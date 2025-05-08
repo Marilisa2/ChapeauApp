@@ -19,6 +19,8 @@ namespace ChapeauApp.Controllers
 
         public IActionResult Index()
         {
+
+
             try
             {
 
