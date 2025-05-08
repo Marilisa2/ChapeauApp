@@ -1,0 +1,138 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ChapeauApp.Repositories;
+
+namespace ChapeauApp.Controllers
+{
+    public class EmployeeController
+    {
+        private readonly IEmployeeRepository _employeeRepository;
+        public EmployeeController(IEmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
+        public IActionResult Index()
+        {
+
+
+            try
+            {
+                // get all users from database
+                List<User> users = _usersRepository.GetAll();
+                User? LoggedInUser = HttpContext.Session.GetObject<User>("LoggedInUser");
+
+                ViewData["LoggedInUser"] = LoggedInUser;
+                // send all users to view
+
+
+                return View(users);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Users");
+            }
+        }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginModel loginModel)
+        {
+            try
+            {
+                User user = _usersRepository.GetByLoginCredentials(loginModel.UserName, loginModel.Password);
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "this username/password combination doesn't exist";
+                    return View(loginModel);
+                }
+                else
+                {
+
+                    HttpContext.Session.SetObject("LoggedInUser", user);
+
+
+                    return RedirectToAction("Index", "Users");
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Users");
+            }
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            try
+            {
+                _usersRepository.Add(user);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(user);
+            }
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                User user = _usersRepository.GetById(id);
+                return View(user);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Users");
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(User user)
+        {
+            try
+            {
+                _usersRepository.Update(user);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(user);
+            }
+        }
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            try
+            {
+                User user = _usersRepository.GetById(id);
+                return View(user);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Users");
+            }
+        }
+        [HttpPost]
+        public IActionResult Remove(User user)
+        {
+            try
+            {
+                _usersRepository.Delete(user.Id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(user);
+            }
+            ;
+        }
+    }
+
+}
+}
