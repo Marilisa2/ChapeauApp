@@ -1,6 +1,7 @@
 ﻿using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
+using ChapeauApp.Repositories;
 
 namespace ChapeauApp.Services
 {
@@ -15,7 +16,7 @@ namespace ChapeauApp.Services
 
         public Employee AddEmployee(Employee employee)
         {
-            return _employeeRepository.AddEmployee(employee);
+           return _employeeRepository.AddEmployee(employee);
         }
 
         public void DeleteEmployee(int id)
@@ -30,12 +31,12 @@ namespace ChapeauApp.Services
 
         public Employee GetEmployeeById(int id)
         {
-            return _employeeRepository.GetEmployeeById(id);
+           return _employeeRepository.GetEmployeeById(id);
         }
 
         public Employee UpdateEmployee(Employee employee)
         {
-            return _employeeRepository.UpdateEmployee(employee);
+           return _employeeRepository.UpdateEmployee(employee);
         }
     }
 }

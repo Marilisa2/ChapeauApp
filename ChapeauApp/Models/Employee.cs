@@ -8,10 +8,6 @@
         public string EmployeeType { get; set; }
         public string Password { get; private set; }
 
-        public Employee()
-        {
-        }
-
         public Employee(int employeeId, string firstName, string lastName, string employeeType, string password)
         {
             EmployeeId = employeeId;
@@ -19,6 +15,10 @@
             LastName = lastName;
             EmployeeType = employeeType;
             Password = password;
+        }
+
+        public Employee()
+        {
         }
     }
 }
