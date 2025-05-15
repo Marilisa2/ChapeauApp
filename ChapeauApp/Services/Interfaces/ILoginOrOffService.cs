@@ -4,7 +4,6 @@ namespace ChapeauApp.Services.Interfaces
 {
     public interface ILoginOrOffService
     {
-        Employee GetEmployeeByLoginCredentials(int EmployeeId, string password);
-        void Logoff();
+        Employee GetEmployeeByLoginCredentials(int EmployeeId, string password);        
     }
 }

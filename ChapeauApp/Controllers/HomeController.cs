@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using ChapeauApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Controllers
 {

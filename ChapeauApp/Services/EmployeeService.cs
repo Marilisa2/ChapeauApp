@@ -33,9 +33,9 @@ namespace ChapeauApp.Services
            return _employeeRepository.GetEmployeeById(id);
         }
 
-        public Employee UpdateEmployee(Employee employee)
+        public void UpdateEmployee(Employee employee)
         {
-           return _employeeRepository.UpdateEmployee(employee);
+           _employeeRepository.UpdateEmployee(employee);
         }
     }
 }

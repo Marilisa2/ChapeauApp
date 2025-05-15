@@ -18,7 +18,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = $"insert into Employees (firstname,lastname,employeeType,password)" +
+                string querry = $"insert into employees (firstname,lastname,employeeType,password)" +
                                 $"values (@firstname,@lastname,@employeeType,@password);" +
                                 "select scope_identity();";
                 SqlCommand command = new SqlCommand(querry, connection);
@@ -37,7 +37,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = $"delete from employees where Employee=@id";
+                string querry = $"delete from employees where EmployeeId=@id";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -51,7 +51,7 @@ namespace ChapeauApp.Repositories
             List<Employee> employees = new List<Employee>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT EmployeeId, firstname, lastname, employeeType,password FROM Employees";
+                string querry = "SELECT employeeId, firstname, lastname, employeeType,password FROM employees";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -68,7 +68,7 @@ namespace ChapeauApp.Repositories
         }
         private Employee ReadEmployee(SqlDataReader reader)
         {
-            int id = (int)reader["EmployeeId"];
+            int id = (int)reader["employeeId"];
             string firstname = (string)reader["firstname"];
             string lastname = (string)reader["lastname"];
             string employeeType = (string)reader["EmployeeType"];
@@ -81,7 +81,7 @@ namespace ChapeauApp.Repositories
             Employee employee = null;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT EmployeeId, firstname, lastname, employeeType,password FROM Employees where UserId=@id";
+                string querry = "SELECT employeeId, firstname, lastname, employeeType,password FROM employees where employeeId=@id";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -102,7 +102,7 @@ namespace ChapeauApp.Repositories
             Employee employee = null;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT EmployeeId, firstname, lastname,employeeType,password FROM Employees where EmployeeId=@id and password=@password";
+                string querry = "SELECT employeeId, firstname, lastname,employeeType,password FROM employees where employeeId=@id and password=@password";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -123,7 +123,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = $"update Employees set firstname=@firstname, lastname=@lastname,employeeType=@employeeType, password=@password where EmployeeId=@id";
+                string querry = $"update employees set firstname=@firstname, lastname=@lastname,employeeType=@employeeType, password=@password where employeeId=@id";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();

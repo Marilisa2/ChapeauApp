@@ -16,11 +16,6 @@ namespace ChapeauApp.Services
         public Employee GetEmployeeByLoginCredentials(int EmployeeId, string password)
         {
            return _employeeRepository.GetEmployeeByLoginCredentials(EmployeeId,password);
-        }
-
-        public void Logoff()
-        {
-            throw new NotImplementedException();
-        }
+        }        
     }
 }

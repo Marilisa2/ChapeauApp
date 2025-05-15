@@ -26,16 +26,16 @@ namespace ChapeauApp.Controllers
             {
                 
                 
-                List<Employee> users = _employeeService.GetAllEmployees();
+                List<Employee> employees = _employeeService.GetAllEmployees();
                 Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInEmployee");
 
                 ViewData["LoggedInEmployee"] = LoggedInEmployee;
                
-                return View(users);
+                return View(employees);
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index", "Employee");
             }
         }
         [HttpGet]
@@ -60,12 +60,12 @@ namespace ChapeauApp.Controllers
                     HttpContext.Session.SetObject("LoggedInEmployee", employee);
 
 
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index");
             }
         }
         [HttpGet]
@@ -96,7 +96,7 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index");
             }
         }
         [HttpPost]
@@ -122,7 +122,7 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index");
             }
         }
         [HttpPost]
@@ -137,7 +137,12 @@ namespace ChapeauApp.Controllers
             {
                 return View(employee);
             }
-            ;
+            
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login");
         }
     }
 
