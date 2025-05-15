@@ -1,10 +1,31 @@
-﻿namespace ChapeauApp.Models
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class OrderItem
     {
-        int OrderItemId { get; set; }
-        int Quantity { get; set; }
-        int MenuItemId { get; set; }
-        int OrderId { get; set; }
+        public int OrderItemId { get; set; }
+        public int Quantity { get; set; }
+        public int MenuItemId { get; set; }
+        public MenuItem MenuItem { get; set; }
+        public int OrderId { get; set; }
+
+        public OrderItemStatus Status { get; set; }
+
+        public OrderItem()
+        {
+        }
+
+        public OrderItem(int orderItemId, int quantity, int menuItemId, MenuItem menuItem, int orderId, OrderItemStatus status)
+        {
+            OrderItemId = orderItemId;
+            Quantity = quantity;
+            MenuItemId = menuItemId;
+            MenuItem = menuItem;
+            OrderId = orderId;
+            Status = status;
+        }
+
+      
     }
 }
