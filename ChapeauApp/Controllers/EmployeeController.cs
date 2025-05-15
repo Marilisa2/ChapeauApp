@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ChapeauApp.Repositories;
+using ChapeauApp.Models;
 
 namespace ChapeauApp.Controllers
 {
@@ -17,10 +18,10 @@ namespace ChapeauApp.Controllers
             try
             {
                 // get all users from database
-                List<User> users = _usersRepository.GetAll();
-                User? LoggedInUser = HttpContext.Session.GetObject<User>("LoggedInUser");
+                List<Employee> users = _employeeRepository.GetAll();
+                Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInemployee");
 
-                ViewData["LoggedInUser"] = LoggedInUser;
+                ViewData["LoggedInUser"] = LoggedInEmployee;
                 // send all users to view
 
 
