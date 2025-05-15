@@ -1,4 +1,5 @@
 using ChapeauApp.Repositories;
+using ChapeauApp.Services;
 
 namespace ChapeauApp
 {
@@ -10,8 +11,12 @@ namespace ChapeauApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddSingleton<IEmployeeRepository, DBUsersRepository>();
-           
+            builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddSingleton<ITableRepository, TableRepository>();
+            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
+            builder.Services.AddSingleton<ITableService, TableService>();
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession(options =>
             {

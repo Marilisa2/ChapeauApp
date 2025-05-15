@@ -1,27 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ChapeauApp.Repositories;
 using ChapeauApp.Models;
+using ChapeauApp.Services;
 
 namespace ChapeauApp.Controllers
 {
     public class EmployeeController
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        private readonly IEmployeeService _employeeService;
+        private readonly ILoginOrOffService _loginOrOffService;
+
+        public EmployeeController(IEmployeeService employeeService, ILoginOrOffService loginOrOffService)
         {
-            _employeeRepository = employeeRepository;
+            _employeeService = employeeService;
+            _loginOrOffService = loginOrOffService;
         }
+
         public IActionResult Index()
         {
 
 
             try
             {
+                
                 // get all users from database
-                List<Employee> users = _employeeRepository.GetAll();
+                List<Employee> users = _employeeService.GetAllEmployees();
                 Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInemployee");
 
-                ViewData["LoggedInUser"] = LoggedInEmployee;
+                ViewData["LoggedInEmployee"] = LoggedInEmployee;
                 // send all users to view
 
 
