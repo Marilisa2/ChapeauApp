@@ -1,0 +1,28 @@
+﻿@using ChapeauApp.Models.ViewModels
+@using ChapeauApp.Models.ViewModels.ViewModels
+@model LoginViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h4>
+    @{
+        if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger" role="alert">@ViewBag.ErrorMessage</div>
+        }
+    }
+</h4>
+<form action="/Users/login" method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="EmployeeId" name="EmployeeId" class="form-control" required value="@Model?.EmployeeId" />
+    </div>
+    <div class="form-group">
+        <label for="name">Password</label>
+        <input type="password" id="Password" name="Password" class="form-control" required value="@Model?.Password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">login</button>
+</form>
