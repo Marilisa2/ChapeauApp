@@ -1,4 +1,47 @@
-﻿@{
+﻿@*List<Menu> menus*@
+@model ChapeauApp.Models.ViewModels.MenusViewModel
+@{
 	ViewData["Title"] = "Menu";
 }
 <h1>This is the menu!</h1>
+<table class="table table-hover">
+	<thead class="table-dark">
+		<tr>
+			<th>Item Name</th>
+			<th>Item Price</th>
+			<th>Warning?</th>
+		</tr>
+	</thead>
+	<tbody class="bg-opacity-10 bg-black">
+		@*{
+			foreach (MenuItem menuItem in Model.Menus.)
+			{
+				@if (menuItem.Stock <= 10 && menuItem.Stock > 0)
+				{
+					<tr class="alert-warning">
+					<td>Item Name</td>
+					<td>Item Price</td>
+					<td>Almost out of stock!</td>
+					</tr>
+				}
+				else if (menuItem.Stock <= 0)
+				{
+					<tr class="alert-danger">
+						<td>Item Name</td>
+						<td>Item Price</td>
+						<td>Item is out of stock!</td>
+					</tr>
+				}
+				else
+				{
+					<tr>
+						<td>Item Name</td>
+						<td>Item Price</td>
+						<td></td>
+					</tr>
+				}
+					
+			}
+		}*@
+	</tbody>
+</table>

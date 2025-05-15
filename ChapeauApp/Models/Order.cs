@@ -6,8 +6,8 @@
         public DateTime Time {  get; set; }
         public DateOnly Date {  get; set; }
         public string Status { get; set; }
-        public int TableNumber { get; set; }
-        public int EmployeeId { get; set; }
+        public Table Table { get; set; }
+        public Employee Employee { get; set; }
 
         public  List<OrderItem> OrderItems { get; set; }
 
@@ -15,14 +15,14 @@
         {
         }
 
-        public Order(int orderId, DateTime time, DateOnly date, string status, int tableNumber, int employeeId, List<OrderItem> orderItems)
+        public Order(int orderId, DateTime time, DateOnly date, string status, Table table, Employee employee, List<OrderItem> orderItems)
         {
             OrderId = orderId;
             Time = time;
             Date = date;
             Status = status;
-            TableNumber = tableNumber;
-            EmployeeId = employeeId;
+            Table= table;
+            Employee = employee;
             OrderItems = orderItems;
         }
     }
