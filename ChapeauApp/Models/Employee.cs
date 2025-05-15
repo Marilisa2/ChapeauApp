@@ -7,5 +7,6 @@
         string LastName { get; set; }
         string EmployeeType { get; set; }
         string Password { get; set; }
+
     }
 }
