@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
@@ -11,6 +12,12 @@ namespace ChapeauApp.Repositories
         public DbMenusRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Chapeau");
+        }
+        public MenuViewModel GetMenuViewModel() 
+        {
+            List<MenuItem> menuItems = GetAllMenuItems();
+            MenuViewModel menusViewModel = new(menuItems);
+            return menusViewModel;
         }
         public List<MenuItem> GetAllMenuItems()
         {

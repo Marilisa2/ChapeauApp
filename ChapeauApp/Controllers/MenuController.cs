@@ -25,7 +25,7 @@ namespace ChapeauApp.Controllers
                     new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
                 MenuViewModel menuViewModel = new (AllMenuItems);
                 */
-                List<MenuItem> menuViewModel = _menusrepository.GetAllMenuItems();
+                MenuViewModel menuViewModel = _menusrepository.GetMenuViewModel();
                 return View(menuViewModel);
             }
             catch (Exception ex)
