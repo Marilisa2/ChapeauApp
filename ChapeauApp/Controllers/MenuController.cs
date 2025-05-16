@@ -10,7 +10,7 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-                Menu menu1 = new (1, "dranken");
+                /*Menu menu1 = new (1, "dranken");
                 Menu menu2 = new (2, "eten");
                 List<MenuItem> AllMenuItems = [
                     new(1, menu1, "Coffee", (decimal)2.99, "Drink", "Dit is koffie", 12, 9),
@@ -18,6 +18,7 @@ namespace ChapeauApp.Controllers
                     new(3, menu2, "Chips", (decimal)2.99, "Drink", "Dit is chips", 0, 9),
                     new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
                 MenuViewModel menuViewModel = new (AllMenuItems);
+                */
                 return View(menuViewModel);
             }
             catch (Exception ex)
