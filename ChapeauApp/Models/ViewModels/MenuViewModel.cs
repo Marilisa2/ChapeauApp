@@ -2,17 +2,15 @@
 {
     public class MenuViewModel
     {
-        public string MenuName { get; set; }
-        public List<MenuItem> MenuItems{ get; set; }
+        public List<MenuItem> AllMenuItems{ get; set; }
         public MenuViewModel()
         {
             
         }
 
-        public MenuViewModel(string menuName, List<MenuItem> menuItems)
+        public MenuViewModel(List<MenuItem> allMenuItems)
         {
-            MenuName = menuName;
-            MenuItems = menuItems;
+            AllMenuItems = allMenuItems;
         }
     }
 }

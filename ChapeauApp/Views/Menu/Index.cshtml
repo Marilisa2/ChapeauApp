@@ -1,66 +1,74 @@
-﻿@*List<Menu> menus*@
-@model ChapeauApp.Models.ViewModels.MenusViewModel
+﻿@model ChapeauApp.Models.ViewModels.MenuViewModel
 @{
 	ViewData["Title"] = "Menu";
 }
-	<form action="/Menu/Index" method="post" id="menuForm">
-		<div class="form-group py-2">
-			<label for="cars">Choose a card:</label>
-			<select name="card" id="card" form="menuForm">
-				<option value="all">All</option>
-				<option value="drinks">Drinks</option>
-				<option value="lunch">Lunch</option>
-				<option value="diner">Diner</option>
-			</select>
-			<label for="cars">Choose a category:</label>
-			<select name="category" id="category" form="menuForm">
-				<option value="all">All</option>
-				<option value="starters">Starters</option>
-				<option value="mains">Mains</option>
-				<option value="desserts">Desserts</option>
-			</select>
-		</div>	
-		<button type="submit" class="btn btn-primary">Filter</button>
-	</form>
-<h1>This is the menu!</h1>
-<table class="table table-hover">
-	<thead class="table-dark">
-		<tr>
-			<th>Item Name</th>
-			<th>Item Price</th>
-			<th>Warning?</th>
-		</tr>
-	</thead>
-	<tbody class="bg-opacity-10 bg-black">
-		@*{
-			foreach (MenuItem menuItem in Model.Menus.)
-			{
-				@if (menuItem.Stock <= 10 && menuItem.Stock > 0)
-				{
-					<tr class="alert-warning">
-					<td>Item Name</td>
-					<td>Item Price</td>
-					<td>Almost out of stock!</td>
-					</tr>
+<form action="/Menu/Index" method="post" id="menuForm">
+	<div class="form-group py-2">
+		<label for="cars">Choose a card:</label>
+		<select name="card" id="card" form="menuForm">
+			<option value="all">All</option>
+			<option value="drinks">Drinks</option>
+			<option value="lunch">Lunch</option>
+			<option value="diner">Diner</option>
+		</select>
+		<label for="cars">Choose a category:</label>
+		<select name="category" id="category" form="menuForm">
+			<option value="all">All</option>
+			<option value="starters">Starters</option>
+			<option value="mains">Mains</option>
+			<option value="desserts">Desserts</option>
+		</select>
+	</div>	
+	<button type="submit" class="btn btn-primary">Filter</button>
+</form>
+@{
+	if (Model != null)
+	{
+		<h1>This is the menu!</h1>
+		<table class="table table-hover">
+			<thead class="table-dark">
+				<tr>
+					<th>Item Name</th>
+					<th>Item Price</th>
+					<th>Commentary</th>
+				</tr>
+			</thead>
+			<tbody class="bg-opacity-10 bg-black">
+				@{
+					foreach (MenuItem menuItem in Model.AllMenuItems)
+					{
+						@if (menuItem.Stock <= 10 && menuItem.Stock > 0)
+						{
+							<tr class="alert-warning">
+								<td>@menuItem.ItemName</td>
+								<td>@menuItem.ItemPrice</td>
+								<td>@menuItem.ItemName is almost out of stock!</td>
+							</tr>
+						}
+						else if (menuItem.Stock <= 0)
+						{
+							<tr class="alert-danger">
+								<td>@menuItem.ItemName</td>
+								<td>@menuItem.ItemPrice</td>
+								<td>@menuItem.ItemName is out of stock!</td>
+							</tr>
+						}
+						else
+						{
+							<tr>
+								<td>@menuItem.ItemName</td>
+								<td>@menuItem.ItemPrice</td>
+								<td></td>
+							</tr>
+						}
+					}
 				}
-				else if (menuItem.Stock <= 0)
-				{
-					<tr class="alert-danger">
-						<td>Item Name</td>
-						<td>Item Price</td>
-						<td>Item is out of stock!</td>
-					</tr>
-				}
-				else
-				{
-					<tr>
-						<td>Item Name</td>
-						<td>Item Price</td>
-						<td></td>
-					</tr>
-				}
-					
-			}
-		}*@
-	</tbody>
-</table>
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h1 class="alert-danger">No menu was found!</h1>
+	}
+	;
+}
