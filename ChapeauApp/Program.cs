@@ -1,3 +1,6 @@
+using ChapeauApp.Repositories;
+using ChapeauApp.Repositories.Interfaces;
+
 namespace ChapeauApp
 {
     public class Program
@@ -8,6 +11,7 @@ namespace ChapeauApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
 
             var app = builder.Build();
 

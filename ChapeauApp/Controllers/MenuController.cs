@@ -1,11 +1,17 @@
 ﻿using ChapeauApp.Models;
 using ChapeauApp.Models.ViewModels;
+using ChapeauApp.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChapeauApp.Controllers
 {
     public class MenuController : Controller
     {
+        private readonly IMenusRepository _menusrepository;
+        public MenuController(IMenusRepository lecturersRepository)
+        {
+            _menusrepository = lecturersRepository;
+        }
         public IActionResult Index()
         {
             try
@@ -19,6 +25,7 @@ namespace ChapeauApp.Controllers
                     new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
                 MenuViewModel menuViewModel = new (AllMenuItems);
                 */
+                List<MenuItem> menuViewModel = _menusrepository.GetAllMenuItems();
                 return View(menuViewModel);
             }
             catch (Exception ex)
