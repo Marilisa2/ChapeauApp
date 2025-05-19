@@ -12,7 +12,7 @@ namespace ChapeauApp.Controllers
         {
             _menusrepository = lecturersRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(string card, string category)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace ChapeauApp.Controllers
                     new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
                 MenuViewModel menuViewModel = new (AllMenuItems);
                 */
-                MenuViewModel menuViewModel = _menusrepository.GetMenuViewModel();
+                MenuViewModel menuViewModel = _menusrepository.GetMenuViewModel(card, category);
                 return View(menuViewModel);
             }
             catch (Exception ex)

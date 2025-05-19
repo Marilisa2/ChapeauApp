@@ -2,6 +2,7 @@
 using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ChapeauApp.Repositories
@@ -13,19 +14,53 @@ namespace ChapeauApp.Repositories
         {
             _connectionString = configuration.GetConnectionString("Chapeau");
         }
-        public MenuViewModel GetMenuViewModel() 
+        public MenuViewModel GetMenuViewModel(string? cardName, string? itemCategory) 
         {
-            List<MenuItem> menuItems = GetAllMenuItems();
+
+            List<MenuItem> menuItems;
+            string query = GetQuery(cardName, itemCategory);
+            menuItems = GetMenuItems(query, cardName, itemCategory);
             MenuViewModel menusViewModel = new(menuItems);
             return menusViewModel;
         }
-        public List<MenuItem> GetAllMenuItems()
+        public string GetQuery(string? cardName, string? itemCategory)
+        {
+            string query;
+            if (cardName == null && itemCategory == null)
+            {
+                query = "SELECT * FROM menuItems";
+                return query;
+            }
+            else if (cardName != null && itemCategory == null)
+            {
+                query = "SELECT * FROM menuItems WHERE menuId IN (SELECT menuId FROM menus WHERE menuName = @MenuName)";
+                return query;
+            }
+            else if (cardName == null && itemCategory != null)
+            {
+                query = "SELECT * FROM menuItems WHERE itemType = @Itemtype";
+                return query;
+            }
+            else if (cardName != null && itemCategory != null)
+            {
+                query = "SELECT * FROM menuItems WHERE menuId IN (SELECT menuId FROM menus WHERE menuName = @MenuName) AND itemType = @ItemType";
+                return query;
+            }
+            else
+            {
+                throw new Exception("Something went terribly wrong!");
+            }
+        }
+        public List<MenuItem> GetMenuItems(string query, string card, string category)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
-            using (SqlConnection connection = new SqlConnection(_connectionString)) 
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM menuItems";
                 SqlCommand command = new SqlCommand(query, connection);
+                if (card != null )
+                command.Parameters.AddWithValue("@MenuName", card);
+                if (category != null)
+                    command.Parameters.AddWithValue("@ItemType", category);
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -72,6 +107,5 @@ namespace ChapeauApp.Repositories
             Menu menu = new(menuId, menuName);
             return menu;
         }
-
     }
 }

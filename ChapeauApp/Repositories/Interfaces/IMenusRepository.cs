@@ -6,9 +6,7 @@ namespace ChapeauApp.Repositories.Interfaces
 {
     public interface IMenusRepository
     {
-        MenuViewModel GetMenuViewModel();
+        MenuViewModel GetMenuViewModel(string? card, string? category);
         MenuItem ReadMenuItem(SqlDataReader reader);
-        List<MenuItem> GetAllMenuItems();
-
     }
 }
