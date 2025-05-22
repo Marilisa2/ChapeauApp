@@ -18,6 +18,7 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
             builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
             builder.Services.AddSingleton<ITableService, TableService>();
+            builder.Services.AddSingleton<IPasswordService, PasswordService>();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

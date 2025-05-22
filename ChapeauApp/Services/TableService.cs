@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
 
@@ -23,9 +24,10 @@ namespace ChapeauApp.Services
            return _tableRepository.GetTableById(id);
         }
 
-        public Table UpdateTableStatus(Table table)
+        public Table UpdateTableStatus(TableViewModel table)
         {
-            return _tableRepository.UpdateTableStatus(table);
+            Table table1=new Table(table.TableNumber,table.TableStatus);
+            return _tableRepository.UpdateTableStatus(table1);
         }
     }
 }

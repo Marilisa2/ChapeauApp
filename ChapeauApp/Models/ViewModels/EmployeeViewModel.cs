@@ -6,15 +6,16 @@
         public string LastName { get; set; }
         public string EmployeeType { get; set; }
 
-        public EmployeeViewModel(string firstName, string lastName, string employeeType)
+        public EmployeeViewModel(Employee employee)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            EmployeeType = employeeType;
+            FirstName = employee.FirstName ;
+            LastName = employee.LastName ;
+            EmployeeType = employee.EmployeeType ;
         }
 
         public EmployeeViewModel()
         {
         }
+
     }
 }

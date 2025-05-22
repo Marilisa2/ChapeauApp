@@ -10,5 +10,6 @@ namespace ChapeauApp.Repositories.Interfaces
         public void UpdateEmployee(Employee employee);
         public void DeleteEmployee(int id);
         Employee GetEmployeeByLoginCredentials(int EmployeeId, string password);
+        public string GetSalt(int EmployeeId);
     }
 }

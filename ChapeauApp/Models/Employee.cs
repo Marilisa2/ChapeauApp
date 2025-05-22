@@ -1,12 +1,14 @@
 ﻿namespace ChapeauApp.Models
 {
+    using ChapeauApp.Models.ViewModels;
     public class Employee
     {
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmployeeType { get; set; }
-        public string Password { get; private set; }
+        public string HashedPassword { get; private set; }
+        public string Salt{ get; set; }
 
         public Employee(int employeeId, string firstName, string lastName, string employeeType, string password)
         {
@@ -14,11 +16,19 @@
             FirstName = firstName;
             LastName = lastName;
             EmployeeType = employeeType;
-            Password = password;
+            HashedPassword = password;
+            
+        }
+
+        public Employee(int employeeId, string firstName, string lastName, string employeeType, string password, string salt) : this(employeeId, firstName, lastName, employeeType, password)
+        {
+            Salt = salt;
         }
 
         public Employee()
         {
         }
+
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Services.Interfaces
 {
@@ -6,6 +7,6 @@ namespace ChapeauApp.Services.Interfaces
     {
         public List<Table> GetAllTables();
         public Table GetTableById(int id);
-        public Table UpdateTableStatus(Table table);
+        public Table UpdateTableStatus(TableViewModel table);
     }
 }

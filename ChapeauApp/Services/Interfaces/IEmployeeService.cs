@@ -1,13 +1,14 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Services.Interfaces
 {
     public interface IEmployeeService
     {
-         List<Employee> GetAllEmployees();
+         List<EmployeeViewModel> GetAllEmployees();
          Employee GetEmployeeById(int id);
-         Employee AddEmployee(Employee employee);
-         void UpdateEmployee(Employee employee);
+         Employee AddEmployee(EmployeeCUDViewModel employee);
+         void UpdateEmployee(EmployeeCUDViewModel employee);
          void DeleteEmployee(int id);
         
     }

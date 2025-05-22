@@ -27,7 +27,7 @@ namespace ChapeauApp.Repositories
                 command.Parameters.AddWithValue("@firstname", employee.FirstName);
                 command.Parameters.AddWithValue("@lastname", employee.LastName);
                 command.Parameters.AddWithValue("@employeeType", employee.EmployeeType);
-                command.Parameters.AddWithValue("@password", employee.Password);
+                command.Parameters.AddWithValue("@password", employee.HashedPassword);
                 employee.EmployeeId = Convert.ToInt32(command.ExecuteScalar());
                 return employee;
             }
@@ -51,7 +51,7 @@ namespace ChapeauApp.Repositories
             List<Employee> employees = new List<Employee>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT employeeId, firstname, lastname, employeeType,password FROM employees";
+                string querry = "SELECT employeeId, firstName, lastName, employeeType, password FROM employees";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -69,8 +69,8 @@ namespace ChapeauApp.Repositories
         private Employee ReadEmployee(SqlDataReader reader)
         {
             int id = (int)reader["employeeId"];
-            string firstname = (string)reader["firstname"];
-            string lastname = (string)reader["lastname"];
+            string firstname = (string)reader["firstName"];
+            string lastname = (string)reader["lastName"];
             string employeeType = (string)reader["EmployeeType"];
             string password = (string)reader["password"];
             return new Employee(id, firstname, lastname, employeeType, password);
@@ -81,7 +81,7 @@ namespace ChapeauApp.Repositories
             Employee employee = null;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT employeeId, firstname, lastname, employeeType,password FROM employees where employeeId=@id";
+                string querry = "SELECT employeeId, firstName, lastName, employeeType,password FROM employees where employeeId=@id";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -102,7 +102,7 @@ namespace ChapeauApp.Repositories
             Employee employee = null;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT employeeId, firstname, lastname,employeeType,password FROM employees where employeeId=@id and password=@password";
+                string querry = "SELECT employeeId, firstName, lastName, employeeType, password FROM employees where employeeId=@id and password=@password";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -123,7 +123,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = $"update employees set firstname=@firstname, lastname=@lastname,employeeType=@employeeType, password=@password where employeeId=@id";
+                string querry = $"update employees set firstName=@firstname, lastName=@lastname,employeeType=@employeeType, password=@password where employeeId=@id";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -131,10 +131,15 @@ namespace ChapeauApp.Repositories
                 command.Parameters.AddWithValue("@firstname", employee.FirstName);
                 command.Parameters.AddWithValue("@lastname", employee.LastName);
                 command.Parameters.AddWithValue("@employeeType", employee.EmployeeType);
-                command.Parameters.AddWithValue("@password", employee.Password);
+                command.Parameters.AddWithValue("@password", employee.HashedPassword);
                 command.ExecuteNonQuery();
-
             }
+            
+        }
+        public string GetSalt(int id)
+        {
+            Employee employee=GetEmployeeById(id);
+            return employee.Salt;
         }
     }
 }

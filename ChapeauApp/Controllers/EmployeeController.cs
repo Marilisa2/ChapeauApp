@@ -26,7 +26,7 @@ namespace ChapeauApp.Controllers
             {
                 
                 
-                List<Employee> employees = _employeeService.GetAllEmployees();
+                List<EmployeeViewModel> employees = _employeeService.GetAllEmployees();
                 Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInEmployee");
 
                 ViewData["LoggedInEmployee"] = LoggedInEmployee;
@@ -48,7 +48,7 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-               Employee employee = _loginOrOffService.GetEmployeeByLoginCredentials(loginViewModel.EmployeeId,loginViewModel.Password);
+               Employee employee = _loginOrOffService.GetEmployeeByLoginCredentials(loginViewModel );
                 if (employee == null)
                 {
                     ViewBag.ErrorMessage = "this username/password combination doesn't exist";
@@ -65,7 +65,7 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
         }
         [HttpGet]
@@ -74,7 +74,7 @@ namespace ChapeauApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCUDViewModel employee)
         {
             try
             {
@@ -92,7 +92,8 @@ namespace ChapeauApp.Controllers
             try
             {
                 Employee employee = _employeeService.GetEmployeeById(id);
-                return View(employee);
+                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
+                return View(employeeViewModel);
             }
             catch (Exception ex)
             {
@@ -100,7 +101,7 @@ namespace ChapeauApp.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Edit(Employee employee)
+        public IActionResult Edit(EmployeeCUDViewModel employee)
         {
             try
             {
@@ -118,7 +119,8 @@ namespace ChapeauApp.Controllers
             try
             {
                 Employee employee = _employeeService.GetEmployeeById(id);
-                return View(employee);
+                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
+                return View(employeeViewModel);
             }
             catch (Exception ex)
             {
@@ -126,7 +128,7 @@ namespace ChapeauApp.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Remove(Employee employee)
+        public IActionResult Remove(EmployeeCUDViewModel employee)
         {
             try
             {

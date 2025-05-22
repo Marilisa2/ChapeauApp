@@ -9,10 +9,10 @@
         public int TableNumber { get; set; }
         public string TableStatus { get; set; }
 
-        public TableViewModel(int tableNumber, string tableStatus)
+        public TableViewModel(Table table)
         {
-            TableNumber = tableNumber;
-            TableStatus = tableStatus;
+            TableNumber =table.TableNumber ;
+            TableStatus =table.TableStatus ;
         }
     }
 }
