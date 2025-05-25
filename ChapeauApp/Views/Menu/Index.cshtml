@@ -1,4 +1,4 @@
-﻿@model ChapeauApp.Models.ViewModels.MenuViewModel
+﻿@model ChapeauApp.Models.ViewModels.MenusViewModel
 @{
 	ViewData["Title"] = "Menu";
 }
@@ -6,6 +6,12 @@
 	<div class="form-group py-2">
 		<label for="cars">Choose a card:</label>
 		<select name="card" id="card" form="menuForm">
+			@*{
+				for (int i = 0; i <= Model.AllMenuItems.Count; i++)
+				{
+					<option value="@Model.AllMenuItems[i].Menu.MenuId">"Model.AllMenuItems[i].Menu.MenuName</option>
+				}
+			}*@
 			<option value="all">All</option>
 			<option value="drinks">Drinks</option>
 			<option value="lunch">Lunch</option>
@@ -28,27 +34,31 @@
 		<table class="table table-hover">
 			<thead class="table-dark">
 				<tr>
-					<th>Item Name</th>
-					<th>Item Price</th>
+					<th>Dish</th>
+					<th>Description</th>
+					<th>Price</th>
 					<th>Commentary</th>
 				</tr>
 			</thead>
 			<tbody class="bg-opacity-10 bg-black">
 				@{
-					foreach (MenuItem menuItem in Model.AllMenuItems)
+					foreach (Menu menu in Model.Menus)
 					{
+						foreach(MenuItem menuItem in menu.MenuItems)
 						@if (menuItem.Stock <= 10 && menuItem.Stock > 0)
 						{
 							<tr class="alert-warning">
 								<td>@menuItem.ItemName</td>
+								<td>@menuItem.Description</td>
 								<td>@menuItem.ItemPrice</td>
-								<td>@menuItem.ItemName is almost out of stock!</td>
+								<td>@menuItem.ItemName is almost out of stock! (@menuItem.Stock left)</td>
 							</tr>
 						}
 						else if (menuItem.Stock <= 0)
 						{
 							<tr class="alert-danger">
 								<td>@menuItem.ItemName</td>
+								<td>@menuItem.Description</td>
 								<td>@menuItem.ItemPrice</td>
 								<td>@menuItem.ItemName is out of stock!</td>
 							</tr>
@@ -57,6 +67,7 @@
 						{
 							<tr>
 								<td>@menuItem.ItemName</td>
+								<td>@menuItem.Description</td>
 								<td>@menuItem.ItemPrice</td>
 								<td>Plenty of @menuItem.ItemName left!</td>
 							</tr>

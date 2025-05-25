@@ -1,18 +1,19 @@
 ﻿using ChapeauApp.Models;
 using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
+using ChapeauApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChapeauApp.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly IMenusRepository _menusrepository;
-        public MenuController(IMenusRepository lecturersRepository)
+        private readonly IMenusService _menusService;
+        public MenuController(IMenusService menusService)
         {
-            _menusrepository = lecturersRepository;
+            _menusService = menusService;
         }
-        public IActionResult Index(string card, string category)
+        public IActionResult Index(string? card, string? category)
         {
             try
             {
@@ -23,15 +24,14 @@ namespace ChapeauApp.Controllers
                     new(2, menu1, "Cola", (decimal)1.99, "Drink", "Dit is cola", 19, 9),
                     new(3, menu2, "Chips", (decimal)2.99, "Drink", "Dit is chips", 0, 9),
                     new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
-                MenuViewModel menuViewModel = new (AllMenuItems);
-                */
-                MenuViewModel menuViewModel = _menusrepository.GetMenuViewModel(card, category);
+                MenuViewModel menuViewModel = new (AllMenuItems);*/
+                MenuViewModel menuViewModel = _menusService.GetMenuViewModel(card, category);
                 return View(menuViewModel);
             }
             catch (Exception ex)
             {
-                ViewData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
+                throw new Exception(ex.Message);
+                return RedirectToAction("Index", "Home");
             }
         }
     }
