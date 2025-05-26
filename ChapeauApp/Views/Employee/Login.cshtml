@@ -5,6 +5,7 @@
 *@
 @{
 }
+
 <h4>
     @{
         if (ViewBag.ErrorMessage != null)
@@ -15,11 +16,11 @@
 </h4>
 <form action="/Employee/login" method="post">
     <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="EmployeeId" name="EmployeeId" class="form-control" required value="@Model?.EmployeeId" />
+        <label for="name">last name</label>
+        <input type="text" id="LastName" name="LastName" class="form-control" required value="@Model?.LastName" />
     </div>
     <div class="form-group">
-        <label for="name">Password</label>
+        <label for="name">password</label>
         <input type="password" id="Password" name="Password" class="form-control" required value="@Model?.Password" />
     </div>
 

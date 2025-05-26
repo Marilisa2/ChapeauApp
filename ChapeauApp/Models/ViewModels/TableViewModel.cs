@@ -1,4 +1,6 @@
-﻿namespace ChapeauApp.Models.ViewModels
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models.ViewModels
 {
     public class TableViewModel
     {
@@ -7,7 +9,7 @@
         }
 
         public int TableNumber { get; set; }
-        public string TableStatus { get; set; }
+        public TableStatuses TableStatus { get; set; }
 
         public TableViewModel(Table table)
         {

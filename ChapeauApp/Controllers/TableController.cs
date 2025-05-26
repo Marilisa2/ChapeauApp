@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChapeauApp.Controllers
 {
+    using ChapeauApp.Models.ViewModels;
     public class TableController:Controller
     {
         private readonly ITableService _tableService;
@@ -15,7 +16,27 @@ namespace ChapeauApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                List<TableViewModel> tableViewModels = _tableService.GetAllTables();
+                ViewData["place"] = "TableIndex";
+                return View(tableViewModels);
+            }
+            catch (Exception) 
+            {
+                return RedirectToAction("Index");
+            }
         }
+        [HttpGet]
+        public IActionResult Update(TableViewModel tableViewModel) 
+        { 
+            return View(tableViewModel);
+        }
+        //[HttpPost]
+        ////public IActionResult Update(TableViewModel tableViewModel)
+        ////{
+        ////    _tableService.UpdateTableStatus(tableViewModel);
+        ////    return RedirectToAction("Index");
+        ////}
     }
 }

@@ -17,10 +17,9 @@ namespace ChapeauApp.Services
         }
 
         public Employee GetEmployeeByLoginCredentials(LoginViewModel loginViewModel)
-        {
-            string interleavedPassword = _passwordService.InterleaveSalt(loginViewModel.Password, _employeeRepository.GetSalt(loginViewModel.EmployeeId));
-           
-            return _employeeRepository.GetEmployeeByLoginCredentials(loginViewModel.EmployeeId ,_passwordService.HashPassword(interleavedPassword));
-        }        
+        {                   
+                string interleavedPassword = _passwordService.InterleaveSalt(loginViewModel.Password, _employeeRepository.GetSalt(loginViewModel.LastName));
+                return _employeeRepository.GetEmployeeByLoginCredentials(loginViewModel.LastName, _passwordService.HashPassword(interleavedPassword));            
+        }     
     }
 }

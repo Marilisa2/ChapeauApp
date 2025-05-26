@@ -14,9 +14,17 @@ namespace ChapeauApp.Services
             _tableRepository = tableRepository;
         }
 
-        public List<Table> GetAllTables()
+        public List<TableViewModel> GetAllTables()
         {
-            return _tableRepository.GetAllTables();
+            List<Table> tables= _tableRepository.GetAllTables();
+            List<TableViewModel> tableViewModels = new List<TableViewModel>();
+            foreach (var table in tables) 
+            { 
+                TableViewModel tableViewModel = new TableViewModel(table);
+                tableViewModels.Add(tableViewModel);
+
+            }
+            return tableViewModels;
         }
 
         public Table GetTableById(int id)

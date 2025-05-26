@@ -21,6 +21,10 @@ namespace ChapeauApp.Services
 
         public string HashPassword(string input)
         {
+            if (input == null)
+            {
+                return  "abcd";
+            }
             using (SHA256 sha = SHA256.Create())
             {
                 byte[] hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(input));
@@ -30,6 +34,10 @@ namespace ChapeauApp.Services
 
         public string InterleaveSalt(string password, string salt)
         {
+            if (salt == null)
+            {
+                return null;
+            }
             StringBuilder interleaved = new StringBuilder();
             int saltIndex = 0;
 

@@ -20,8 +20,6 @@ namespace ChapeauApp.Controllers
 
         public IActionResult Index()
         {
-
-
             try
             {
                 
@@ -60,7 +58,7 @@ namespace ChapeauApp.Controllers
                     HttpContext.Session.SetObject("LoggedInEmployee", employee);
 
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Table");
                 }
             }
             catch (Exception ex)
