@@ -1,17 +1,15 @@
-﻿using ChapeauApp.Enums;
-
-namespace ChapeauApp.Models
+﻿namespace ChapeauApp.Models.ViewModels
 {
-    public class Table
+    public class TableViewModel
     {
-        public Table()
+        public TableViewModel()
         {
         }
 
         public int TableNumber { get; set; }
         public string TableStatus { get; set; }
 
-        public Table(int tableNumber, string tableStatus)
+        public TableViewModel(int tableNumber, string tableStatus)
         {
             TableNumber = tableNumber;
             TableStatus = tableStatus;
