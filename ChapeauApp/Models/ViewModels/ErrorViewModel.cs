@@ -1,4 +1,4 @@
-namespace ChapeauApp.Models
+namespace ChapeauApp.Models.ViewModels
 {
     public class ErrorViewModel
     {
