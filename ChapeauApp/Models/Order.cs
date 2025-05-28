@@ -5,14 +5,15 @@ namespace ChapeauApp.Models
     public class Order
     {
         public int OrderId { get; set; }
-        public DateTime OrderTime {  get; set; }
-        //public DateOnly Date {  get; set; } //niet meer nodig?
+        public DateTime OrderTime { get; set; }
+        //public DateOnly Date {  get; set; } //?
         public OrderStatus OrderStatus { get; set; }
         public Table TableNumber { get; set; }
-        //public Employee Employee { get; set; } //toevoegen voor sprint2
+        //public Employee Employee { get; set; } add later!
+        //public Bill Bill { get; set; } //add later!
 
         public List<OrderItem> OrderItems { get; set; }
-        
+
         public Order()
         {
         }
@@ -25,17 +26,5 @@ namespace ChapeauApp.Models
             TableNumber = tableNumber;
             OrderItems = orderItems;
         }
-
-
-
-        //public Order(int orderId, DateTime orderTime, OrderItemStatus orderItemStatus, Table tableNumber, Employee employee, List<OrderItem> orderItems)
-        //{
-        //    OrderId = orderId;
-        //    OrderTime = orderTime;
-        //    OrderItemStatus = orderItemStatus;
-        //    TableNumber = tableNumber;
-        //    Employee = employee;
-        //    OrderItems = orderItems;
-        //}
     }
 }

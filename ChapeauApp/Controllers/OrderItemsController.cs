@@ -17,7 +17,7 @@ namespace ChapeauApp.Controllers
 
         public IActionResult Index()
         {
-            var orderItems = _orderItemsService.GetAllOrderItems();
+            var orderItems = _orderItemsService.GetAllOrderItems();  
             return View(orderItems);
         }
 
@@ -27,8 +27,8 @@ namespace ChapeauApp.Controllers
             try
             {
                 _orderItemsService.UpdateOrderItem(orderItem);
-
-                TempData["SuccesMessage"] = "Item is succesfully updated";
+             
+                    TempData["SuccesMessage"] = "Item is succesfully updated";
             }
             catch (Exception ex)
             {
