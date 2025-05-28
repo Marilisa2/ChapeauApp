@@ -14,11 +14,21 @@ namespace ChapeauApp.Services
             _menusrepository = lecturersRepository;
         }
 
-        public MenusViewModel GetMenusViewModel(string? cardName, string? itemCategory)
+        //cardName is menuName in the database.
+        //itemCategory is itemType in the database but should have been courseName to avoid confusion.
+        //Naming things really is some of the most difficult things in programming.
+        public MenuViewModel GetMenuViewModel(string? cardName, string? itemCategory)
         {
-            string query = GetQuery(cardName, itemCategory);
-            MenusViewModel menuViewModel = _menusrepository.GetMenusViewModel(query, cardName, itemCategory);
-            return menuViewModel;
+            try
+            {
+                string query = GetQuery(cardName, itemCategory);
+                MenuViewModel menuViewModel = _menusrepository.GetMenusViewModel(query, cardName, itemCategory);
+                return menuViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public string GetQuery(string? cardName, string? itemCategory)
         {
@@ -27,23 +37,23 @@ namespace ChapeauApp.Services
             {
                 cardName = "All";
                 itemCategory = "All";
-                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM menuItems";
+                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems";
                 return query;
             }
             else if (cardName != null && itemCategory == null)
             {
-                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM menuItems WHERE menuId IN (SELECT menuId FROM menus WHERE menuName = @MenuName)";
+                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems WHERE menuId IN (SELECT menuId FROM Menus WHERE menuName = @MenuName)";
                 return query;
             }
             else if (cardName == null && itemCategory != null)
             {
-                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM menuItems WHERE itemType = @Itemtype";
+                query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems WHERE itemType = @Itemtype";
                 return query;
             }
             else if (cardName != null && itemCategory != null)
             {
                 query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount " +
-                        "FROM menuItems WHERE menuId IN (SELECT menuId FROM menus WHERE menuName = @MenuName) AND itemType = @ItemType";
+                        "FROM MenuItems WHERE menuId IN (SELECT menuId FROM Menus WHERE menuName = @MenuName) AND itemType = @ItemType";
                 return query;
             }
             else

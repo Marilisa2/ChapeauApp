@@ -1,5 +1,6 @@
 ﻿namespace ChapeauApp.Models.ViewModels
 {
+   //this model is outdated and unused.
     public class MenusViewModel
     {
         public List<Menu> Menus { get; set; }

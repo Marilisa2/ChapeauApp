@@ -1,4 +1,5 @@
-﻿using ChapeauApp.Models;
+﻿using ChapeauApp.Enums;
+using ChapeauApp.Models;
 using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
@@ -13,18 +14,25 @@ namespace ChapeauApp.Controllers
         {
             _menusService = menusService;
         }
+        
+        //cardName is menuName in the database.
+        //itemCategory is itemType in the database but should have been courseName to avoid confusion.
+        //Naming things really is some of the most difficult things in programming.
         public IActionResult Index(string? card, string? category)
         {
             try
             {
-                /*Menu menu1 = new (1, "dranken");
-                Menu menu2 = new (2, "eten");
+                //Hardcoded offline backup
+                /*MenuItemCard card1 = MenuItemCard.Lunch;
+                MenuItemCard card2 = MenuItemCard.Diner;
+                MenuItemCard card3 = MenuItemCard.Dranken;
                 List<MenuItem> AllMenuItems = [
-                    new(1, menu1, "Coffee", (decimal)2.99, "Drink", "Dit is koffie", 12, 9),
-                    new(2, menu1, "Cola", (decimal)1.99, "Drink", "Dit is cola", 19, 9),
-                    new(3, menu2, "Chips", (decimal)2.99, "Drink", "Dit is chips", 0, 9),
-                    new(4, menu1, "Wine", (decimal)5.99, "Drink", "Dit is wijn", 2, 21)];
-                MenuViewModel menuViewModel = new (AllMenuItems);*/
+                    new(1, card3, "Coffee", (decimal)2.99, "Drink", "This is coffee", 12, 9),
+                    new(2, card3, "Cola", (decimal)1.99, "Drink", "This is cola", 19, 9),
+                    new(3, card1, "Chips", (decimal)2.99, "Drink", "This is chips", 0, 9),
+                    new(4, card3, "Wine", (decimal)5.99, "Drink", "This is wine", 2, 21)];
+                Menu menu = new(AllMenuItems);
+                MenuViewModel menuViewModel = new (menu);*/
                 MenuViewModel menuViewModel = _menusService.GetMenuViewModel(card, category);
                 return View(menuViewModel);
             }

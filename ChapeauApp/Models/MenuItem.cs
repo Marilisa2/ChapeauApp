@@ -1,12 +1,14 @@
-﻿namespace ChapeauApp.Models
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class MenuItem
     {
         public int MenuItemId { get; set; }
-        public Menu Menu { get; set; }
+        public MenuItemCard MenuCard { get; set; }
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
-        public string ItemType { get; set; }
+        public MenuItemCategory ItemCategory { get; set; }
         public string Description { get; set; }
         public int Stock {  get; set; }
         public int VATAmount { get; set; }
@@ -16,13 +18,13 @@
             
         }
 
-        public MenuItem(int menuItemId, Menu menu, string itemName, decimal itemPrice, string itemType, string description, int stock, int vATAmount)
+        public MenuItem(int menuItemId, MenuItemCard menuCard, string itemName, decimal itemPrice, MenuItemCategory itemCategory, string description, int stock, int vATAmount)
         {
             MenuItemId = menuItemId;
-            Menu = menu;
+            MenuCard = menuCard;
             ItemName = itemName;
             ItemPrice = itemPrice;
-            ItemType = itemType;
+            ItemCategory = itemCategory;
             Description = description;
             Stock = stock;
             VATAmount = vATAmount;

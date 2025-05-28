@@ -6,6 +6,6 @@ namespace ChapeauApp.Services.Interfaces
 {
     public interface IMenusService
     {
-        MenusViewModel GetMenusViewModel(string? card, string? category);
+        MenuViewModel GetMenuViewModel(string? card, string? category);
     }
 }
