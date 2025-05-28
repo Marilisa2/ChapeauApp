@@ -12,10 +12,26 @@ namespace ChapeauApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
+            //Services
+            builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
+            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            builder.Services.AddSingleton<ITableService, TableService>();
             builder.Services.AddSingleton<IMenusService, MenusService>();
+            builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
+            builder.Services.AddSingleton<IOrdersService, OrdersService>();
+            builder.Services.AddSingleton<IVatsService, VatsService>();
+            builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
 
+            builder.Services.AddControllersWithViews();
+
+            //DatbaseRepository
+            builder.Services.AddSingleton<IEmployeeRepository, DbEmployeesRepository>();
+            builder.Services.AddSingleton<ITableRepository, DbTablesRepository>();
+            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
+            builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
+            builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
+            builder.Services.AddSingleton<IBillsRepository, DbBillsRepository>();
+           
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

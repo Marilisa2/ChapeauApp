@@ -9,7 +9,7 @@ namespace ChapeauApp.Models
         public MenuItem MenuItem { get; set; }
         public Order Order { get; set; }
 
-        public OrderItemStatus Status { get; set; }
+       // public OrderItemStatus Status { get; set; }
 
         public OrderItem()
         {

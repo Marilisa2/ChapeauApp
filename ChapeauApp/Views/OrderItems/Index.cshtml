@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ChapeauApp.Models.OrderItem>
+
+@{
+    ViewData["Title"] = "OrderItems";
+}
+<h1 class="display-4 p-3">OrderItems</h1>
+<table class="table table-striped table-hover mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>OrderItemId</th>
+            <th>Quantity</th>
+            <th>MenuItem</th>
+            <th>Comment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+             {
+                <tr>
+                 <td>@item.OrderItemId</td>
+                 <td>@item.Quantity</td>
+                 <td>@item.MenuItem.ItemName</td>
+                 <td>@item.Comment</td>
+                 <td>@item.OrderItemStatus.ToString()</td> <!--Status wordt nu weergeven als string-->
+                </tr>
+            }
+        }
+    </tbody>
+</table>

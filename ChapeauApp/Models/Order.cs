@@ -3,26 +3,24 @@
     public class Order
     {
         public int OrderId { get; set; }
-        public DateTime Time {  get; set; }
-        public DateOnly Date {  get; set; }
-        public string Status { get; set; }
-        public Table Table { get; set; }
-        public Employee Employee { get; set; }
+        public DateTime OrderTime {  get; set; }
+        //public DateOnly Date {  get; set; } //niet meer nodig?
+        public string OrderStatus { get; set; } //wordt enum!
+        public Table TableNumber { get; set; }
+        //public Employee EmployeeId { get; set; } //toevoegen voor sprint2
 
-        public  List<OrderItem> OrderItems { get; set; }
-
+        public List<OrderItem> OrderItems { get; set; }
+        
         public Order()
         {
         }
 
-        public Order(int orderId, DateTime time, DateOnly date, string status, Table table, Employee employee, List<OrderItem> orderItems)
+        public Order(int orderId, DateTime orderTime, string orderStatus, Table tableNumber, List<OrderItem> orderItems)
         {
             OrderId = orderId;
-            Time = time;
-            Date = date;
-            Status = status;
-            Table= table;
-            Employee = employee;
+            OrderTime = orderTime;
+            OrderStatus = orderStatus;
+            TableNumber = tableNumber;
             OrderItems = orderItems;
         }
     }
