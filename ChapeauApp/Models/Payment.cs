@@ -1,10 +1,24 @@
-﻿namespace ChapeauApp.Models
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class Payment
     {
-        int PaymentId { get; set; }
-        string PaymentMethod { get; set; }
-        string Status { get; set; }
-        int DivisionType { get; set; }
+        public int PaymentId { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentStatus { get; set; }
+        public int PaymentSplitCount { get; set; }
+
+        public Payment()
+        {
+        }
+
+        public Payment(int paymentId, PaymentMethod paymentMethod, string paymentStatus, int paymentSplitCount)
+        {
+            PaymentId = paymentId;
+            PaymentMethod = paymentMethod;
+            PaymentStatus = paymentStatus;
+            PaymentSplitCount = paymentSplitCount;
+        }
     }
 }

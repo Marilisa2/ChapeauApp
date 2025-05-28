@@ -1,0 +1,86 @@
+﻿@model ChapeauApp.Models.ViewModels.OrdersViewModel
+@{
+    ViewData["Title"] = "View Order By Table Number";
+}
+
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Order for Table @Model.Table.TableNumber</h2>
+
+    <div class="card mb-5 shadow-sm">
+        <div class="card-body">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @*OrderItems (/MenuItems)*@
+                    @foreach (var orderItem in Model.Order.OrderItems)
+                    {
+                        <tr>
+                            <td>@orderItem.MenuItem.ItemName</td>
+                            <td>@orderItem.Quantity</td>
+                            <td>@orderItem.MenuItem.ItemPrice</td>
+                            <td>€@(orderItem.Quantity * orderItem.MenuItem.ItemPrice) </td>
+                        </tr>
+                    }
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+    @*VAT Amount + Total price amount*@
+    <div class="card mb-5 shadow-sm">
+        <div class="card-body">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th colspan="2">VAT Overview</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th scope="row">Low VAT (9%)</th>
+                        <td>€@Model.VatTotals.LowVatAmount.ToString("0.00")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">High VAT (21%) </th>
+                        <td>€@Model.VatTotals.HighVatAmount.ToString("0.00")</td>
+                    </tr>
+                    <tr class="table-active">
+                        <th scope="row"><strong>Total amount to be paid:</strong></th>
+                        <td><strong>€@Model.TotalPricemount.ToString("0.00")</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* Feedback card *@
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Leave Feedback</h5>
+            <form method="post" action="/Feedback/Submit">
+                <div class="mb-3">
+                    <label for="feedback" class="form-label">Your comments</label>
+                    <textarea class="form-control" id="feedback" name="FeedbackText" rows="3" placeholder="For example: The food was wonderful!"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit feedback</button>
+            </form>
+        </div>
+    </div>
+    
+    @* Navgation buttons *@
+    <div class="d-flex justify-content-between mt-3">
+        <a href="/Orders/Index" class="btn btn-primary w-25 text-white">← Back to table overview</a>
+        <a href="/Bills/Index" class="btn btn-primary w-25 text-white">Go to bill →</a>
+    </div>
+
+</div>

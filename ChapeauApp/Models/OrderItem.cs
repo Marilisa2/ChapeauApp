@@ -10,7 +10,7 @@ namespace ChapeauApp.Models
         public MenuItem MenuItem { get; set; }
         public int OrderId { get; set; }
 
-        public OrderItemStatus Status { get; set; }
+       // public OrderItemStatus Status { get; set; }
 
         public OrderItem()
         {
@@ -23,7 +23,7 @@ namespace ChapeauApp.Models
             MenuItemId = menuItemId;
             MenuItem = menuItem;
             OrderId = orderId;
-            Status = status;
+            //Status = status;
         }
 
       
