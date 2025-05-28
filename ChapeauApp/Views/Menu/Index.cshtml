@@ -2,29 +2,26 @@
 @{
 	ViewData["Title"] = "Menu";
 }
-<form action="/Menu/Index" method="post" id="menuForm">
+<form action="/Menu/Index" method="get" id="menuForm">
 	<div class="form-group py-2">
 		<label for="cars">Choose a card:</label>
-		<select name="card" id="card" form="menuForm">
+		<select value="@Model.Menu.MenuItemCard" name="card" id="card" form="menuForm">
 			<option value="All">Alles</option>
 			<option value="Dranken">Dranken</option>
 			<option value="Lunch">Lunch</option>
 			<option value="Diner">Diner</option>
 		</select>
 		<label for="cars">Choose a category:</label>
-		<select name="category" id="category" form="menuForm">
+		<select value="@Model.Menu.Category" name="category" id="category" form="menuForm">
 			<option value="All">Alles</option>
 			<option value="Voorgerecht">Voorgerecht</option>
 			<option value="Tussengerecht">Tussengerecht</option>
 			<option value="Hoofdgerecht">Hoofdgerecht</option>
 			<option value="Nagerecht">Nagerecht</option>
-			<option value="Bieren van de tap">Bieren van de tap</option>
+			<option value="Bieren">Bieren van de tap</option>
 			<option value="Wijnen">Wijnen</option>
-			<option value="Koffie / Thee">Koffie / Thee</option>
-			<option value="Gedistilleerde drank">Gedistilleerde drank</option>
-			<option value="All">Alles</option>
-			<option value="All">Alles</option>
-			<option value="All">Alles</option>
+			<option value="KoffieThee">Koffie / Thee</option>
+			<option value="GedistilleerdeDrank">Gedistilleerde drank</option>
 			
 			<!--option value="All">All</option>
 			<option value="Starters">Starters</option>
@@ -37,16 +34,29 @@
 @{
 	if (Model != null)
 	{
-		<h1>This is the menu!</h1>
-		<h2>Selected card: @Model.Menu.MenuItemCard</h2>
-		<h2>Selected category: @Model.Menu.Category</h2>
+		/*
+				 <h1>This is the menu!</h1>
+				<h2>Selected card: @Model.Menu.MenuItemCard</h2>
+				<h2>Selected category: @Model.Menu.Category</h2>
+				<table class="table table-hover">
+					<thead class="table-dark">
+						<tr>
+							<th>Dish</th>
+							<th>Description</th>
+							<th>Price</th>
+							<th>Commentary</th>
+						</tr>
+				 */
+		<h1>Dit is het menu!</h1>
+		<h2>Geselecteerde menukaart: @Model.Menu.MenuItemCard</h2>
+		<h2>Geselecteerde categorie: @Model.Menu.Category</h2>
 		<table class="table table-hover">
 			<thead class="table-dark">
 				<tr>
-					<th>Dish</th>
-					<th>Description</th>
-					<th>Price</th>
-					<th>Commentary</th>
+					<th>Gerecht</th>
+					<th>Beschrijving</th>
+					<th>Prijs</th>
+					<th>Opmerkingen</th>
 				</tr>
 			</thead>
 			<tbody class="bg-opacity-10 bg-black">
@@ -58,7 +68,8 @@
 							<td>@menuItem.ItemName</td>
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
-							<td>@menuItem.ItemName is almost out of stock! (@menuItem.Stock left)</td>
+							<td>Nog maar @menuItem over!</td>
+							<!--td>@menuItem.ItemName is almost out of stock! (@menuItem.Stock left)</-->
 						</tr>
 					}
 					else if (menuItem.Stock <= 0)
@@ -67,7 +78,8 @@
 							<td>@menuItem.ItemName</td>
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
-							<td>@menuItem.ItemName is out of stock!</td>
+							<td>Geen voorraad meer.</td>
+							<!--td>@menuItem.ItemName is out of stock!</-->
 						</tr>
 					}
 					else
@@ -76,7 +88,8 @@
 							<td>@menuItem.ItemName</td>
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
-							<td>Plenty of @menuItem.ItemName left!</td>
+							<td>n.v.t.</td>
+							<!--td>Plenty of @menuItem.ItemName left!</-->
 						</tr>
 					}
 				}
@@ -85,6 +98,8 @@
 	}
 	else
 	{
-		<h1 class="alert-danger">No menu was found!</h1>
+		/*<h1 class="alert-danger">No menu was found!</h1>*/
+	<h1 class="alert-danger">Geen menu gevonden!</h1>
+
 	}
 }

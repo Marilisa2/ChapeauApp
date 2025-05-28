@@ -22,7 +22,7 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-                //Hardcoded offline backup
+                //Hardcoded offline backup (outdated)
                 /*MenuItemCard card1 = MenuItemCard.Lunch;
                 MenuItemCard card2 = MenuItemCard.Diner;
                 MenuItemCard card3 = MenuItemCard.Dranken;
@@ -39,6 +39,7 @@ namespace ChapeauApp.Controllers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+                ViewBag.Error = ex.Message;
                 return RedirectToAction("Index", "Home");
             }
         }

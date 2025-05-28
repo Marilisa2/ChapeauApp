@@ -33,24 +33,32 @@ namespace ChapeauApp.Services
         public string GetQuery(string? cardName, string? itemCategory)
         {
             string query;
-            if (cardName == null && itemCategory == null)
+            if (cardName == null)
+                cardName = "All";
+            cardName = cardName.ToLower();
+            if (itemCategory == null)
+                itemCategory = "All";
+            itemCategory = itemCategory.ToLower();
+
+            cardName = cardName ?? string.Empty;
+            if (cardName == "all" && itemCategory == "all")
             {
                 cardName = "All";
                 itemCategory = "All";
                 query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems";
                 return query;
             }
-            else if (cardName != null && itemCategory == null)
+            else if (cardName != "all" && itemCategory == "all")
             {
                 query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems WHERE menuId IN (SELECT menuId FROM Menus WHERE menuName = @MenuName)";
                 return query;
             }
-            else if (cardName == null && itemCategory != null)
+            else if (cardName == "all" && itemCategory != "all")
             {
                 query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems WHERE itemType = @Itemtype";
                 return query;
             }
-            else if (cardName != null && itemCategory != null)
+            else if (cardName != "all" && itemCategory != "all")
             {
                 query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount " +
                         "FROM MenuItems WHERE menuId IN (SELECT menuId FROM Menus WHERE menuName = @MenuName) AND itemType = @ItemType";
