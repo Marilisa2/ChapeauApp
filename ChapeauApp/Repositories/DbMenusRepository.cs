@@ -29,13 +29,20 @@ namespace ChapeauApp.Repositories
         }
         public List<MenuItem> GetMenuItems(string query, string card, string category)
         {
+            if (card == null)
+                card = "All";
+            card = card.ToLower();
+            if (category == null)
+                category = "All";
+            category = category.ToLower();
+
             List<MenuItem> menuItems = new List<MenuItem>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                if (card != null )
+                if (category != "all")
                 command.Parameters.AddWithValue("@MenuName", card);
-                if (category != null)
+                if (category != "all")
                     command.Parameters.AddWithValue("@ItemType", category);
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();

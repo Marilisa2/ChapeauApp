@@ -40,9 +40,13 @@ namespace ChapeauApp.Services
             itemCategory = itemCategory.ToLower();
 
             string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems";
+            if (cardName != "all" || itemCategory != "all")
+            {
+                query += " WHERE";
+            }
             if (cardName != "all") 
             { 
-                query += " WHERE menuId IN(SELECT menuId FROM Menus WHERE menuName = @MenuName)"; 
+                query += " menuId IN (SELECT menuId FROM Menus WHERE menuName = @MenuName)"; 
             }
             if (cardName != "all" && itemCategory != "all")
             {
@@ -50,7 +54,7 @@ namespace ChapeauApp.Services
             }
             if (itemCategory != "all")
             {
-                query += " WHERE itemType = @Itemtype";
+                query += " itemType = @Itemtype";
             }
             return query;
         }
