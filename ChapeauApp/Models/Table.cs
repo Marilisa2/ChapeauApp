@@ -1,4 +1,6 @@
-﻿namespace ChapeauApp.Models
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class Table
     {

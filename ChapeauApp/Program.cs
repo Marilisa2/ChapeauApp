@@ -1,5 +1,7 @@
-using ChapeauApp.Repositories;
+using ChapeauApp.Services.Interfaces;
 using ChapeauApp.Services;
+using ChapeauApp.Repositories;
+using ChapeauApp.Repositories.Interfaces;
 
 namespace ChapeauApp
 {
@@ -24,6 +26,14 @@ namespace ChapeauApp
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            //Service
+            builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
+
+            //Repository
+            builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
+
+
 
             var app = builder.Build();
 
