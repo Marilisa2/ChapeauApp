@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Services.Interfaces;
+using ChapeauApp.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChapeauApp.Controllers
@@ -29,14 +30,15 @@ namespace ChapeauApp.Controllers
         }
         [HttpGet]
         public IActionResult Update(TableViewModel tableViewModel) 
-        { 
-            return View(tableViewModel);
+        {
+            ViewData["OldStatus"] = tableViewModel.TableStatus;
+            return View(tableViewModel);   
         }
-        //[HttpPost]
-        ////public IActionResult Update(TableViewModel tableViewModel)
-        ////{
-        ////    _tableService.UpdateTableStatus(tableViewModel);
-        ////    return RedirectToAction("Index");
-        ////}
+        [HttpPost]
+        public IActionResult Update(TableUpdateViewModel tableUpdateViewModel)
+        {
+            _tableService.UpdateTableStatus(tableUpdateViewModel);
+            return RedirectToAction("Index");
+        }
     }
 }

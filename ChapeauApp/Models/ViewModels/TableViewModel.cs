@@ -7,7 +7,6 @@ namespace ChapeauApp.Models.ViewModels
         public TableViewModel()
         {
         }
-
         public int TableNumber { get; set; }
         public TableStatuses TableStatus { get; set; }
 
@@ -15,6 +14,6 @@ namespace ChapeauApp.Models.ViewModels
         {
             TableNumber =table.TableNumber ;
             TableStatus =table.TableStatus ;
-        }
+        }        
     }
 }

@@ -21,21 +21,45 @@ body {
   margin-bottom: 60px;
 }
 .Free {
-    color :#FFFFFF
+    background-color :#FFFFFF;
 }
 .Occupied {
-    color :#16EB20
+    background-color :#16EB20;
 }
 .Ordered {
-    color :#ED0B0B
+    background-color :#ED0B0B;
 }
 .Reserved {
-    color :#3B10EA
+    background-color :#3B10EA;
 }
 .OrderReadyToBeServed {
-    color :#FA9302
+    background-color :#FA9302;
 }
-#TableIndex
-{
-    color:#000000
+#TableIndex {
+    grid-template-areas:
+        "           #2       #4       #6          #8         #10                " 
+        "           #1       #3       #5          #7         #9                 " 
+        "#refreshButton                                            #logoffButon " 
+        ;
+    color: #000000;
 }
+div.Table{
+    width:20px;
+    height:20px;
+    display:block;
+}
+.rechthoek-knop {
+    width: 150px;
+    height: 75px;
+   
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color:black;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+

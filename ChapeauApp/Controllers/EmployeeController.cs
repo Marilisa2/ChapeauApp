@@ -31,7 +31,7 @@ namespace ChapeauApp.Controllers
                
                 return View(employees);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Employee");
             }
@@ -61,7 +61,7 @@ namespace ChapeauApp.Controllers
                     return RedirectToAction("Index","Table");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Login");
             }
@@ -79,7 +79,7 @@ namespace ChapeauApp.Controllers
                 _employeeService.AddEmployee(employee);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View(employee);
             }
@@ -93,7 +93,7 @@ namespace ChapeauApp.Controllers
                 EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
                 return View(employeeViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index");
             }
@@ -106,7 +106,7 @@ namespace ChapeauApp.Controllers
                 _employeeService.UpdateEmployee(employee);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View(employee);
             }
@@ -120,7 +120,7 @@ namespace ChapeauApp.Controllers
                 EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
                 return View(employeeViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index");
             }
@@ -133,13 +133,13 @@ namespace ChapeauApp.Controllers
                 _employeeService.DeleteEmployee(employee.EmployeeId);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View(employee);
             }
             
         }
-        public IActionResult Logout()
+        public IActionResult Logoff()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("login");

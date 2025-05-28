@@ -45,8 +45,8 @@ namespace ChapeauApp
 
             app.MapControllerRoute(
                 name: "default",
-            //pattern: "{controller=Employee}/{action=Create}");
-            pattern: "{controller=Employee}/{action=login}");
+            //pattern: "{controller=Employee}/{action=login}");
+            pattern: "{controller=Table}/{action=Index}");
 
             app.Run();
         }
