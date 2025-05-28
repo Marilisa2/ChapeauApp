@@ -1,3 +1,8 @@
+using ChapeauApp.Services.Interfaces;
+using ChapeauApp.Services;
+using ChapeauApp.Repositories;
+using ChapeauApp.Repositories.Interfaces;
+
 namespace ChapeauApp
 {
     public class Program
@@ -8,6 +13,14 @@ namespace ChapeauApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Service
+            builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
+
+            //Repository
+            builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
+
+
 
             var app = builder.Build();
 

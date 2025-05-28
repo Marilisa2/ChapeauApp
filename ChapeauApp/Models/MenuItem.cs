@@ -2,13 +2,13 @@
 {
     public class MenuItem
     {
-        int MenuItemId { get; set; }
-        int MenuId { get; set; }
-        string ItemName { get; set; }
-        decimal ItemPrice { get; set; }
-        string ItemType { get; set; }
-        string Description { get; set; }
-        int Stock {  get; set; }
-        int VATAmount { get; set; }
+        public int MenuItemId { get; set; }
+        public int MenuId { get; set; }
+        public string ItemName { get; set; }
+        public decimal ItemPrice { get; set; }
+        public string ItemType { get; set; }
+        public string Description { get; set; }
+        public int Stock {  get; set; }
+        public int VATAmount { get; set; }
     }
 }

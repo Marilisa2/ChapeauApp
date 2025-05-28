@@ -1,6 +1,6 @@
 ﻿namespace ChapeauApp.Repositories
 {
-    public class DBPaymentsRepository
+    public class DbPaymentsRepository
     {
     }
 }
