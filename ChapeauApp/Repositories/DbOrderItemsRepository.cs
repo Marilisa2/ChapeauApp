@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Controllers;
+using ChapeauApp.Enums;
 using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -21,18 +22,20 @@ namespace ChapeauApp.Repositories
         {
             int orderItemId = (int)reader["OrderItemId"];
             int quantity = (int)reader["Quantity"];
-            int menuItemId = (int)reader["MenuItemId"];
-            int orderId = (int)reader["OrderId"];
+            MenuItem menuItemId = new MenuItem { MenuItemId = (int)reader["MenuItemId"] };
+            Order order = new Order { OrderId = (int)reader["OrderId"] };
+            string? comment = (string)reader["Comment"];
+            OrderItemStatus orderItemStatus = (OrderItemStatus)(int)reader["OrderItemStatus"];
 
 
             MenuItem menuItem = new MenuItem
             {
                 MenuItemId = (int)reader["menuItemId"],
-                MenuId = new Menu { MenuId = (int)reader["menuId"] },
+                Menu = new Menu { MenuId = (int)reader["menuId"] },
                 ItemName = (string)reader["itemName"],
                 ItemPrice = reader["itemPrice"] == DBNull.Value ? 0m : (decimal)reader["itemPrice"],
                 ItemType = reader["itemType"] == DBNull.Value ? string.Empty : (string)reader["itemType"],
-                ItemDescription = reader["itemDescription"] == DBNull.Value ? string.Empty : (string)reader["itemType"],
+                ItemDescription = reader["itemDescription"] == DBNull.Value ? string.Empty : (string)reader["itemDescription"],
                 ItemStock = (int)reader["itemStock"],
                 VATAmount = (int)reader["vat_Amount"]
             };
@@ -41,9 +44,10 @@ namespace ChapeauApp.Repositories
             {
                 OrderItemId = orderItemId,
                 Quantity = quantity,
-                MenuItemId = menuItemId,
-                OrderId = orderId,
-                MenuItem = menuItem
+                MenuItem = menuItem,
+                Order = order,
+                Comment = comment,
+                OrderItemStatus = orderItemStatus
             };
         }
 
@@ -53,7 +57,7 @@ namespace ChapeauApp.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT oi.OrderItemId, oi.Quantity, oi.MenuItemId, oi.OrderId, oi.Comment, " + 
+                string query = "SELECT oi.OrderItemId, oi.Quantity, oi.MenuItemId, oi.OrderId, oi.Comment, oi.OrderItemStatus, " + 
                                   "mi.menuItemId, mi.menuId, mi.itemName, mi.itemPrice, mi.itemType, mi.itemDescription, mi.itemStock, mi.vat_Amount " +  
                                   "FROM OrderItems oi " +  
                                   "JOIN MenuItems mi ON oi.MenuItemId = mi.menuItemId " +  

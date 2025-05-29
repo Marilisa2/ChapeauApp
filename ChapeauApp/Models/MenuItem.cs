@@ -3,7 +3,7 @@
     public class MenuItem
     {
         public int MenuItemId { get; set; }
-        public Menu MenuId { get; set; }
+        public Menu Menu { get; set; }
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
         public string ItemType { get; set; }
@@ -15,10 +15,10 @@
         {
         }
 
-        public MenuItem(int menuItemId, Menu menuId, string itemName, decimal itemPrice, string itemType, string itemDescription, int itemStock, int vATAmount)
+        public MenuItem(int menuItemId, Menu menu, string itemName, decimal itemPrice, string itemType, string itemDescription, int itemStock, int vATAmount)
         {
             MenuItemId = menuItemId;
-            MenuId = menuId;
+            Menu = menu;
             ItemName = itemName;
             ItemPrice = itemPrice;
             ItemType = itemType;
