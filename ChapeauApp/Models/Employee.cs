@@ -1,4 +1,4 @@
-﻿namespace ChapeauApp.Models
+namespace ChapeauApp.Models
 {
     public class Employee
     {
@@ -6,7 +6,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmployeeType { get; set; }
-        public string Password { get; set; }
+        public string Password { get; private set; }
 
         public Employee()
         {

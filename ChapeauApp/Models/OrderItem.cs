@@ -1,4 +1,4 @@
-﻿using ChapeauApp.Enums;
+using ChapeauApp.Enums;
 
 namespace ChapeauApp.Models
 {
@@ -6,26 +6,24 @@ namespace ChapeauApp.Models
     {
         public int OrderItemId { get; set; }
         public int Quantity { get; set; }
-        public int MenuItemId { get; set; }
         public MenuItem MenuItem { get; set; }
-        public int OrderId { get; set; }
-
-       // public OrderItemStatus Status { get; set; }
+        public Order Order { get; set; }
+        public string? Comment { get; set; }//mag null zijn
+       // public string? Course { get; set; } in MenuItem??//mag null zijn, 
+       public OrderItemStatus OrderItemStatus { get; set; }
 
         public OrderItem()
         {
         }
 
-        public OrderItem(int orderItemId, int quantity, int menuItemId, MenuItem menuItem, int orderId, OrderItemStatus status)
+        public OrderItem(int orderItemId, int quantity, MenuItem menuItem, Order order, string? comment, OrderItemStatus orderItemStatus)
         {
             OrderItemId = orderItemId;
             Quantity = quantity;
-            MenuItemId = menuItemId;
             MenuItem = menuItem;
-            OrderId = orderId;
-            //Status = status;
+            Order = order;
+            Comment = comment;
+            OrderItemStatus = orderItemStatus;
         }
-
-      
     }
 }

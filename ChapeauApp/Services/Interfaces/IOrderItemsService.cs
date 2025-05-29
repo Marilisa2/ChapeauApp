@@ -1,10 +1,9 @@
-using ChapeauApp.Models;
+﻿using ChapeauApp.Models;
 
-namespace ChapeauApp.Repositories.Interfaces
+namespace ChapeauApp.Services.Interfaces
 {
-    public interface IOrderItemsRepository
+    public interface IOrderItemsService
     {
-        List<OrderItem> GetOrderItemsByOrderId(int orderId);
         List<OrderItem> GetAllOrderItems();
         List<OrderItem> GetByOrderId(int orderId);
         OrderItem? GetOrderItemById(int orderItemId);

@@ -1,13 +1,15 @@
-﻿namespace ChapeauApp.Models
+using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class Order
     {
         public int OrderId { get; set; }
         public DateTime OrderTime {  get; set; }
-        //public DateOnly Date {  get; set; } //niet meer nodig?
-        public string OrderStatus { get; set; } //wordt enum!
+        //public DateOnly Date {  get; set; } //?
+        public OrderItemStatus OrderItemStatus { get; set; }
         public Table TableNumber { get; set; }
-        //public Employee EmployeeId { get; set; } //toevoegen voor sprint2
+        //public Employee Employee { get; set; } //Add later!
 
         public List<OrderItem> OrderItems { get; set; }
         
@@ -15,12 +17,13 @@
         {
         }
 
-        public Order(int orderId, DateTime orderTime, string orderStatus, Table tableNumber, List<OrderItem> orderItems)
+        public Order(int orderId, DateTime orderTime, OrderItemStatus orderItemStatus, Table tableNumber, List<OrderItem> orderItems)
         {
             OrderId = orderId;
             OrderTime = orderTime;
-            OrderStatus = orderStatus;
+            OrderItemStatus = orderItemStatus;
             TableNumber = tableNumber;
+            //Employee = employee;
             OrderItems = orderItems;
         }
     }
