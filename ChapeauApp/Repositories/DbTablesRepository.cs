@@ -4,8 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ChapeauApp.Repositories
 {
-    //tijdelijk tot teamgenoot klaar is
-    public class DbTablesRepository : ITablesRepository
+    public class DbTablesRepository : ITableRepository
     {
         private readonly string? _connectionString;
 
@@ -49,6 +48,16 @@ namespace ChapeauApp.Repositories
                 reader.Close();
             }
             return tables;
+        }
+
+        public Table GetTableById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Table UpdateTableStatus(Table table)
+        {
+            throw new NotImplementedException();
         }
     }
 }

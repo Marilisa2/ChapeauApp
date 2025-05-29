@@ -1,9 +1,7 @@
 ﻿using ChapeauApp.Models;
 using ChapeauApp.Models.ViewModels;
-using ChapeauApp.Repositories;
 using ChapeauApp.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using ChapeauApp.Services.Interfaces;
 
@@ -11,21 +9,13 @@ namespace ChapeauApp.Controllers
 {
     public class OrdersController : Controller
     {
-        //dummyrepository
-        //private readonly IOrdersRepository _ordersRepository;
-
-        //public OrdersController()
-        //{
-        //    _ordersRepository = new DummyOrdersRepository();
-        //}
-
         //database
         private readonly IOrdersRepository _ordersRepository;
-        private readonly ITablesRepository _tablesRepository;
+        private readonly ITableRepository _tablesRepository;
         private readonly IOrdersService _ordersService; 
         private readonly IVatsService _vatsService;
 
-        public OrdersController(IOrdersRepository ordersRepository, ITablesRepository tablesRepository, IOrdersService ordersService, IVatsService vatsService)
+        public OrdersController(IOrdersRepository ordersRepository, ITableRepository tablesRepository, IOrdersService ordersService, IVatsService vatsService)
         {
             _ordersRepository = ordersRepository;
             _tablesRepository = tablesRepository;

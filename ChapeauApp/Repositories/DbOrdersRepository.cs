@@ -1,4 +1,3 @@
-﻿using ChapeauApp.Controllers;
 using ChapeauApp.Enums;
 using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
@@ -28,7 +27,6 @@ namespace ChapeauApp.Repositories
             DateTime orderTime = (DateTime)reader["OrderTime"];
             OrderStatus orderStatus = (OrderStatus)(int)reader["OrderStatus"];
 
-            //navragen of dit stukje goed is:
             int tableNumber = (int)reader["TableNumber"];
             Table table = new Table
             {
@@ -39,6 +37,7 @@ namespace ChapeauApp.Repositories
             //Employee employee = new Employee { EmployeeId = (int)reader["EmployeeId"] };
             //Employee? employee = _employeeRepository.GetEmployeeById(employeeId);
 
+            //Bill_Id toevoegen!
 
             List<OrderItem> orderItems = _orderItemsRepository.GetOrderItemsByOrderId(orderId);
 

@@ -1,4 +1,4 @@
-﻿using ChapeauApp.Enums;
+using ChapeauApp.Enums;
 
 namespace ChapeauApp.Models
 {

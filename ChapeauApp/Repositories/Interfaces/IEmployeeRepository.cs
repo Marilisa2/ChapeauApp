@@ -2,9 +2,13 @@
 
 namespace ChapeauApp.Repositories.Interfaces
 {
-    //tijdelijke IEmployeeRepository tot teamgenoot klaar is
     public interface IEmployeeRepository
     {
-        Employee? GetEmployeeById(int id);
+        public List<Employee> GetAllEmployees();
+        public Employee GetEmployeeById(int id);
+        public Employee AddEmployee(Employee employee);
+        public Employee UpdateEmployee(Employee employee);
+        public void DeleteEmployee(int id);
+        Employee GetEmployeeByLoginCredentials(int EmployeeId, string password);
     }
 }

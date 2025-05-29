@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using ChapeauApp.Models.ViewModels;
 

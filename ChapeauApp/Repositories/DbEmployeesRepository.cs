@@ -9,7 +9,6 @@ namespace ChapeauApp.Repositories
     {
         private readonly string? _connectionString;
 
-
         public DbEmployeesRepository(IConfiguration configuration)
         {
             //get database connectionstring from appsettings
@@ -48,6 +47,31 @@ namespace ChapeauApp.Repositories
 
                 return null;
             }
+        }
+
+        public List<Employee> GetAllEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee AddEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee GetEmployeeByLoginCredentials(int EmployeeId, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }
