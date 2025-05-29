@@ -1,8 +1,8 @@
 ﻿using ChapeauApp.Enums;
 using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Reflection.PortableExecutable;
 
 namespace ChapeauApp.Repositories
 {
@@ -40,7 +40,6 @@ namespace ChapeauApp.Repositories
             //Bill_Id toevoegen!
 
             List<OrderItem> orderItems = _orderItemsRepository.GetOrderItemsByOrderId(orderId);
-
 
             return new Order(orderId, orderTime, orderStatus, table, orderItems);
         }
