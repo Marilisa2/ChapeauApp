@@ -1,0 +1,20 @@
+﻿@using ChapeauApp.Models.ViewModels;
+@model TableViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<form id="UpdateTableForm" action="/Table/Update" method="get">
+    <div class="form-group">
+        <input hidden type="text" id="TableStatus" name="TableStatus" class="form-control" required value="@Model.TableStatus" />
+    </div>
+    <div class="form-group">
+        <input hidden type="text" id="TableNumber" name="TableNumber" class="form-control" required value="@Model.TableNumber" />
+    </div>
+    <title>Rechthoek Knop</title>
+    <div id="@Model.TableNumber" class="rechthoek-knop @Model.TableStatus" onclick="document.getElementById('UpdateTableForm').submit();">@Model.TableNumber</div>
+</form>
+
+
+    
+        
+   

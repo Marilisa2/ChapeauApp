@@ -1,7 +1,7 @@
-using ChapeauApp.Repositories;
 using ChapeauApp.Repositories.Interfaces;
-using ChapeauApp.Services;
+using ChapeauApp.Repositories;
 using ChapeauApp.Services.Interfaces;
+using ChapeauApp.Services;
 
 namespace ChapeauApp
 {
@@ -13,9 +13,18 @@ namespace ChapeauApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
-            builder.Services.AddSingleton<IMenusService, MenusService>();
-
+            builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddSingleton<ITableRepository, TableRepository>();
+            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
+            builder.Services.AddSingleton<ITableService, TableService>();
+            builder.Services.AddSingleton<IPasswordService, PasswordService>();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -28,6 +37,7 @@ namespace ChapeauApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
@@ -35,7 +45,8 @@ namespace ChapeauApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            //pattern: "{controller=Employee}/{action=login}");
+            pattern: "{controller=Table}/{action=Index}");
 
             app.Run();
         }

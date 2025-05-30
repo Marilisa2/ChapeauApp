@@ -1,0 +1,31 @@
+﻿@using ChapeauApp.Models.ViewModels;
+@model List<TableViewModel>
+@*
+
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "TableIndex";
+}
+<div>  
+    @{
+        foreach (TableViewModel tableViewModel in Model)
+        {
+            <partial name="_Table" model="tableViewModel" />
+        }
+        
+    }
+    <form action="/Employee/Logoff " method="get">
+        <button id="logoffButton" type="submit" class="btn btn-primary">logoff</button>
+    </form>
+    <form action ="/Table/Index " method="get">
+        <button id="refreshButton" type="submit" class="btn btn-primary" >refresh</button>
+    </form>
+     
+</div>
+<script>
+    redirect(controller,action)
+    {
+        RedirectToAction(Controller,action)
+    }
+</script>

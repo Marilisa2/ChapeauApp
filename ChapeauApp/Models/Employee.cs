@@ -1,26 +1,35 @@
 ﻿namespace ChapeauApp.Models
 {
+    using ChapeauApp.Enums;
+    
     public class Employee
     {
-        int EmployeeId { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
-        string EmployeeType { get; set; }
-        string Password { get; set; }
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public EmployeeTypes EmployeeType { get; set; }
+        public string HashedPassword { get; private set; }
+        public string Salt{ get; set; }
 
-        public Employee()
-        {
-            
-        }
-
-        public Employee(int employeeId, string firstName, string lastName, string employeeType, string password)
+        public Employee(int employeeId, string firstName, string lastName, EmployeeTypes employeeType, string password)
         {
             EmployeeId = employeeId;
             FirstName = firstName;
             LastName = lastName;
             EmployeeType = employeeType;
-            Password = password;
+            HashedPassword = password;
+            
         }
+
+        public Employee(int employeeId, string firstName, string lastName, EmployeeTypes employeeType, string password, string salt) : this(employeeId, firstName, lastName, employeeType, password)
+        {
+            Salt = salt;
+        }
+
+        public Employee()
+        {
+        }
+
+        
     }
-    
 }
