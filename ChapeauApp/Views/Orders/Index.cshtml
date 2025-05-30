@@ -1,0 +1,38 @@
+﻿@model ChapeauApp.Models.ViewModels.OrdersViewModel
+
+@{
+    ViewData["Title"] = "View TableOrders";
+}
+
+<div class="container my-5">
+    <h4>Choose a table</h4>
+
+    <div class="row">
+        @foreach(var table in Model.Tables)
+        {
+            <div class="col-md-4 mb-4">
+                <a href="/Orders/GetOrderByTableNumber?tableNumber=@table.TableNumber" class="text-decoration-none text-dark">
+                    <div class="card shadow-sm h-100 card-hover">
+                        <div class="card-body d-flex flex-column justify-content-between text-center">
+                            <h5 class="card-title">Table @table.TableNumber</h5>
+                            <span>View Order</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@* Style css *@
+@*Fixen!!!*@
+<style>
+    .card-hover{
+        transition: box-shadow 0.3s ease;
+    }
+
+    a:hover .card-hover{
+        box-shadow: 0 0 15px #00000033;
+        cursor: pointer;
+    }
+</style>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChapeauApp.Controllers
 {
-    public class TableController
+    public class TableController : Controller
     {
         private readonly ITableService _tableService;
 

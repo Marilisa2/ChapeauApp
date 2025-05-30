@@ -3,14 +3,13 @@ using Microsoft.Data.SqlClient;
 
 namespace ChapeauApp.Repositories
 {
-    //tijdelijk
     public class DbMenuItemsRepository
     {
         private readonly string? _connectionString;
 
         public DbMenuItemsRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("ChapeauDb");
         }
 
         public List<MenuItem> GetAllMenuItems()
@@ -19,7 +18,7 @@ namespace ChapeauApp.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT MenuItemId, MenuId, ItemName, ItemPrice, ItemType, Description, Stock, VATAmount FROM MenuItems ORDER BY MenuItemId ASC";
+                string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems ORDER BY MenuItemId ASC";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
@@ -41,14 +40,14 @@ namespace ChapeauApp.Repositories
         {
             return new MenuItem
             {
-                MenuItemId = (int)reader["MenuItemId"],
-                MenuId = (int)reader["MenuId"],
-                ItemName = reader["ItemName"].ToString(),
-                ItemPrice = (decimal)reader["ItemPrice"],
-                ItemType = reader["ItemType"].ToString(),
-                Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : null,
-                Stock = (int)reader["Stock"],
-                VATAmount = (int)reader["VATAmount"]
+                MenuItemId = (int)reader["menuItemId"],
+                Menu = new Menu { MenuId = (int)reader["menuId"] },
+                ItemName = reader["itemName"].ToString(),
+                ItemPrice = (decimal)reader["itemPrice"],
+                ItemType = reader["itemType"].ToString(),
+                ItemDescription = reader["itemDescription"] != DBNull.Value ? reader["itemDescription"].ToString() : null,
+                ItemStock = (int)reader["itemStock"],
+                VATAmount = (int)reader["vat_Amount"]
             };
         }
     }

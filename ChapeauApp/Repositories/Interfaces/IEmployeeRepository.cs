@@ -1,6 +1,6 @@
 ﻿using ChapeauApp.Models;
 
-namespace ChapeauApp.Repositories
+namespace ChapeauApp.Repositories.Interfaces
 {
     public interface IEmployeeRepository
     {
