@@ -2,10 +2,23 @@
 {
     public class Employee
     {
-        int EmployeeId { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
-        string EmployeeType { get; set; }
-        string Password { get; set; }
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmployeeType { get; set; }
+        public string Password { get; private set; }
+
+        public Employee(int employeeId, string firstName, string lastName, string employeeType, string password)
+        {
+            EmployeeId = employeeId;
+            FirstName = firstName;
+            LastName = lastName;
+            EmployeeType = employeeType;
+            Password = password;
+        }
+
+        public Employee()
+        {
+        }
     }
 }
