@@ -4,7 +4,17 @@ namespace ChapeauApp.Models
 {
     public class Table
     {
+        public Table()
+        {
+        }
+
         public int TableNumber { get; set; }
-        public TableStatusTest TableStatus { get; set; }
+        public string TableStatus { get; set; }
+
+        public Table(int tableNumber, string tableStatus)
+        {
+            TableNumber = tableNumber;
+            TableStatus = tableStatus;
+        }
     }
 }
