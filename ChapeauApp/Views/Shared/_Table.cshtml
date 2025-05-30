@@ -11,7 +11,7 @@
         <input hidden type="text" id="TableNumber" name="TableNumber" class="form-control" required value="@Model.TableNumber" />
     </div>
     <title>Rechthoek Knop</title>
-    <div class="rechthoek-knop @Model.TableStatus" onclick="document.getElementById('UpdateTableForm').submit();">@Model.TableNumber</div>
+    <div id="@Model.TableNumber" class="rechthoek-knop @Model.TableStatus" onclick="document.getElementById('UpdateTableForm').submit();">@Model.TableNumber</div>
 </form>
 
 
