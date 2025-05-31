@@ -2,10 +2,11 @@
 using ChapeauApp.Repositories;
 using ChapeauApp.Models;
 using ChapeauApp.Services;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Controllers
 {
-    public class EmployeeController
+    public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
         private readonly ILoginOrOffService _loginOrOffService;
@@ -44,7 +45,7 @@ namespace ChapeauApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginModel loginModel)
+        public ActionResult Login(LoginViewModel loginModel)
         {
             try
             {

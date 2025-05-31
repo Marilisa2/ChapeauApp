@@ -19,9 +19,9 @@ namespace ChapeauApp.Services
             return _OrderItemsRepository.GetAllOrderItems();
         }
 
-        public List<OrderItem> GetByOrderId(int orderId)
+        public List<OrderItem> GetOrderItemsByOrderId(int orderId)
         {
-            return _OrderItemsRepository.GetByOrderId(orderId);
+            return _OrderItemsRepository.GetOrderItemsByOrderId(orderId);
         }
 
         public OrderItem? GetOrderItemById(int orderItemId)

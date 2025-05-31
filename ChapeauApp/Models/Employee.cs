@@ -16,9 +16,9 @@
             EmployeeType = employeeType;
             Password = password;
         }
+
         public Employee()
         {
         }
     }
-    
 }

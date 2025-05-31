@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Repositories;
 
 namespace ChapeauApp.Services
@@ -14,7 +15,7 @@ namespace ChapeauApp.Services
 
         public Employee GetEmployeeByLoginCredentials(int EmployeeId, string password)
         {
-           return _employeeRepository.GetEmployeeByLoginCredentials(EmployeeId,password);
+            return _employeeRepository.GetEmployeeByLoginCredentials(EmployeeId, password);
         }
 
         public void Logoff()
