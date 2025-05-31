@@ -23,7 +23,7 @@ namespace ChapeauApp.Controllers
 
             try
             {
-
+                
                 // get all users from database
                 List<Employee> users = _employeeService.GetAllEmployees();
                 Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInemployee");

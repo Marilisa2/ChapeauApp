@@ -4,6 +4,8 @@ namespace ChapeauApp.Models
 {
     public class Table
     {
+
+        
         public Table()
         {
         }

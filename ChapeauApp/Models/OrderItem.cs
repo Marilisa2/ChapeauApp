@@ -8,7 +8,8 @@ namespace ChapeauApp.Models
         public int Quantity { get; set; }
         public MenuItem MenuItem { get; set; }
         public Order Order { get; set; }
-        public string? Comment { get; set; }
+        public string? Comment { get; set; }//mag null zijn
+      
         public OrderItemStatus OrderItemStatus { get; set; }
 
         public OrderItem()

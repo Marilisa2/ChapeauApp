@@ -14,6 +14,8 @@ namespace ChapeauApp.Models
 
         public List<OrderItem> OrderItems { get; set; }
 
+        public OrderStatus OrderStatus { get; set; }
+
         public Order()
         {
         }
