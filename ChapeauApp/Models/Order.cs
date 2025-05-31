@@ -1,4 +1,6 @@
-﻿namespace ChapeauApp.Models
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models
 {
     public class Order
     {
@@ -10,6 +12,8 @@
         public Employee Employee { get; set; }
 
         public  List<OrderItem> OrderItems { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
 
         public Order()
         {

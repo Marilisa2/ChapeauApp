@@ -8,22 +8,24 @@ namespace ChapeauApp.Models
         public int Quantity { get; set; }
         public MenuItem MenuItem { get; set; }
         public Order Order { get; set; }
-
-        public OrderItemStatus Status { get; set; }
+        public string? Comment { get; set; }//mag null zijn
+      
+        public OrderItemStatus OrderItemStatus { get; set; }
 
         public OrderItem()
         {
         }
 
-        public OrderItem(int orderItemId, int quantity, MenuItem menuItem, Order order, OrderItemStatus status)
+        public OrderItem(int orderItemId, int quantity, MenuItem menuItem, Order order, OrderItemStatus orderItemStatus, string? comment)
         {
             OrderItemId = orderItemId;
             Quantity = quantity;
             MenuItem = menuItem;
             Order = order;
-            Status = status;
+            OrderItemStatus = orderItemStatus;
+            Comment = comment;
         }
 
-      
+
     }
 }

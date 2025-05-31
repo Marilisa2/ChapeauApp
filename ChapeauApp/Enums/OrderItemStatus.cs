@@ -2,8 +2,8 @@
 {
     public enum OrderItemStatus
     {
-        Waiting,
-        Preparing, 
-        ReadyToBeServed,
+        Wachten,
+        Voorbereiden,
+        KlaarOmTeServeren,
     }
 }
