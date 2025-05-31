@@ -5,7 +5,7 @@ using ChapeauApp.Services;
 
 namespace ChapeauApp.Controllers
 {
-    public class EmployeeController
+    public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
         private readonly ILoginOrOffService _loginOrOffService;
@@ -142,4 +142,4 @@ namespace ChapeauApp.Controllers
     }
 
 }
-}
+
