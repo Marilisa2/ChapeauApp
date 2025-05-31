@@ -8,8 +8,8 @@ namespace ChapeauApp.Models
         public DateTime Time {  get; set; }
         public DateOnly Date {  get; set; }
         public string Status { get; set; }
-        public Table TableNumber { get; set; }
-        public Employee EmployeeId { get; set; }
+        public Table Table { get; set; }
+        public Employee Employee { get; set; }
 
         public  List<OrderItem> OrderItems { get; set; }
 
@@ -19,14 +19,14 @@ namespace ChapeauApp.Models
         {
         }
 
-        public Order(int orderId, DateTime time, DateOnly date, string status, Table tableNumber, Employee employeeId, List<OrderItem> orderItems)
+        public Order(int orderId, DateTime time, DateOnly date, string status, Table table, Employee employee, List<OrderItem> orderItems)
         {
             OrderId = orderId;
             Time = time;
             Date = date;
             Status = status;
-            TableNumber = tableNumber;
-            EmployeeId = employeeId;
+            Table= table;
+            Employee = employee;
             OrderItems = orderItems;
         }
     }

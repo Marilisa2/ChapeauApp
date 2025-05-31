@@ -1,7 +1,7 @@
-using ChapeauApp.Services.Interfaces;
-using ChapeauApp.Services;
 using ChapeauApp.Repositories;
 using ChapeauApp.Repositories.Interfaces;
+using ChapeauApp.Services;
+using ChapeauApp.Services.Interfaces;
 
 namespace ChapeauApp
 {
@@ -20,6 +20,7 @@ namespace ChapeauApp
             builder.Services.AddSingleton<ITableService, TableService>();
 
             builder.Services.AddControllersWithViews();
+
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -29,11 +30,11 @@ namespace ChapeauApp
 
             //Service
             builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
+            builder.Services.AddSingleton<IMenusService, MenusService>();
 
             //Repository
             builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
-
-
+            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
 
             var app = builder.Build();
 
