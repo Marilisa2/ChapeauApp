@@ -16,16 +16,14 @@ namespace ChapeauApp.Models
         {
         }
 
-        public OrderItem(int orderItemId, int quantity, MenuItem menuItem, Order order, OrderItemStatus orderItemStatus, string? comment)
+        public OrderItem(int orderItemId, int quantity, MenuItem menuItem, Order order, string? comment, OrderItemStatus orderItemStatus)
         {
             OrderItemId = orderItemId;
             Quantity = quantity;
             MenuItem = menuItem;
             Order = order;
-            OrderItemStatus = orderItemStatus;
             Comment = comment;
+            OrderItemStatus = orderItemStatus;
         }
-
-
     }
 }

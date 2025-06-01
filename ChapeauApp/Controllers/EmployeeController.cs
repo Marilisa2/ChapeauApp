@@ -2,6 +2,7 @@
 using ChapeauApp.Repositories;
 using ChapeauApp.Models;
 using ChapeauApp.Services;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Controllers
 {
@@ -44,7 +45,7 @@ namespace ChapeauApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginModel loginModel)
+        public ActionResult Login(LoginViewModel loginModel)
         {
             try
             {

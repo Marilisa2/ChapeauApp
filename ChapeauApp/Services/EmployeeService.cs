@@ -1,4 +1,6 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Repositories.Interfaces;
+using ChapeauApp.Services.Interfaces;
 using ChapeauApp.Repositories;
 
 namespace ChapeauApp.Services

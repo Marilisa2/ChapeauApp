@@ -4,8 +4,8 @@ namespace ChapeauApp.Repositories.Interfaces
 {
     public interface IOrderItemsRepository
     {
+        List<OrderItem> GetOrderItemsByOrderId(int orderId);
         List<OrderItem> GetAllOrderItems();
-        List<OrderItem> GetByOrderId(int orderId);
         OrderItem? GetOrderItemById(int orderItemId);
         void UpdateOrderItem(OrderItem orderItem);
     }
