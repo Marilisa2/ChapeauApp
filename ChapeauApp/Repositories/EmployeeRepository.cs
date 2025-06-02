@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Repositories.Interfaces;
 
 namespace ChapeauApp.Repositories
 {
@@ -20,6 +21,11 @@ namespace ChapeauApp.Repositories
         }
 
         public Employee GetEmployeeById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee GetEmployeeByLoginCredentials(int EmployeeId, string password)
         {
             throw new NotImplementedException();
         }

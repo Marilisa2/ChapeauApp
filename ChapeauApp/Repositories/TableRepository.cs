@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Repositories.Interfaces;
 
 namespace ChapeauApp.Repositories
 {

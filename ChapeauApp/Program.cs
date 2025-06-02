@@ -14,9 +14,9 @@ namespace ChapeauApp
 
             // Add services to the container.
             //Services
-            builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
-            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
-            builder.Services.AddSingleton<ITableService, TableService>();
+            //builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
+            //builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            //builder.Services.AddSingleton<ITableService, TableService>();
             builder.Services.AddSingleton<IMenusService, MenusService>();
             builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
             builder.Services.AddSingleton<IOrdersService, OrdersService>();
