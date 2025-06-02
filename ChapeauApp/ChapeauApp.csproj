@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\VM\**" />
+    <Content Remove="Models\VM\**" />
+    <EmbeddedResource Remove="Models\VM\**" />
+    <None Remove="Models\VM\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Extensions\" />
     <Folder Include="Models\Extensions\" />
-    <Folder Include="Models\VM\" />
     <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
 
