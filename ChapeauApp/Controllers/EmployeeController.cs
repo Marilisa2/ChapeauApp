@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ChapeauApp.Repositories;
 using ChapeauApp.Models;
-using ChapeauApp.Services;
+using ChapeauApp.Models.Extensions;
 using ChapeauApp.Models.ViewModels;
+using ChapeauApp.Services.Interfaces;
+
 
 namespace ChapeauApp.Controllers
 {
@@ -19,24 +20,20 @@ namespace ChapeauApp.Controllers
 
         public IActionResult Index()
         {
-
-
             try
             {
-
-                // get all users from database
-                List<Employee> users = _employeeService.GetAllEmployees();
-                Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInemployee");
+                
+                
+                List<EmployeeViewModel> employees = _employeeService.GetAllEmployees();
+                Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInEmployee");
 
                 ViewData["LoggedInEmployee"] = LoggedInEmployee;
-                // send all users to view
-
-
-                return View(users);
+               
+                return View(employees);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index", "Employee");
             }
         }
         [HttpGet]
@@ -45,28 +42,28 @@ namespace ChapeauApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel loginModel)
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
             try
             {
-                User user = _usersRepository.GetByLoginCredentials(loginModel.UserName, loginModel.Password);
-                if (user == null)
+               Employee employee = _loginOrOffService.GetEmployeeByLoginCredentials(loginViewModel );
+                if (employee == null)
                 {
                     ViewBag.ErrorMessage = "this username/password combination doesn't exist";
-                    return View(loginModel);
+                    return View(loginViewModel);
                 }
                 else
                 {
 
-                    HttpContext.Session.SetObject("LoggedInUser", user);
+                    HttpContext.Session.SetObject("LoggedInEmployee", employee);
 
 
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index","Table");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Login");
             }
         }
         [HttpGet]
@@ -75,16 +72,16 @@ namespace ChapeauApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(User user)
+        public IActionResult Create(EmployeeCUDViewModel employee)
         {
             try
             {
-                _usersRepository.Add(user);
+                _employeeService.AddEmployee(employee);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View(user);
+                return View(employee);
             }
         }
         [HttpGet]
@@ -92,25 +89,26 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-                User user = _usersRepository.GetById(id);
-                return View(user);
+                Employee employee = _employeeService.GetEmployeeById(id);
+                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
+                return View(employeeViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index");
             }
         }
         [HttpPost]
-        public IActionResult Edit(User user)
+        public IActionResult Edit(EmployeeCUDViewModel employee)
         {
             try
             {
-                _usersRepository.Update(user);
+                _employeeService.UpdateEmployee(employee);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View(user);
+                return View(employee);
             }
         }
         [HttpGet]
@@ -118,27 +116,33 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-                User user = _usersRepository.GetById(id);
-                return View(user);
+                Employee employee = _employeeService.GetEmployeeById(id);
+                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
+                return View(employeeViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Index");
             }
         }
         [HttpPost]
-        public IActionResult Remove(User user)
+        public IActionResult Remove(EmployeeCUDViewModel employee)
         {
             try
             {
-                _usersRepository.Delete(user.Id);
+                _employeeService.DeleteEmployee(employee.EmployeeId);
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View(user);
+                return View(employee);
             }
-            ;
+            
+        }
+        public IActionResult Logoff()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login");
         }
     }
 

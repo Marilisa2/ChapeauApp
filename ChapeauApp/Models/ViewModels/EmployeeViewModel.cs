@@ -1,20 +1,25 @@
-﻿namespace ChapeauApp.Models.ViewModels
+﻿using ChapeauApp.Enums;
+
+namespace ChapeauApp.Models.ViewModels
 {
     public class EmployeeViewModel
     {
+        public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string EmployeeType { get; set; }
+        public EmployeeTypes EmployeeType { get; set; }
 
-        public EmployeeViewModel(string firstName, string lastName, string employeeType)
+        public EmployeeViewModel(Employee employee)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            EmployeeType = employeeType;
+            EmployeeId=employee.EmployeeId;
+            FirstName = employee.FirstName ;
+            LastName = employee.LastName ;
+            EmployeeType = employee.EmployeeType ;
         }
 
         public EmployeeViewModel()
         {
         }
+
     }
 }
