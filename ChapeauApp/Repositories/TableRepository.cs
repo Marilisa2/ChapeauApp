@@ -11,7 +11,7 @@ namespace ChapeauApp.Repositories
 
         public TableRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("SomerenDatabase");
+            _connectionString = configuration.GetConnectionString("Chapeau");
         }
         public List<Table> GetAllTables()
         {

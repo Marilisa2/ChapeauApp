@@ -12,7 +12,7 @@ namespace ChapeauApp.Repositories
 
         public EmployeeRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("SomerenDatabase");
+            _connectionString = configuration.GetConnectionString("Chapeau");
         }
 
         public Employee AddEmployee(Employee employee)
