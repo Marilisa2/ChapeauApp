@@ -10,8 +10,7 @@
 <div id="gridContainer">
     @{
         foreach (TableViewModel tableViewModel in Model)
-        {
-            // <partial name="_Table" model="tableViewModel" />
+        {           
             <form id="UpdateTableForm @tableViewModel.TableNumber" action="/Table/Update" method="get">
                 <div class="form-group">
                     <input hidden type="text" id="TableStatus" name="TableStatus" class="form-control" required value="@tableViewModel.TableStatus" />
