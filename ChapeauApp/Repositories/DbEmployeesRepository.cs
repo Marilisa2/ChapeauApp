@@ -73,5 +73,20 @@ namespace ChapeauApp.Repositories
         {
             throw new NotImplementedException();
         }
+
+        void IEmployeeRepository.UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Employee GetEmployeeByLoginCredentials(string lastName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetSalt(string lastName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
