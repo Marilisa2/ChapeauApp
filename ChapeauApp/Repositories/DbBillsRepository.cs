@@ -10,7 +10,7 @@ namespace ChapeauApp.Repositories
         public DbBillsRepository(IConfiguration configuration)
         {
             //get database connectionstring from appsettings
-            _connectionString = configuration.GetConnectionString("ChapeauDb");
+            _connectionString = configuration.GetConnectionString("Chapeau");
         }
 
         public void BillCheckOut(Bill bill)
