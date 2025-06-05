@@ -23,7 +23,6 @@ namespace ChapeauApp.Services
             { 
                 TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
-
             }
             return tableViewModels;
         }
