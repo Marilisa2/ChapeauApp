@@ -24,21 +24,6 @@ body {
 .textOnBackground{
     color:white;
 }
-.Free {
-    background-color :#FFFFFF;
-}
-.Occupied {
-    background-color :#16EB20;
-}
-.Ordered {
-    background-color :#ED0B0B;
-}
-.Reserved {
-    background-color :#3B10EA;
-}
-.OrderReadyToBeServed {
-    background-color :#FA9302;
-}
 .vrij {
     background-color: #FFFFFF;
 }

@@ -8,24 +8,21 @@
     ViewData["Title"] = "TableIndex";
 }
 <div id="gridContainer">
-    @{
-        int count = 1;
+    @{        
         foreach (TableViewModel tableViewModel in Model)
         {
-            var itemId = $"item{tableViewModel.TableNumber}";
-            var formId = $"UpdateTableForm_{tableViewModel.TableNumber}";
+            string itemId = $"item{tableViewModel.TableNumber}";
+            string formId = $"UpdateTableForm_{tableViewModel.TableNumber}";
             <form id="@formId" action="/Table/Update" method="get">
                 <div class="form-group">
                     <input hidden type="text" name="TableStatus" value="@tableViewModel.TableStatus" />
                     <input hidden type="text" name="TableNumber" value="@tableViewModel.TableNumber" />
                 </div>
-                <div id="@itemId" class="rechthoek-knop @tableViewModel.TableStatus"
-                     style="grid-area:@itemId;"
+                <div id="@itemId" class="rechthoek-knop @tableViewModel.TableStatus"                      
                      onclick="document.getElementById('@formId').submit();">
                     @tableViewModel.TableNumber
                 </div>
             </form>
-            count++;
         }
     }
 

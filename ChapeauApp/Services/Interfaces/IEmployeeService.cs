@@ -7,9 +7,7 @@ namespace ChapeauApp.Services.Interfaces
     {
          List<EmployeeViewModel> GetAllEmployees();
          Employee GetEmployeeById(int id);
-         Employee AddEmployee(EmployeeCUDViewModel employee);
-         void UpdateEmployee(EmployeeCUDViewModel employee);
-         void DeleteEmployee(int id);
+        
         
     }
 }
