@@ -5,7 +5,6 @@ namespace ChapeauApp.Services.Interfaces
 {
     public interface IEmployeeService
     {
-         List<EmployeeViewModel> GetAllEmployees();
          Employee GetEmployeeById(int id);
         
         
