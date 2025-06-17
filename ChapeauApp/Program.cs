@@ -25,13 +25,7 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IBillsService, BillsService>();
             builder.Services.AddSingleton<IVatsService, VatsService>();
             builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
-       
-            
-            
-            
-           
-            
-            
+          
             
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession(options =>
@@ -71,7 +65,7 @@ namespace ChapeauApp
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             //pattern: "{controller=Employee}/{action=login}");
-            pattern: "{controller=Table}/{action=Index}");
+            //pattern: "{controller=Table}/{action=Index}");
 
             app.Run();
         }
