@@ -12,6 +12,7 @@ namespace ChapeauApp.Repositories
 
         public DbOrderItemsRepository(IConfiguration configuration)
         {
+            //get database connectionstring from appsettings
             _connectionString = configuration.GetConnectionString("Chapeau");
         }
 

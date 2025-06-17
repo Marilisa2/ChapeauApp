@@ -2,6 +2,6 @@
 {
     public enum EmployeeTypes
     {
-        ober,barMan,chef,waiter,bartender
+        ober,barMan,chef
     }
 }

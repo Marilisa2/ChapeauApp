@@ -7,25 +7,31 @@
 @{
     ViewData["Title"] = "TableIndex";
 }
-<div>  
-    @{
+<div id="gridContainer">
+    @{        
         foreach (TableViewModel tableViewModel in Model)
         {
-            <partial name="_Table" model="tableViewModel" />
+            string itemId = $"item{tableViewModel.TableNumber}";
+            string formId = $"UpdateTableForm_{tableViewModel.TableNumber}";
+            <form id="@formId" action="/Table/Update" method="get">
+                <div class="form-group">
+                    <input hidden type="text" name="TableStatus" value="@tableViewModel.TableStatus" />
+                    <input hidden type="text" name="TableNumber" value="@tableViewModel.TableNumber" />
+                </div>
+                <div id="@itemId" class="rechthoek-knop @tableViewModel.TableStatus"                      
+                     onclick="document.getElementById('@formId').submit();">
+                    @tableViewModel.TableNumber
+                </div>
+            </form>
         }
-        
     }
-    <form action="/Employee/Logoff " method="get">
-        <button id="logoffButton" type="submit" class="btn btn-primary">logoff</button>
+
+    <form action="/Employee/Logoff" method="get">
+        <button id="logoffButton" style="grid-area:logoffButton;" type="submit" class="btn btn-primary">Logoff</button>
     </form>
-    <form action ="/Table/Index " method="get">
-        <button id="refreshButton" type="submit" class="btn btn-primary" >refresh</button>
+
+    <form action="/Table/Index" method="get">
+        <button id="refreshButton" style="grid-area:refreshButton;" type="submit" class="btn btn-primary">Refresh</button>
     </form>
-     
 </div>
-<script>
-    redirect(controller,action)
-    {
-        RedirectToAction(Controller,action)
-    }
-</script>
+
