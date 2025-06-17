@@ -16,26 +16,7 @@ namespace ChapeauApp.Controllers
         {
             _employeeService = employeeService;
             _loginOrOffService = loginOrOffService;
-        }
-
-        public IActionResult Index()
-        {
-            try
-            {
-                
-                
-                List<EmployeeViewModel> employees = _employeeService.GetAllEmployees();
-                Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInEmployee");
-
-                ViewData["LoggedInEmployee"] = LoggedInEmployee;
-               
-                return View(employees);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index", "Employee");
-            }
-        }
+        }        
         [HttpGet]
         public IActionResult Login()
         {
@@ -65,80 +46,7 @@ namespace ChapeauApp.Controllers
             {
                 return RedirectToAction("Login");
             }
-        }
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(EmployeeCUDViewModel employee)
-        {
-            try
-            {
-                _employeeService.AddEmployee(employee);
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                return View(employee);
-            }
-        }
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            try
-            {
-                Employee employee = _employeeService.GetEmployeeById(id);
-                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
-                return View(employeeViewModel);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index");
-            }
-        }
-        [HttpPost]
-        public IActionResult Edit(EmployeeCUDViewModel employee)
-        {
-            try
-            {
-                _employeeService.UpdateEmployee(employee);
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                return View(employee);
-            }
-        }
-        [HttpGet]
-        public IActionResult Remove(int id)
-        {
-            try
-            {
-                Employee employee = _employeeService.GetEmployeeById(id);
-                EmployeeCUDViewModel employeeViewModel = new EmployeeCUDViewModel(employee);
-                return View(employeeViewModel);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index");
-            }
-        }
-        [HttpPost]
-        public IActionResult Remove(EmployeeCUDViewModel employee)
-        {
-            try
-            {
-                _employeeService.DeleteEmployee(employee.EmployeeId);
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                return View(employee);
-            }
-            
-        }
+        }        
         public IActionResult Logoff()
         {
             HttpContext.Session.Clear();

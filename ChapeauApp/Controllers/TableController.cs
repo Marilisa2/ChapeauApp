@@ -1,10 +1,11 @@
 ﻿using ChapeauApp.Services.Interfaces;
 using ChapeauApp.Enums;
 using Microsoft.AspNetCore.Mvc;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Controllers
 {
-    using ChapeauApp.Models.ViewModels;
+   
     public class TableController:Controller
     {
         private readonly ITableService _tableService;
