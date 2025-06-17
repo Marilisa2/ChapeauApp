@@ -31,18 +31,16 @@ namespace ChapeauApp.Repositories
         {
             if (card == null)
                 card = "All";
-            card = card.ToLower();
             if (category == null)
                 category = "All";
-            category = category.ToLower();
 
             List<MenuItem> menuItems = new List<MenuItem>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                if (category != "all")
+                if (card != "All")
                 command.Parameters.AddWithValue("@MenuName", card);
-                if (category != "all")
+                if (category != "All")
                     command.Parameters.AddWithValue("@ItemType", category);
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
