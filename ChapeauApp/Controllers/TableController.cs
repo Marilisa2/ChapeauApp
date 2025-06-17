@@ -12,10 +12,10 @@ namespace ChapeauApp.Controllers
             _tableService = tableService;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
     }
 }

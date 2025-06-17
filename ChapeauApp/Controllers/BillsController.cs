@@ -9,44 +9,56 @@ namespace ChapeauApp.Controllers
 {
     public class BillsController : Controller
     {
-        private readonly IBillsRepository _billsRepository;
-        private readonly IPaymentMethodsService _paymentMethodsService;
+        private readonly IBillsService _billsService;
+        private readonly IOrdersService _ordersService;
 
-        public BillsController(IBillsRepository billsRepository, IPaymentMethodsService paymentMethodsService)
+        public BillsController(IBillsService billsService, IOrdersService ordersService)
         {
-            _billsRepository = billsRepository;
-            _paymentMethodsService = paymentMethodsService;
-
+            _billsService = billsService;
+            _ordersService = ordersService;
         }
 
-        public IActionResult Index()
+        public IActionResult GetBillByTableNumber(int tableNumber)
         {
-            return View();
-        }
+            GetBillByOrderAndTableNumberViewModel getBillByOrderAndTableNumberViewModel = _billsService.GetBillByOrderAndTableNumberViewModel(tableNumber);
 
-        public IActionResult GetByBillId(int billId)
-        {
-            Bill bill = _billsRepository.GetByBillId(billId);
-
-            if (bill == null)
+            if (getBillByOrderAndTableNumberViewModel == null)
             {
-                return NotFound("No bill found");
+                return NotFound($"No bill found for table {tableNumber}");
             }
 
-            //calling available payment methods from PaymentMethodsService
-            List<PaymentMethod> availablepaymentMethods = _paymentMethodsService.GetAvailablePaymentMethods();
-
-            //billsviewmodel
-            BillsCheckOutViewModel billsCheckOutViewModel = new BillsCheckOutViewModel
-            {
-                Bill = bill,
-                Payment = new Payment(),
-                AvailablePaymentMethods = availablepaymentMethods
-            };
-
-            return View(billsCheckOutViewModel);
+            return View(getBillByOrderAndTableNumberViewModel);
         }
 
+        [HttpGet]
+        public IActionResult SettleBill(int billId)
+        {
+            SettleBillViewmodel settleBillViewmodel = _billsService.SettleBillViewmodel(billId);
 
+            if (settleBillViewmodel == null)
+            {
+                return NotFound("Bill not found");
+            }
+
+            return View(settleBillViewmodel);
+        }
+
+        [HttpPost]
+        public IActionResult SettleBill(SettleBillViewmodel settleBillViewmodel)
+        {
+            if (settleBillViewmodel.TipAmount < 0)
+            {
+                ModelState.AddModelError("TipAmount", "TipAmount must be postive"); //aanpassen!!!
+                return View(settleBillViewmodel);
+            }
+
+            _billsService.SaveTipAmount(settleBillViewmodel.BillId, settleBillViewmodel.TipAmount ?? 0); 
+            _billsService.SavePaymentMethod(settleBillViewmodel.BillId, settleBillViewmodel.PaymentMethod);
+                        
+            TempData["SuccessMessage"] = "Payment was successful!"; //vervangen naar  the order has been finished correctly
+            return RedirectToAction("Index", "Orders"); //aanpassen teruggestuurd naar Tafeloverzicht
+        }
+
+        
     }
 }

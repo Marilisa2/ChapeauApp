@@ -4,29 +4,27 @@ using ChapeauApp.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ChapeauApp.Services.Interfaces;
+using ChapeauApp.Services;
 
 namespace ChapeauApp.Controllers
 {
     public class OrdersController : Controller
     {
-        //database
-        private readonly IOrdersRepository _ordersRepository;
-        private readonly ITableRepository _tablesRepository;
         private readonly IOrdersService _ordersService;
+        private readonly ITableService _tableService;
         private readonly IVatsService _vatsService;
-
-        public OrdersController(IOrdersRepository ordersRepository, ITableRepository tablesRepository, IOrdersService ordersService, IVatsService vatsService)
+        
+        public OrdersController(IOrdersService ordersService, ITableService tableService, IVatsService vatsService)
         {
-            _ordersRepository = ordersRepository;
-            _tablesRepository = tablesRepository;
             _ordersService = ordersService;
+            _tableService = tableService;            
             _vatsService = vatsService;
         }
 
         public IActionResult Index()
         {
-            List<Table> tables = _tablesRepository.GetAllTables();
-
+            //List<Table> tables = _tablesRepository.GetAllTables();
+            List<Table> tables = _tableService.GetAllTables();
             //orderviemodel
             OrdersViewModel ordersViewModel = new OrdersViewModel
             {
@@ -36,25 +34,39 @@ namespace ChapeauApp.Controllers
             return View(ordersViewModel);
         }
 
+        // shows ordered items (orders)
         public IActionResult GetOrderByTableNumber(int tableNumber)
         {
-            Order order = _ordersRepository.GetOrderByTableNumber(tableNumber);
+            Order order = _ordersService.GetOrderByTableNumber(tableNumber);
 
             if (order == null)
             {
                 return NotFound($"No order found for table: {tableNumber}");
             }
 
+            // calling the methode GetOrderByBillId(int bllId)
+            return GetOrderByBillId(order.Bill.BillId);
+        }
+
+        public IActionResult GetOrderByBillId(int billId)
+        {
+            Order order = _ordersService.GetOrderByBillId(billId);
+
+            if (order == null)
+            {
+                return NotFound("Order not found for this bill.");
+            }
+
             //orderServices to calculate totalpriceamount
             decimal totalPriceAmount = _ordersService.CalculateTotalPriceAmount(order.OrderItems);
 
             //vatservice to display low and high vat amount
-            VatSummary vatTotals = _vatsService.CalculateVatTotalAMount(order.OrderItems);
+            VatSummary vatTotals = _vatsService.CalculateVatTotalAmount(order.OrderItems);
 
             //orderviewmodel
             OrdersViewModel ordersViewModel = new OrdersViewModel
             {
-                Table = new Table { TableNumber = tableNumber },
+                Table = order.Table,
                 Order = order,
                 TotalPricemount = totalPriceAmount,
                 VatTotals = vatTotals

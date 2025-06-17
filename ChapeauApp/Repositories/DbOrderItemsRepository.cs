@@ -26,70 +26,17 @@ namespace ChapeauApp.Repositories
             string? comment = (string)reader["Comment"];
             OrderItemStatus orderItemStatus = (OrderItemStatus)(int)reader["OrderItemStatus"];
 
-            //Enums from MenuItems
-            //MenuItemCard mapping
-            MenuItemCard menuItemCard;
-            string menuName = reader["menuName"] == DBNull.Value ? "" : (string)reader["menuName"];
-
-            switch (menuName)
-            {
-                case "Lunch":
-                    menuItemCard = MenuItemCard.Lunch;
-                    break;
-                case "Diner":
-                    menuItemCard = MenuItemCard.Diner;
-                    break;
-                case "Dranken":
-                    menuItemCard = MenuItemCard.Dranken;
-                    break;
-                default:
-                    menuItemCard = MenuItemCard.All;
-                    break;
-            }
-
-            //MenuItemCategory mapping
-            MenuItemCategory menuItemCategory;
-            string itemType = reader["itemType"] == DBNull.Value ? "" : (string)reader["itemType"];
-
-            switch (itemType)
-            {
-                case "Voorgerecht":
-                    menuItemCategory = MenuItemCategory.Voorgerecht;
-                    break;
-                case "Tussengerecht":
-                    menuItemCategory = MenuItemCategory.Tussengerecht;
-                    break;
-                case "Hoofdgerecht":
-                    menuItemCategory = MenuItemCategory.Hoofdgerecht;
-                    break;
-                case "Nagerecht":
-                    menuItemCategory = MenuItemCategory.Nagerecht;
-                    break;
-                case "Bieren van de tap":
-                    menuItemCategory = MenuItemCategory.Bieren;
-                    break;
-                case "Wijnen":
-                    menuItemCategory = MenuItemCategory.Wijnen;
-                    break;
-                case "Koffie / Thee":
-                    menuItemCategory = MenuItemCategory.KoffieThee;
-                    break;
-                case "Gedistilleerde drank":
-                    menuItemCategory= MenuItemCategory.GedistilleerdeDrank;
-                    break;
-                default:
-                    menuItemCategory = MenuItemCategory.All;
-                    break;
-            }
-            
+                  
 
             MenuItem menuItem = new MenuItem
             {
                 MenuItemId = (int)reader["menuItemId"],
-                MenuCard = menuItemCard,
+                //MenuCard = (MenuItemCard)(int)reader["menuCard"]
+                MenuCard = reader["menuCard"] == DBNull.Value ? MenuItemCard.All : (MenuItemCard)(int)reader["menuCard"],
                 ItemName = (string)reader["itemName"],
                 ItemPrice = reader["itemPrice"] == DBNull.Value ? 0m : (decimal)reader["itemPrice"],
-                ItemCategory = menuItemCategory,
+                //ItemCategory = (MenuItemCategory)(int)reader["itemCategory"],
+                ItemCategory = reader["itemCategory"] == DBNull.Value ? MenuItemCategory.All : (MenuItemCategory)(int)reader["itemCategory"],
                 Description = reader["itemDescription"] == DBNull.Value ? string.Empty : (string)reader["itemDescription"],
                 Stock = (int)reader["itemStock"],
                 VATAmount = (int)reader["vat_Amount"]
@@ -113,7 +60,7 @@ namespace ChapeauApp.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT oi.OrderItemId, oi.Quantity, oi.MenuItemId, oi.OrderId, oi.Comment, oi.OrderItemStatus, " +
-                                  "mi.menuItemId, mi.menuId, mi.itemName, mi.itemPrice, mi.itemType, mi.itemDescription, mi.itemStock, mi.vat_Amount " +
+                                  "mi.menuItemId, mi.itemName, mi.itemPrice, mi.itemDescription, mi.itemStock, mi.vat_Amount, mi.itemCategory, mi.menuCard " +
                                   "FROM OrderItems oi " +
                                   "JOIN MenuItems mi ON oi.MenuItemId = mi.menuItemId " +
                                   "WHERE oi.OrderId = @OrderId ";

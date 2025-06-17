@@ -59,5 +59,25 @@ namespace ChapeauApp.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Table? GetTableByTableNumber(int tableNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT TableNumber, TableStatus FROM Tables WHERE TableNumber = @TableNumber";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TableNumber", tableNumber);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return ReadTable(reader);
+                }
+
+                return null;
+            }
+        }
     }
 }

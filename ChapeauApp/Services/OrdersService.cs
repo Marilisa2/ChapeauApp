@@ -1,10 +1,18 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
 
 namespace ChapeauApp.Services
 {
     public class OrdersService : IOrdersService
     {
+        private readonly IOrdersRepository _ordersRepository;
+
+        public OrdersService(IOrdersRepository ordersRepository)
+        {
+            _ordersRepository = ordersRepository;
+        }
+
         public decimal CalculateTotalPriceAmount(List<OrderItem> orderItems)
         {
             decimal totalPriceAmount = 0;
@@ -21,6 +29,16 @@ namespace ChapeauApp.Services
             }
 
             return totalPriceAmount;
+        }
+
+        public Order GetOrderByTableNumber(int tableNumber)
+        {
+            return _ordersRepository.GetOrderByTableNumber(tableNumber);
+        }
+
+        public Order GetOrderByBillId(int billId)
+        {
+            return _ordersRepository.GetOrderByBillId(billId); 
         }
     }
 }

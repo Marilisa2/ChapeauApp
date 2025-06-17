@@ -4,6 +4,6 @@ namespace ChapeauApp.Services.Interfaces
 {
     public interface IVatsService
     {
-        public VatSummary CalculateVatTotalAMount(List<OrderItem> orderItems);
+        public VatSummary CalculateVatTotalAmount(List<OrderItem> orderItems);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using ChapeauApp.Models;
 
-namespace ChapeauApp.Services
+namespace ChapeauApp.Services.Interfaces
 {
     public interface ILoginOrOffService
     {

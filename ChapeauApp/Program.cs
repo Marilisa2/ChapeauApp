@@ -5,7 +5,6 @@ using ChapeauApp.Services.Interfaces;
 
 namespace ChapeauApp
 {
-
     public class Program
     {
         public static void Main(string[] args)
@@ -20,9 +19,10 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IMenusService, MenusService>();
             builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
             builder.Services.AddSingleton<IOrdersService, OrdersService>();
+            builder.Services.AddSingleton<IBillsService, BillsService>();
             builder.Services.AddSingleton<IVatsService, VatsService>();
             builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
-
+            
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession(options =>
             {
@@ -58,7 +58,7 @@ namespace ChapeauApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Users}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
