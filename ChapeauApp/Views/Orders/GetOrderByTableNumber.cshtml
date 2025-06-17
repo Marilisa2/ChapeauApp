@@ -1,4 +1,5 @@
 ﻿@model ChapeauApp.Models.ViewModels.OrdersViewModel
+
 @{
     ViewData["Title"] = "View Order By Table Number";
 }
@@ -56,7 +57,7 @@
                     </tr>
                     <tr class="table-active">
                         <th scope="row"><strong>Total amount to be paid:</strong></th>
-                        <td><strong>€@Model.TotalPricemount.ToString("0.00")</strong></td>
+                        <td><strong>€@Model.TotalPriceAmount.ToString("0.00")</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -80,6 +81,13 @@
     @* Navgation buttons *@
     <div class="d-flex justify-content-between mt-3">
         <a href="/Orders/Index" class="btn btn-primary w-25 text-white">← Back to table overview</a>
-        <a href="/Bills/Index" class="btn btn-primary w-25 text-white">Go to bill →</a>
+        @*<a href="/Bills/SettleBill" class="btn btn-primary w-25 text-white">Go to Bill →</a>*@
+        <a asp-controller="Bills" asp-action="SettleBill" asp-route-billId="@Model.Order.Bill.BillId" class="btn btn-primary w-25 text-white">Go to Bill →</a>
+
+
+
+
+        @* <a href="/Bills/AddTip" class="btn btn-primary w-25 text-white">Go to tips →</a> *@
+        @* <a asp-controller="Bills" asp-action="AddTip" asp-route-billId="@Model.AddTipsViewModel.BillId" class="btn btn-primary w-25 text-white">Go to tips →</a> *@
     </div>
 </div>

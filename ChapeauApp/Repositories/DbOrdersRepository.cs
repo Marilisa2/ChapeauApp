@@ -37,11 +37,15 @@ namespace ChapeauApp.Repositories
             //Employee employee = new Employee { EmployeeId = (int)reader["EmployeeId"] };
             //Employee? employee = _employeeRepository.GetEmployeeById(employeeId);
 
-            //Bill_Id toevoegen!
+            int billId = (int)reader["BillId"];
+            Bill bill = new Bill()
+            {
+                BillId = billId,
+            };
 
             List<OrderItem> orderItems = _orderItemsRepository.GetOrderItemsByOrderId(orderId);
 
-            return new Order(orderId, orderTime, orderStatus, table, orderItems);
+            return new Order(orderId, orderTime, orderStatus, table, bill, orderItems);
         }
 
         public List<Order> GetAllOrders()
@@ -50,7 +54,7 @@ namespace ChapeauApp.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber FROM Orders";
+                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber, BillId FROM Orders";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 command.Connection.Open();
@@ -70,7 +74,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber FROM Orders WHERE TableNumber = @TableNumber";
+                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber, BillId FROM Orders WHERE TableNumber = @TableNumber";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@TableNumber", tableNumber);
 
@@ -84,6 +88,27 @@ namespace ChapeauApp.Repositories
 
                 return null;
             }
+        }
+
+        public Order? GetOrderByBillId(int billId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber, BillId FROM Orders WHERE BillId = @BillId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@BillId", billId);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return ReadOrder(reader);
+                }
+
+                return null;
+            }
+
         }
 
         public List<Order> GetAllRunningOrders()

@@ -87,5 +87,15 @@ namespace ChapeauApp.Services
             }   
              return runningOrdersVM;             
         }
+
+        public Order GetOrderByTableNumber(int tableNumber)
+        {
+            return _ordersRepository.GetOrderByTableNumber(tableNumber);
+        }
+
+        public Order GetOrderByBillId(int billId)
+        {
+            return _ordersRepository.GetOrderByBillId(billId); 
+        }
     }
 }
