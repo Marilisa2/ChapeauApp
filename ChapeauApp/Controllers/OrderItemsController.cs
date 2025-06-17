@@ -1,7 +1,5 @@
 ﻿using ChapeauApp.Enums;
 using ChapeauApp.Models;
-using ChapeauApp.Repositories;
-using ChapeauApp.Services;
 using ChapeauApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

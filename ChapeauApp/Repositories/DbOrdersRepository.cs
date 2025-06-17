@@ -85,5 +85,10 @@ namespace ChapeauApp.Repositories
                 return null;
             }
         }
+
+        public List<Order> GetAllRunningOrders()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
