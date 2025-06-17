@@ -12,6 +12,7 @@ namespace ChapeauApp
             var builder = WebApplication.CreateBuilder(args);  
             
             // Add services to the container.
+            //repository
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<IBillsRepository, DbBillsRepository>();
             builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
@@ -19,7 +20,8 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
             builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
             builder.Services.AddSingleton<ITableRepository, TableRepository>();
-
+            
+            //Services
             builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
             builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
             builder.Services.AddSingleton<IMenusService, MenusService>();
