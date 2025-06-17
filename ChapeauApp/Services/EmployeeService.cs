@@ -25,6 +25,11 @@ namespace ChapeauApp.Services
 
         }
 
+        public Employee AddEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteEmployee(int id)
         {
             _employeeRepository.DeleteEmployee(id);
@@ -54,6 +59,16 @@ namespace ChapeauApp.Services
             string interleavedPassword=_passwordService.InterleaveSalt(employee.Password, salt);            
             Employee employee1=new Employee(employee.EmployeeId,employee.FirstName,employee.LastName,employee.EmployeeType, _passwordService.HashPassword(interleavedPassword),salt);
            _employeeRepository.UpdateEmployee(employee1);
+        }
+
+        public Employee UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Employee> IEmployeeService.GetAllEmployees()
+        {
+            throw new NotImplementedException();
         }
     }
 }

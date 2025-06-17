@@ -1,7 +1,6 @@
 ﻿using ChapeauApp.Enums;
 using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
-using ChapeauApp.Services.Interfaces;
 using Microsoft.Data.SqlClient;
 using System.Reflection.PortableExecutable;
 
@@ -20,89 +19,18 @@ namespace ChapeauApp.Repositories
         {
             int orderItemId = (int)reader["OrderItemId"];
             int quantity = (int)reader["Quantity"];
-            MenuItem menuItemId = new MenuItem { MenuItemId = (int)reader["MenuItemId"] };
-            Order order = new Order { OrderId = (int)reader["OrderId"] };
+            MenuItem menuItem = new MenuItem 
+            {
+                MenuItemId = (int)reader["MenuItemId"] 
+            };
+            Order order = new Order 
+            { 
+                OrderId = (int)reader["OrderId"] 
+            };
             string? comment = (string)reader["Comment"];
             OrderItemStatus orderItemStatus = (OrderItemStatus)(int)reader["OrderItemStatus"];
 
-            //Enums from MenuItems
-            //MenuItemCard mapping
-            MenuItemCard menuItemCard;
-            string menuName = reader["menuName"] == DBNull.Value ? "" : (string)reader["menuName"];
-
-            switch (menuName)
-            {
-                case "Lunch":
-                    menuItemCard = MenuItemCard.Lunch;
-                    break;
-                case "Diner":
-                    menuItemCard = MenuItemCard.Diner;
-                    break;
-                case "Dranken":
-                    menuItemCard = MenuItemCard.Dranken;
-                    break;
-                default:
-                    menuItemCard = MenuItemCard.All;
-                    break;
-            }
-
-            //MenuItemCategory mapping
-            MenuItemCategory menuItemCategory;
-            string itemType = reader["itemType"] == DBNull.Value ? "" : (string)reader["itemType"];
-
-            switch (itemType)
-            {
-                case "Voorgerecht":
-                    menuItemCategory = MenuItemCategory.Voorgerecht;
-                    break;
-                case "Tussengerecht":
-                    menuItemCategory = MenuItemCategory.Tussengerecht;
-                    break;
-                case "Hoofdgerecht":
-                    menuItemCategory = MenuItemCategory.Hoofdgerecht;
-                    break;
-                case "Nagerecht":
-                    menuItemCategory = MenuItemCategory.Nagerecht;
-                    break;
-                case "Bieren van de tap":
-                    menuItemCategory = MenuItemCategory.Bieren;
-                    break;
-                case "Wijnen":
-                    menuItemCategory = MenuItemCategory.Wijnen;
-                    break;
-                case "Koffie / Thee":
-                    menuItemCategory = MenuItemCategory.KoffieThee;
-                    break;
-                case "Gedistilleerde drank":
-                    menuItemCategory= MenuItemCategory.GedistilleerdeDrank;
-                    break;
-                default:
-                    menuItemCategory = MenuItemCategory.All;
-                    break;
-            }
-            
-
-            MenuItem menuItem = new MenuItem
-            {
-                MenuItemId = (int)reader["menuItemId"],
-                MenuCard = menuItemCard,
-                ItemName = (string)reader["itemName"],
-                ItemPrice = reader["itemPrice"] == DBNull.Value ? 0m : (decimal)reader["itemPrice"],
-                ItemCategory = menuItemCategory,
-                Description = reader["itemDescription"] == DBNull.Value ? string.Empty : (string)reader["itemDescription"],
-                Stock = (int)reader["itemStock"],
-                VATAmount = (int)reader["vat_Amount"]
-            };
-
-            return new OrderItem
-            {
-                OrderItemId = orderItemId,
-                Quantity = quantity,
-                MenuItem = menuItem,
-                Order = order,
-                Comment = comment,
-                OrderItemStatus = orderItemStatus
-            };
+            return new(orderItemId, quantity, menuItem, order, comment, orderItemStatus);
         }
 
         public List<OrderItem> GetOrderItemsByOrderId(int orderId)
@@ -186,7 +114,24 @@ namespace ChapeauApp.Repositories
 
         public List<OrderItem> GetAllOrderItems()
         {
-            throw new NotImplementedException();
+            List<OrderItem> orderItems = new List<OrderItem>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT  OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    OrderItem orderItem = ReadOrderItem(reader);
+                    orderItems.Add(orderItem);
+                }
+                reader.Close();
+            }
+            return orderItems;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ChapeauApp.Repositories
         public DbOrdersRepository(IConfiguration configuration, IOrderItemsRepository orderItemsRepository)
         {
             //get database connectionstring from appsettings
-            _connectionString = configuration.GetConnectionString("ChapeauDb");
+            _connectionString = configuration.GetConnectionString("Chapeau");
             //_employeeRepository = employeeRepository;
             _orderItemsRepository = orderItemsRepository;
         }
@@ -87,6 +87,34 @@ namespace ChapeauApp.Repositories
         }
 
         public List<Order> GetAllRunningOrders()
+        {
+            List<Order> orders = new List<Order>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = $"SELECT OrderId, OrderTime, OrderStatus, TableNumber FROM Orders";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Order order = ReadOrder(reader);
+                    orders.Add(order);
+                }
+                reader.Close();
+            }
+            return orders;
+        }
+
+        List<Order> IOrdersRepository.GetAllOrders()
+        {
+            throw new NotImplementedException();
+        }
+
+        Order? IOrdersRepository.GetOrderByTableNumber(int tableNumber)
         {
             throw new NotImplementedException();
         }

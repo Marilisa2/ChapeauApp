@@ -1,0 +1,93 @@
+﻿@model List<ChapeauApp.Models.ViewModels.RunningOrdersViewModel>
+@{
+	ViewData["Title"] = "Running Orders";
+}
+
+ <h2>Running orders</h2>
+
+<div class="order-container">
+		@foreach (var order in Model)
+		{
+			<form class="order-card" action="/BarAndKitchen/RunningOrders" method="post">
+			
+				<div class="order-info">
+					<p>@order.OrderTime.ToString(@"HH:mm")</p>
+					<p>Tafel: @order.Table.TableNumber</p>
+					@*<p>@order.Employee.FirstName @order.Employee.LastName</p>*@
+				</div>
+
+				<p class="waitingTime">@order.WaitingTime.ToString(@"mm") minuten</p>
+
+				<ul class="OrderItems-block">
+					@foreach (var item in order.OrderItems)
+					{
+						<li>@item.MenuItem.ItemName x @item.Quantity</li>
+					}
+				</ul>
+				<div class="order-action">
+					<button type="submit" class="btnPreparing">Preparing</button> @*linken met enum??*@
+					<button type="submit" class="btnDone">Done</button>
+				</div>
+			</form>
+
+			@* <form action="/BarAndKitchen/RunningOrders" method="post">
+				<input type="hidden" name="OrderId" value="@order.OrderId"/>
+				@foreach (var course in order.Courses)
+				{
+					
+				}
+				
+			</form> *@
+		}
+</div>
+<!--css-->
+<style>
+	.order-container{
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	.order-card{
+		background-color: white; 
+		color: black;
+		width: 280px;
+		border: 2px solid #838383;
+		box-sizing: border-box; 
+	}
+
+	.order-info, .order-action{
+		background-color: #9F9F9F;
+		padding: 15px;
+	}
+
+	.order-info{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.waitingTime{
+		padding: 7px;
+		text-align: center;
+		border-bottom: 1px solid #838383;
+	}
+	/*Button*/
+	button{
+		padding-left: 20px;
+		padding-right: 20px;
+		height: 45px;
+		border-radius: 20px;
+	}
+	.btnPreparing:hover{
+		background-color: #FFAF3E;
+	}
+
+	.btnDone:hover {
+		background-color: #98FF91;
+	}
+
+	.btnDone{
+		margin-left: 40px;
+	}
+	</style>

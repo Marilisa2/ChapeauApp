@@ -36,6 +36,13 @@ namespace ChapeauApp.Controllers
             return View(ordersViewModel);
         }
 
+        [HttpGet]
+        public IActionResult RunningOrders(string section)
+        {
+            List<RunningOrdersViewModel> runningOrders = _ordersService.GetRunningOrdersBySection(section);
+            return View(runningOrders);
+        }
+
         public IActionResult GetOrderByTableNumber(int tableNumber)
         {
             Order order = _ordersRepository.GetOrderByTableNumber(tableNumber);
@@ -62,5 +69,6 @@ namespace ChapeauApp.Controllers
 
             return View(ordersViewModel);
         }
+
     }
 }

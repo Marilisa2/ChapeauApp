@@ -10,10 +10,12 @@ namespace ChapeauApp.Services
     public class OrdersService : IOrdersService
     {
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IOrderItemsRepository _orderItemsRepository;
 
-        public OrdersService(IOrdersRepository ordersRepository)
+        public OrdersService(IOrdersRepository ordersRepository, IOrderItemsRepository orderItemsRepository)
         {
             _ordersRepository = ordersRepository;
+            _orderItemsRepository = orderItemsRepository;
         }
 
         public decimal CalculateTotalPriceAmount(List<OrderItem> orderItems)
@@ -49,7 +51,9 @@ namespace ChapeauApp.Services
                     MenuItemCategory.KoffieThee,
                     MenuItemCategory.GedistilleerdeDrank
                 };
-                foreach (Order order in orders) {
+                foreach (Order order in orders) 
+                {
+                    order.OrderItems = _orderItemsRepository.GetOrderItemsByOrderId(order.OrderId);                     
 
                     bool isInSection = false;
 
@@ -66,15 +70,15 @@ namespace ChapeauApp.Services
                                 break;
                             }
 
-                        //RunningOrdersViewModel runningOrdersViewModel = new RunningOrdersViewModel()
-                        //{
-                        //    OrderId = order.OrderId,
-                        //    TableNumber = order.Table.TableNumber,
-                        //    OrderTime = order.OrderTime,
-                        //    EmployeeName = order.Employee.FirstName,
-                        //};
+                        RunningOrdersViewModel runningOrdersViewModel = new RunningOrdersViewModel()
+                        {
+                            Order = order, //OrderId ophalen
+                            Table = order.Table, //TableNumber ophalen
+                            OrderTime = order.OrderTime
+                            //Employee = order.Employee //Employee First- en LastName
+                        };
 
-                        //runningOrdersVM.Add(runningOrdersViewModel);
+                        runningOrdersVM.Add(runningOrdersViewModel);
                     }
                     //sorteer lopende orders van oud naar nieuw
                     runningOrdersVM.Sort((x, y) => DateTime.Compare(x.OrderTime, y.OrderTime));
@@ -82,7 +86,6 @@ namespace ChapeauApp.Services
             }
             catch (Exception)
             {
-
                 throw;
             }   
              return runningOrdersVM;             
