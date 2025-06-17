@@ -2,7 +2,6 @@
 using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using ChapeauApp.Services.Interfaces;
 using ChapeauApp.Services;
 
@@ -24,7 +23,8 @@ namespace ChapeauApp.Controllers
         public IActionResult Index()
         {
             //List<Table> tables = _tablesRepository.GetAllTables();
-            List<Table> tables = _tableService.GetAllTables();
+            List<TableViewModel> tables = _tableService.GetAllTables();
+
             //orderviemodel
             OrdersViewModel ordersViewModel = new OrdersViewModel
             {
@@ -68,7 +68,7 @@ namespace ChapeauApp.Controllers
             {
                 Table = order.Table,
                 Order = order,
-                TotalPricemount = totalPriceAmount,
+                TotalPriceAmount = totalPriceAmount,
                 VatTotals = vatTotals
             };
 

@@ -4,25 +4,26 @@
     {
         public Order Order { get; set; }
         public Table Table { get; set; }
-        public List<Table> Tables { get; set; }
-        public decimal TotalPricemount { get; set; }
 
+        public List<TableViewModel> Tables { get; set; }
+
+        public decimal TotalPriceAmount { get; set; }
         public VatSummary VatTotals { get; set; } = new VatSummary();
-        Bill Bill { get; set; }
+        public Bill Bill { get; set; }
 
         public OrdersViewModel()
         {
             //prevents Null_error
-            Tables = new List<Table>();
+            Tables = new List<TableViewModel>();
             Bill = new Bill();
         }
 
-        public OrdersViewModel(Order order, Table table, List<Table> tables, decimal totalPricemount, Bill bill)
+        public OrdersViewModel(Order order, Table table, List<TableViewModel> tables, decimal totalPriceAmount, Bill bill)
         {
             Order = order;
             Table = table;
             Tables = tables;
-            TotalPricemount = totalPricemount;
+            TotalPriceAmount = totalPriceAmount;
             Bill = bill;
         }
     }

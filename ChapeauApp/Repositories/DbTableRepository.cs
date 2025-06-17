@@ -5,11 +5,11 @@ using Microsoft.Data.SqlClient;
 
 namespace ChapeauApp.Repositories
 {
-    public class TableRepository : ITableRepository
+    public class DbTableRepository : ITableRepository
     {
         private readonly string _connectionString;
 
-        public TableRepository(IConfiguration configuration)
+        public DbTableRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Chapeau");
         }

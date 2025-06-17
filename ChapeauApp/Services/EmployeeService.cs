@@ -15,11 +15,30 @@ namespace ChapeauApp.Services
             _employeeRepository = employeeRepository;
             _passwordService = passwordService;
         }
+
+        public Employee AddEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> GetAllEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
         public Employee GetEmployeeById(int id)
         {
             return _employeeRepository.GetEmployeeById(id);
         }
 
-       
+        public Employee UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

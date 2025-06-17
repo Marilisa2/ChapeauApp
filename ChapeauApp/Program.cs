@@ -37,7 +37,7 @@ namespace ChapeauApp
 
             //DatbaseRepository
             builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddSingleton<ITableRepository, TableRepository>();
+            builder.Services.AddSingleton<ITableRepository, DbTableRepository>();
             builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
             builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
             builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
