@@ -10,7 +10,7 @@ namespace ChapeauApp.Repositories
 
         public DbTablesRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("ChapeauDb");
+            _connectionString = configuration.GetConnectionString("Chapeau");
         }
 
         private Table ReadTable(SqlDataReader reader)
