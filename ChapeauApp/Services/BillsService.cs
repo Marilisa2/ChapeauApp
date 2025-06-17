@@ -45,10 +45,10 @@ namespace ChapeauApp.Services
             throw new NotImplementedException();
         }//weghalen?
 
-        public void SavePaymentMethod(int billId, PaymentMethod paymentMethod)
-        {
-            _billsRepository.SavePaymentMethod(billId, paymentMethod);
-        }
+        //public void SavePaymentMethod(int paymentId, PaymentMethod paymentMethod)
+        //{
+        //    paymentId = _billsRepository.
+        //}
 
         public void SaveTipAmount(int billId, decimal tipAmount)
         {

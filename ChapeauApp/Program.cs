@@ -25,6 +25,7 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IBillsService, BillsService>();
             builder.Services.AddSingleton<IVatsService, VatsService>();
             builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
+            builder.Services.AddSingleton<IPaymentsService, PaymentsService>();
           
             
             builder.Services.AddControllersWithViews();
@@ -42,6 +43,7 @@ namespace ChapeauApp
             builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
             builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
             builder.Services.AddSingleton<IBillsRepository, DbBillsRepository>();
+            builder.Services.AddSingleton<IPaymentsRepository, DbPaymentsRepository>();
             
             var app = builder.Build();
 

@@ -102,11 +102,7 @@ namespace ChapeauApp.Repositories
 
         }
 
-        public void SavePaymentMethod(int billId, PaymentMethod paymentMethod)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         //public int GetPaymentIdByBillId(int billId)
         //{
 
