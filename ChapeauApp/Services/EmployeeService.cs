@@ -1,42 +1,25 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
-using ChapeauApp.Repositories;
 
 namespace ChapeauApp.Services
 {
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IPasswordService _passwordService;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IPasswordService passwordService)
         {
             _employeeRepository = employeeRepository;
+            _passwordService = passwordService;
         }
-
-        public Employee AddEmployee(Employee employee)
-        {
-           return _employeeRepository.AddEmployee(employee);
-        }
-
-        public void DeleteEmployee(int id)
-        {
-            _employeeRepository.DeleteEmployee(id);
-        }
-
-        public List<Employee> GetAllEmployees()
-        {
-            return _employeeRepository.GetAllEmployees();
-        }
-
         public Employee GetEmployeeById(int id)
         {
-           return _employeeRepository.GetEmployeeById(id);
+            return _employeeRepository.GetEmployeeById(id);
         }
 
-        public Employee UpdateEmployee(Employee employee)
-        {
-           return _employeeRepository.UpdateEmployee(employee);
-        }
+       
     }
 }

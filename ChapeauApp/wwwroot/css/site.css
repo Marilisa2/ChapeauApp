@@ -18,5 +18,110 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #3A3A3A;
 }
+.textOnBackground{
+    color:white;
+}
+.vrij {
+    background-color: #FFFFFF;
+}
+
+.bezet {
+    background-color: #16EB20;
+}
+
+.besteld {
+    background-color: #ED0B0B;
+}
+
+.gereserveerd {
+    background-color: #3B10EA;
+}
+
+.bestellingKlaar {
+    background-color: #FA9302;
+}
+#gridContainer {
+    display: grid;
+    grid-template-areas:
+        "item2 item4 item6 item8 item10"
+        "item1 item3 item5 item7 item9"
+        "refreshButton . . . logoffButton";
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+[id^="item"], #refreshButton, #logoffButton {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #999;    
+}
+
+
+#refreshButton {
+    grid-area: refreshButton;
+}
+
+#logoffButton {
+    grid-area: logoffButton;
+}
+
+
+#item1 {
+    grid-area: item1;
+}
+
+#item2 {
+    grid-area: item2;
+}
+
+#item3 {
+    grid-area: item3;
+}
+
+#item4 {
+    grid-area: item4;
+}
+
+#item5 {
+    grid-area: item5;
+}
+
+#item6 {
+    grid-area: item6;
+}
+
+#item7 {
+    grid-area: item7;
+}
+
+#item8 {
+    grid-area: item8;
+}
+
+#item9 {
+    grid-area: item9;
+}
+
+#item10 {
+    grid-area: item10;
+}
+.rechthoek-knop {
+    width: 150px;
+    height: 75px;
+   
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color:black;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+

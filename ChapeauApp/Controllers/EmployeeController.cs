@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ChapeauApp.Repositories;
 using ChapeauApp.Models;
-using ChapeauApp.Services;
+using ChapeauApp.Models.Extensions;
 using ChapeauApp.Models.ViewModels;
+using ChapeauApp.Services.Interfaces;
+
 
 namespace ChapeauApp.Controllers
 {
@@ -15,132 +16,43 @@ namespace ChapeauApp.Controllers
         {
             _employeeService = employeeService;
             _loginOrOffService = loginOrOffService;
-        }
-
-        public IActionResult Index()
-        {
-
-
-            try
-            {
-                
-                // get all users from database
-                List<Employee> users = _employeeService.GetAllEmployees();
-                Employee? LoggedInEmployee = HttpContext.Session.GetObject<Employee>("LoggedInemployee");
-
-                ViewData["LoggedInEmployee"] = LoggedInEmployee;
-                // send all users to view
-
-
-                return View(users);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index", "Users");
-            }
-        }
+        }        
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel loginModel)
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
             try
             {
-                User user = _usersRepository.GetByLoginCredentials(loginModel.UserName, loginModel.Password);
-                if (user == null)
+               Employee employee = _loginOrOffService.GetEmployeeByLoginCredentials(loginViewModel );
+                if (employee == null)
                 {
                     ViewBag.ErrorMessage = "this username/password combination doesn't exist";
-                    return View(loginModel);
+                    return View(loginViewModel);
                 }
                 else
                 {
 
-                    HttpContext.Session.SetObject("LoggedInUser", user);
+                    HttpContext.Session.SetObject("LoggedInEmployee", employee);
 
 
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index","Table");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("Login");
             }
-        }
-        [HttpGet]
-        public IActionResult Create()
+        }        
+        public IActionResult Logoff()
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(User user)
-        {
-            try
-            {
-                _usersRepository.Add(user);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View(user);
-            }
-        }
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            try
-            {
-                User user = _usersRepository.GetById(id);
-                return View(user);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index", "Users");
-            }
-        }
-        [HttpPost]
-        public IActionResult Edit(User user)
-        {
-            try
-            {
-                _usersRepository.Update(user);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View(user);
-            }
-        }
-        [HttpGet]
-        public IActionResult Remove(int id)
-        {
-            try
-            {
-                User user = _usersRepository.GetById(id);
-                return View(user);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index", "Users");
-            }
-        }
-        [HttpPost]
-        public IActionResult Remove(User user)
-        {
-            try
-            {
-                _usersRepository.Delete(user.Id);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View(user);
-            }
-            ;
+            HttpContext.Session.Clear();
+            return RedirectToAction("login");
         }
     }
 
 }
-}
+

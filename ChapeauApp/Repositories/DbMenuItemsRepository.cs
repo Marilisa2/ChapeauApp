@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 namespace ChapeauApp.Repositories
 {
     //tijdelijk
-    public class DbMenuItemsRepository
+    /*public class DbMenuItemsRepository
     {
         private readonly string? _connectionString;
 
@@ -42,14 +42,14 @@ namespace ChapeauApp.Repositories
             return new MenuItem
             {
                 MenuItemId = (int)reader["MenuItemId"],
-                MenuId = (int)reader["MenuId"],
+                //MenuId = (int)reader["MenuId"],
                 ItemName = reader["ItemName"].ToString(),
                 ItemPrice = (decimal)reader["ItemPrice"],
-                ItemType = reader["ItemType"].ToString(),
+                //ItemType = reader["ItemType"].ToString(),
                 Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : null,
                 Stock = (int)reader["Stock"],
                 VATAmount = (int)reader["VATAmount"]
             };
         }
-    }
+    }*/
 }

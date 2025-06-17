@@ -14,7 +14,7 @@ namespace ChapeauApp.Repositories
         public DbOrderItemsRepository(IConfiguration configuration)
         {
             //get database connectionstring from appsettings
-            _connectionString = configuration.GetConnectionString("ChapeauDb");
+            _connectionString = configuration.GetConnectionString("Chapeau");
         }
 
         private OrderItem ReadOrderItem(SqlDataReader reader)

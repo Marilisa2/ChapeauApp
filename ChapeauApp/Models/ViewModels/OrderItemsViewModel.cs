@@ -2,9 +2,9 @@
 
 namespace ChapeauApp.Models.ViewModels
 {
-    public class OrderItemsVM
+    public class OrderItemsViewModel
     {
-        public int OrderItemId { get; set; }
+        public OrderItem OrderItem { get; set; }
         public int Quantity { get; set; }
         public MenuItem MenuItem { get; set; } //Name van menuitem gebruiken
         public OrderItemStatus Status { get; set; }

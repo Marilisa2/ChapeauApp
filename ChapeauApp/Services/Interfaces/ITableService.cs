@@ -1,11 +1,13 @@
-﻿using ChapeauApp.Models;
+﻿using ChapeauApp.Enums;
+using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 
-namespace ChapeauApp.Services
+namespace ChapeauApp.Services.Interfaces
 {
     public interface ITableService
     {
-        public List<Table> GetAllTables();
+        public List<TableViewModel> GetAllTables();
         public Table GetTableById(int id);
-        public Table UpdateTableStatus(Table table);
+        public Table UpdateTableStatus(TableUpdateViewModel table);
     }
 }

@@ -15,7 +15,7 @@ namespace ChapeauApp.Repositories
         public DbOrdersRepository(IConfiguration configuration, IOrderItemsRepository orderItemsRepository)
         {
             //get database connectionstring from appsettings
-            _connectionString = configuration.GetConnectionString("ChapeauDb");
+            _connectionString = configuration.GetConnectionString("Chapeau");
             //_employeeRepository = employeeRepository;
             _orderItemsRepository = orderItemsRepository;
         }
@@ -84,6 +84,11 @@ namespace ChapeauApp.Repositories
 
                 return null;
             }
+        }
+
+        public List<Order> GetAllRunningOrders()
+        {
+            throw new NotImplementedException();
         }
     }
 }
