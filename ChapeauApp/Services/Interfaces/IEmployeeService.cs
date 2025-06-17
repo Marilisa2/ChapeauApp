@@ -1,4 +1,5 @@
 ﻿using ChapeauApp.Models;
+using ChapeauApp.Models.ViewModels;
 
 namespace ChapeauApp.Services.Interfaces
 {
@@ -9,6 +10,9 @@ namespace ChapeauApp.Services.Interfaces
          Employee AddEmployee(Employee employee);
          Employee UpdateEmployee(Employee employee);
          void DeleteEmployee(int id);
+        
+         Employee GetEmployeeById(int id);
+        
         
     }
 }

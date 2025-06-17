@@ -1,18 +1,18 @@
-﻿using ChapeauApp.Enums;
-
-namespace ChapeauApp.Models
+﻿namespace ChapeauApp.Models
 {
+    using ChapeauApp.Enums;
     public class Table
     {
 
-        public int TableNumber { get; set; }
-        public string TableStatus { get; set; }
-
+        
         public Table()
         {
         }
 
-        public Table(int tableNumber, string tableStatus)
+        public int TableNumber { get; set; }
+        public TableStatuses TableStatus { get; set; }
+
+        public Table(int tableNumber, TableStatuses tableStatus)
         {
             TableNumber = tableNumber;
             TableStatus = tableStatus;

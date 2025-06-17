@@ -11,6 +11,7 @@ namespace ChapeauApp.Models
         //public Employee Employee { get; set; } add later!
         public Bill Bill { get; set; }
 
+        public Employee Employee { get; set; }
         public List<OrderItem> OrderItems { get; set; }
 
         public Order()

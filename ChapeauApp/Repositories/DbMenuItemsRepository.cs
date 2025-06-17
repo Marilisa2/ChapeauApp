@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 namespace ChapeauApp.Repositories
 {
     //tijdelijk
-    public class DbMenuItemsRepository
+    /*public class DbMenuItemsRepository
     {
         private readonly string? _connectionString;
 
@@ -51,5 +51,5 @@ namespace ChapeauApp.Repositories
                 VATAmount = (int)reader["VATAmount"]
             };
         }
-    }
+    }*/
 }

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace mvc_whatsup.Models.Extentions
+namespace ChapeauApp.Models.Extensions
 {
     public static class SessionExtentions
     {
@@ -11,7 +11,7 @@ namespace mvc_whatsup.Models.Extentions
         public static T? GetObject<T>(this ISession session, string key) 
         {
             string? value = session.GetString(key); 
-            return value==null ? default(T) : JsonSerializer.Deserialize<T>(value);
+            return value==null ? default : JsonSerializer.Deserialize<T>(value);
         }
 
 
