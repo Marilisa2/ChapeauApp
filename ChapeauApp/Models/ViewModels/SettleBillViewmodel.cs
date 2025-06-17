@@ -15,7 +15,7 @@ namespace ChapeauApp.Models.ViewModels
                 return TotalPriceAmountExclTip + (TipAmount ?? 0); // ?? 0 => Use the value of TipAmount if it exists, otherwise use 0.
             }
         }
-        public PaymentMethod PaymentMethod { get; set; }
+        public PaymentMethod PaymentMethod { get; set; } 
         public string? FeedbackText { get; set; }
 
         //public VatSummary VatTotalAmount { get; set; } = new VatSummary();

@@ -11,11 +11,13 @@ namespace ChapeauApp.Controllers
     {
         private readonly IBillsService _billsService;
         private readonly IOrdersService _ordersService;
+        private readonly IPaymentsService _paymentsService;
 
-        public BillsController(IBillsService billsService, IOrdersService ordersService)
+        public BillsController(IBillsService billsService, IOrdersService ordersService, IPaymentsService paymentsService)
         {
             _billsService = billsService;
             _ordersService = ordersService;
+            _paymentsService = paymentsService;
         }
 
         public IActionResult GetBillByTableNumber(int tableNumber)
@@ -48,12 +50,16 @@ namespace ChapeauApp.Controllers
         {
             if (settleBillViewmodel.TipAmount < 0)
             {
-                ModelState.AddModelError("TipAmount", "TipAmount must be postive"); //aanpassen!!!
+                ModelState.AddModelError("TipAmount", "Tip amount must be postive"); //aanpassen!!!
                 return View(settleBillViewmodel);
             }
 
             _billsService.SaveTipAmount(settleBillViewmodel.BillId, settleBillViewmodel.TipAmount ?? 0); 
-            _billsService.SavePaymentMethod(settleBillViewmodel.BillId, settleBillViewmodel.PaymentMethod);
+            //_billsService.SavePaymentMethod(settleBillViewmodel.BillId, settleBillViewmodel.PaymentMethod);
+
+            //paymentId eerst ophalen
+            int paymentId = _paymentsService.GetPaymentIdForBill(settleBillViewmodel.BillId);
+            _paymentsService.SavePaymentMethod(paymentId, settleBillViewmodel.PaymentMethod);
                         
             TempData["SuccessMessage"] = "Payment was successful!"; //vervangen naar  the order has been finished correctly
             return RedirectToAction("Index", "Orders"); //aanpassen teruggestuurd naar Tafeloverzicht
