@@ -4,6 +4,13 @@
     ViewData["Title"] = "Settle Bill";
 }
 
+@* @if (TempData["ConfirmationMessage"] != null)  *@
+@* { *@
+@*     <div class="alert alert-success">  *@
+@*         @TempData["ConfirmationMessage"]  *@
+@*     </div>  *@
+@* }  *@
+
 <h2>Settle Bill for Bill #@Model.BillId</h2>
 
 <form asp-action="SettleBill" method="post">

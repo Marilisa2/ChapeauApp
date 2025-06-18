@@ -53,7 +53,7 @@ namespace ChapeauApp.Services
 
         public void SaveTipAmount(int billId, decimal tipAmount)
         {
-            _billsRepository.UpdateTipAmount(billId, tipAmount);
+            _billsRepository.SaveTipAmount(billId, tipAmount);
         }
 
         public void SaveFeedbackText(int billId, string feedbackText)
