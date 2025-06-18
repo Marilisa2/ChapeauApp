@@ -102,7 +102,22 @@ namespace ChapeauApp.Repositories
 
         }
 
-        
+        public void SaveFeedbackText(int billId, string feedbackText)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Bills SET FeedbackText = @FeedbackText WHERE BillId = @BillId";
+
+                SqlCommand command = new SqlCommand(@query, connection);
+                command.Parameters.AddWithValue("FeedbackText", feedbackText);
+                command.Parameters.AddWithValue("@BillId", billId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+
         //public int GetPaymentIdByBillId(int billId)
         //{
 

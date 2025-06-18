@@ -1,4 +1,5 @@
-﻿using ChapeauApp.Enums;
+﻿using AspNetCoreGeneratedDocument;
+using ChapeauApp.Enums;
 using ChapeauApp.Models;
 using ChapeauApp.Models.ViewModels;
 using ChapeauApp.Repositories.Interfaces;
@@ -53,6 +54,11 @@ namespace ChapeauApp.Services
         public void SaveTipAmount(int billId, decimal tipAmount)
         {
             _billsRepository.UpdateTipAmount(billId, tipAmount);
+        }
+
+        public void SaveFeedbackText(int billId, string feedbackText)
+        {
+            _billsRepository.SaveFeedbackText(billId, feedbackText);
         }
 
         public SettleBillViewmodel? SettleBillViewmodel(int billId)
