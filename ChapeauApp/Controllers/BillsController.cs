@@ -64,10 +64,9 @@ namespace ChapeauApp.Controllers
             //FeedbackText
             _billsService.SaveFeedbackText(settleBillViewmodel.BillId, settleBillViewmodel.FeedbackText);
                         
-            TempData["SuccessMessage"] = "Payment was successful!"; //vervangen naar  the order has been finished correctly
+            TempData["ConfirmationMessage"] = "The order has been finished correctly!";
             return RedirectToAction("Index", "Orders"); //aanpassen teruggestuurd naar Tafeloverzicht
-        }
-
-        
+            //return View(settleBillViewmodel);
+        } 
     }
 }

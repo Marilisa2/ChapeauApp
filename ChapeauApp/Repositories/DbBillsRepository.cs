@@ -86,7 +86,7 @@ namespace ChapeauApp.Repositories
         }
 
         //Saves entered tip amount in the database
-        public void UpdateTipAmount (int billId, decimal tipAmount)
+        public void SaveTipAmount (int billId, decimal tipAmount)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
