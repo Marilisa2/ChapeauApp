@@ -60,6 +60,9 @@ namespace ChapeauApp.Controllers
             //paymentId eerst ophalen
             int paymentId = _paymentsService.GetPaymentIdForBill(settleBillViewmodel.BillId);
             _paymentsService.SavePaymentMethod(paymentId, settleBillViewmodel.PaymentMethod);
+
+            //FeedbackText
+            _billsService.SaveFeedbackText(settleBillViewmodel.BillId, settleBillViewmodel.FeedbackText);
                         
             TempData["SuccessMessage"] = "Payment was successful!"; //vervangen naar  the order has been finished correctly
             return RedirectToAction("Index", "Orders"); //aanpassen teruggestuurd naar Tafeloverzicht

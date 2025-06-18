@@ -13,6 +13,7 @@ namespace ChapeauApp.Services.Interfaces
         SettleBillViewmodel? SettleBillViewmodel(int billId);
         Bill GetCurrentBill();//weghalen?
         void SaveTipAmount(int billId, decimal tipAmount);
+        void SaveFeedbackText(int billId, string feedbackText);
         //void SavePaymentMethod (int billId, PaymentMethod paymentMethod); //billId en enum paymentMethod nodig
     }
 }
