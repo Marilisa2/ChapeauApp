@@ -13,29 +13,38 @@ namespace ChapeauApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IBillsRepository, DbBillsRepository>();
-            builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
-            builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
-            builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
-            builder.Services.AddSingleton<ITableRepository, TableRepository>();
 
-            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            //Services
             builder.Services.AddSingleton<ILoginOrOffService, LoginOrOffService>();
+            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+            builder.Services.AddSingleton<IPasswordService, PasswordService>();
+            builder.Services.AddSingleton<ITableService, TableService>();
             builder.Services.AddSingleton<IMenusService, MenusService>();
             builder.Services.AddSingleton<IOrderItemsService, OrderItemsService>();
             builder.Services.AddSingleton<IOrdersService, OrdersService>();
-            builder.Services.AddSingleton<IPasswordService, PasswordService>();
-            builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
-            builder.Services.AddSingleton<ITableService, TableService>();
+            builder.Services.AddSingleton<IBillsService, BillsService>();
             builder.Services.AddSingleton<IVatsService, VatsService>();
-
+            builder.Services.AddSingleton<IPaymentMethodsService, PaymentMethodsService>();
+            builder.Services.AddSingleton<IPaymentsService, PaymentsService>();
+          
+            
+            builder.Services.AddControllersWithViews();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            //DatbaseRepository
+            builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddSingleton<ITableRepository, DbTableRepository>();
+            builder.Services.AddSingleton<IMenusRepository, DbMenusRepository>();
+            builder.Services.AddSingleton<IOrderItemsRepository, DbOrderItemsRepository>();
+            builder.Services.AddSingleton<IOrdersRepository, DbOrdersRepository>();
+            builder.Services.AddSingleton<IBillsRepository, DbBillsRepository>();
+            builder.Services.AddSingleton<IPaymentsRepository, DbPaymentsRepository>();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -56,8 +65,9 @@ namespace ChapeauApp
 
             app.MapControllerRoute(
                 name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             //pattern: "{controller=Employee}/{action=login}");
-            pattern: "{controller=Table}/{action=Index}");
+            //pattern: "{controller=Table}/{action=Index}");
 
             app.Run();
         }

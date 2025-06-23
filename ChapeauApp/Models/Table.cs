@@ -3,6 +3,8 @@
     using ChapeauApp.Enums;
     public class Table
     {
+
+        
         public Table()
         {
         }

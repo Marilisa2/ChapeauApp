@@ -8,7 +8,7 @@ namespace ChapeauApp.Services
 {
     public class TableService : ITableService
     {
-       private readonly ITableRepository _tableRepository;
+        private readonly ITableRepository _tableRepository;
 
         public TableService(ITableRepository tableRepository)
         {
@@ -23,14 +23,13 @@ namespace ChapeauApp.Services
             { 
                 TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
-
             }
             return tableViewModels;
         }
 
         public Table GetTableById(int id)
         {
-           return _tableRepository.GetTableById(id);
+            return _tableRepository.GetTableById(id);
         }
 
         public Table UpdateTableStatus(TableUpdateViewModel table)

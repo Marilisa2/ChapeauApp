@@ -6,24 +6,25 @@ namespace ChapeauApp.Models
     {
         public int OrderId { get; set; }
         public DateTime OrderTime { get; set; }
-        //public DateOnly Date {  get; set; } //?
         public OrderStatus OrderStatus { get; set; }
         public Table Table { get; set; }
         //public Employee Employee { get; set; } add later!
-        //public Bill Bill { get; set; } //add later!
+        public Bill Bill { get; set; }
 
+        public Employee Employee { get; set; }
         public List<OrderItem> OrderItems { get; set; }
 
         public Order()
         {
         }
 
-        public Order(int orderId, DateTime orderTime, OrderStatus orderStatus, Table table, List<OrderItem> orderItems)
+        public Order(int orderId, DateTime orderTime, OrderStatus orderStatus, Table table,Bill bill, List<OrderItem> orderItems)
         {
             OrderId = orderId;
             OrderTime = orderTime;
             OrderStatus = orderStatus;
             Table = table;
+            Bill = bill;
             OrderItems = orderItems;
         }
     }

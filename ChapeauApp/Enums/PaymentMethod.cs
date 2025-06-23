@@ -2,7 +2,7 @@
 {
     public enum PaymentMethod
     {
-        Pin,
+        Pin, //0
         Creditcard, 
         Contant
     }

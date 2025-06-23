@@ -8,7 +8,7 @@ namespace ChapeauApp.Services
         private const int LowVatAmount = 9;
         private const int HighVatAmount = 21;
 
-        public VatSummary CalculateVatTotalAMount(List<OrderItem> orderItems)
+        public VatSummary CalculateVatTotalAmount(List<OrderItem> orderItems)
         {
             VatSummary vatSummary = new VatSummary();
 

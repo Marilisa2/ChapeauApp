@@ -5,20 +5,31 @@ using Microsoft.Data.SqlClient;
 
 namespace ChapeauApp.Repositories
 {
-    public class TableRepository : ITableRepository
+    public class DbTableRepository : ITableRepository
     {
         private readonly string _connectionString;
 
-        public TableRepository(IConfiguration configuration)
+        public DbTableRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Chapeau");
         }
+
+        private Table ReadTable(SqlDataReader reader)
+        {
+            //retrieve data from fields from database
+            int tableNumber = (int)reader["TableNumber"];
+            string _tableStatus = (string)reader["TableStatus"];
+            TableStatuses tableStatus = (TableStatuses)Enum.Parse(typeof(TableStatuses), _tableStatus, true);
+
+            return new Table(tableNumber, tableStatus);
+        }
+
         public List<Table> GetAllTables()
         {
             List<Table> tables = new List<Table>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT tableNumber,tableStatus FROM Tables";
+                string querry = "SELECT TableNumber, TableStatus FROM Tables";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -26,9 +37,10 @@ namespace ChapeauApp.Repositories
 
                 while (reader.Read())
                 {
-                   Table table = ReadTable(reader);
+                    Table table = ReadTable(reader);
                     tables.Add(table);
                 }
+
                 reader.Close();
             }
             return tables;
@@ -39,7 +51,7 @@ namespace ChapeauApp.Repositories
             Table table = new Table();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT tableNumber,tableStatus FROM Tables";
+                string querry = "SELECT TableNumber, TableStatus FROM Tables";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();
@@ -53,7 +65,27 @@ namespace ChapeauApp.Repositories
                 reader.Close();
             }
             return table;
-        }        
+        }
+
+        public Table? GetTableByTableNumber(int tableNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT TableNumber, TableStatus FROM Tables WHERE TableNumber = @TableNumber";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TableNumber", tableNumber);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return ReadTable(reader);
+                }
+
+                return null;
+            }
+        }
 
         public Table UpdateTableStatus(Table table)
         {
@@ -69,13 +101,20 @@ namespace ChapeauApp.Repositories
             }
             return table;
         }
-        private Table ReadTable(SqlDataReader reader)
-        {
-            int tableNumber = (int)reader["tableNumber"];
-            string _tableStatus = (string)reader["tableStatus"];
-            TableStatuses tableStatus = (TableStatuses)Enum.Parse(typeof(TableStatuses), _tableStatus, true);
-            return new Table(tableNumber,tableStatus);
-        }
 
+        //Y versie
+        //private Table ReadTable(SqlDataReader reader)
+        //{
+        //    //retrieve data from fields from database
+        //    int tableNumber = (int)reader["TableNumber"];
+        //    string tableStatus = (string)reader["TableStatus"];
+
+        //    //return new Table Object
+        //    return new Table
+        //    {
+        //        TableNumber = tableNumber,
+        //        TableStatus = tableStatus,
+        //    };
+        //}
     }
 }

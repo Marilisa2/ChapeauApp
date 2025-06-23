@@ -1,0 +1,53 @@
+﻿@model ChapeauApp.Models.ViewModels.SettleBillViewmodel
+
+@{
+    ViewData["Title"] = "Settle Bill";
+}
+
+@* @if (TempData["ConfirmationMessage"] != null)  *@
+@* { *@
+@*     <div class="alert alert-success">  *@
+@*         @TempData["ConfirmationMessage"]  *@
+@*     </div>  *@
+@* }  *@
+
+<h2>Settle Bill for Bill #@Model.BillId</h2>
+
+<form asp-action="SettleBill" method="post">
+    <input type="hidden" asp-for="BillId" />
+
+    @*Total Price Amount excl. Tip*@
+    <div class="form-group">
+        <label asp-for="TotalPriceAmountExclTip">Total Price Amount (excl. Tip)</label>
+        <input asp-for="TotalPriceAmountExclTip" class="form-control" readonly/>
+    </div>
+
+    @*Tip Amount*@
+    <div class="form-group">
+        <label asp-for="TipAmount">Tip Amount</label>
+        <input asp-for="TipAmount" class="form-control" type="number" step="0.01" min="0" />
+    </div>
+
+    @*Total Price Amount incl. Tip*@
+    <div class="form-group">
+        <label>Total Price Amount (incl. tip)</label>
+        <input class="form-control" value="@Model.TotalPriceAmountInclTip" readonly />
+    </div>
+
+    @*Payment methods*@
+    <div class="form-group">
+        <label asp-for="PaymentMethod">PaymentMethod</label>
+        <select asp-for="PaymentMethod" class="form-control" asp-items="Html.GetEnumSelectList<ChapeauApp.Enums.PaymentMethod>()">
+            <option value="">-- Select a Payment Method --</option>
+        </select>
+    </div>
+
+    @*Feedback*@
+    <div class="form-group">
+        <label asp-for="FeedbackText">Guest Feedback</label>
+        <textarea asp-for="FeedbackText" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirm Payment</button>
+
+</form>
