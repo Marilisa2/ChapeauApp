@@ -115,7 +115,7 @@ namespace ChapeauApp.Repositories
                     menuItemCard = MenuItemCard.Diner;
                     break;
                 default:
-                    throw new Exception($"{menuName} is a invalid menuName!");
+                    throw new Exception($"{menuName} is an invalid menuName!");
             }
             return menuItemCard;
         }
