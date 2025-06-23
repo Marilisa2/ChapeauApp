@@ -61,7 +61,7 @@ namespace ChapeauApp.Repositories
             decimal itemPrice = (decimal)reader["itemPrice"];
             if (itemPrice < 0)
                 throw new Exception($"The itemPrice is negative for menuItemId {menuItemId} in the database!");
-            string itemType = (string)reader["itemType"];
+            string itemType = (string)reader["itemCategory"];
             if (itemType == null)
                 throw new Exception($"The itemType has no value for menuItemId {menuItemId} in the database!");
             MenuItemCategory itemCategory = GetMenuItemCategory(itemType);

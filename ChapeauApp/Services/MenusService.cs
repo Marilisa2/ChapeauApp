@@ -39,7 +39,7 @@ namespace ChapeauApp.Services
                 itemCategory = "All";
             itemCategory = itemCategory.ToLower();
 
-            string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemType, itemDescription, itemStock, vat_Amount FROM MenuItems";
+            string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemCategory, itemDescription, itemStock, vat_Amount FROM MenuItems";
             if (cardName != "all" || itemCategory != "all")
             {
                 query += " WHERE";
