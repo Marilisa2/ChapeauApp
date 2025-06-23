@@ -82,7 +82,6 @@ namespace ChapeauApp.Services
             }
             catch (Exception)
             {
-
                 throw;
             }   
              return runningOrdersVM;             

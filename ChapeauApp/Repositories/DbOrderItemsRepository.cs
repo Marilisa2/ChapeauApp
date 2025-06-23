@@ -3,6 +3,7 @@ using ChapeauApp.Models;
 using ChapeauApp.Repositories.Interfaces;
 using ChapeauApp.Services.Interfaces;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 using System.Reflection.PortableExecutable;
 
 namespace ChapeauApp.Repositories
@@ -134,7 +135,20 @@ namespace ChapeauApp.Repositories
 
         public List<OrderItem> GetAllOrderItems()
         {
-            throw new NotImplementedException();
+            List <OrderItem> orderItems = new ();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    OrderItem menuItem = ReadOrderItem(reader);
+                    orderItems.Add(menuItem);
+                }
+            }
+            return orderItems;
         }
     }
 }

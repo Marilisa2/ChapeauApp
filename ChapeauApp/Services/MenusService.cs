@@ -39,11 +39,14 @@ namespace ChapeauApp.Services
             string time = timeNow.ToString("hh:mm:ss");
              */
             if (cardName == null)
-                cardName = "All";
-            cardName = cardName.ToLower();
+            { cardName = "all"; }
+            else 
+            { cardName = cardName.ToLower(); }
+
             if (itemCategory == null)
-                itemCategory = "All";
-            itemCategory = itemCategory.ToLower();
+            { itemCategory = "all"; }
+            else
+            { itemCategory = itemCategory.ToLower(); }
 
             string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemCategory, itemDescription, itemStock, vat_Amount FROM MenuItems";
             if (cardName != "all" || itemCategory != "all")
