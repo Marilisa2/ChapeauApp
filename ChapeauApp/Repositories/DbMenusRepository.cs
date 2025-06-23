@@ -29,6 +29,7 @@ namespace ChapeauApp.Repositories
         }
         public List<MenuItem> GetMenuItems(string query, string card, string category)
         {
+            //Sets the default value for the filters card and category
             if (card == null)
                 card = "All";
             if (category == null)
@@ -38,10 +39,13 @@ namespace ChapeauApp.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                
+                //Only adds the parameters if they are needed
                 if (card != "All")
                 command.Parameters.AddWithValue("@MenuName", card);
                 if (category != "All")
                     command.Parameters.AddWithValue("@ItemType", category);
+                
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())

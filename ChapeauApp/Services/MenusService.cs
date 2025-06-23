@@ -32,6 +32,12 @@ namespace ChapeauApp.Services
         }
         public string GetQuery(string? cardName, string? itemCategory)
         {
+            //This will be used later for the implemention of basing the card on the time of day and displaying the current time.
+            /*
+            DateTime timeNow = DateTime.Now;
+            string day = timeNow.ToString("yyyy/MM/dd");
+            string time = timeNow.ToString("hh:mm:ss");
+             */
             if (cardName == null)
                 cardName = "All";
             cardName = cardName.ToLower();
