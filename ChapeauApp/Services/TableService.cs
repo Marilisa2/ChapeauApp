@@ -29,7 +29,8 @@ namespace ChapeauApp.Services
             {
                 List<Order> orders = _ordersRepository.GetOrdersByTableNumber(table.TableNumber);
                 //Every OrderItem has a MenuItem as atribute, however this isn't implemented yet. This is why _menusRepository was added to the constructor of TableService.
-                Table newTable = new Table(table.TableNumber, table.TableStatus, orders);
+                //Todo: fix MenusRepository according to DB changes and to add retrieve MenuItem for OrderItem
+                                Table newTable = new Table(table.TableNumber, table.TableStatus, orders);
                 TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
             }
