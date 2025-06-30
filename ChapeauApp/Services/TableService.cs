@@ -25,18 +25,28 @@ namespace ChapeauApp.Services
             List <TableViewModel> tableViewModels = new List<TableViewModel>();//All tables with their orders
             foreach (Table table in tablesWithoutOrders)
             {
+                Table newTable;
                 List<Order> orders = _ordersRepository.GetOrdersByTableNumber(table.TableNumber);
-                Table newTable = new Table(table.TableNumber, table.TableStatus, orders);
-                TableViewModel tableViewModel = new TableViewModel(table);
+                if (orders != null)
+                {
+                    newTable = new Table(table.TableNumber, table.TableStatus, orders);
+                }
+                else
+                {
+                    newTable = new Table(table.TableNumber, table.TableStatus);
+                }
+                    TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
             }
             TablesViewModel tablesViewModel = new (tableViewModels);
             return tablesViewModel;
         }
 
-        public Table GetTableById(int id)
+        public TableViewModel GetTableById(int id)
         {
-            return _tableRepository.GetTableById(id);
+            Table table = _tableRepository.GetTableById(id);
+            TableViewModel tableViewModel = new (table);
+            return tableViewModel;
         }
         public List<Order> GetAllOrders()
         {

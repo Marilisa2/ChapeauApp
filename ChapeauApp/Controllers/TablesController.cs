@@ -6,11 +6,11 @@ using ChapeauApp.Models.ViewModels;
 namespace ChapeauApp.Controllers
 {
    
-    public class TableController : Controller
+    public class TablesController : Controller
     {
         private readonly ITableService _tableService;
 
-        public TableController(ITableService tableService)
+        public TablesController(ITableService tableService)
         {
             _tableService = tableService;
         }
@@ -26,10 +26,25 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Message"] = $"The tables could not be loaded: {ex.Message}.";
+                TempData["ErrorMessage"] = $"The tables could not be loaded: {ex.Message}.";
                 return RedirectToAction("Index", "Home");
             }
         }
+        [HttpGet]
+        public IActionResult Table(int tableNumber)
+        {
+            try
+            {
+                TableViewModel tableViewModel = _tableService.GetTableById(tableNumber);
+                return View(tableViewModel);
+            }
+            catch(Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Something went wrong: {ex.Message}.";//This message should be updated to give the client a clear idea of what went wrong.
+                return RedirectToAction("Index", "Table");
+            }
+        }
+
         [HttpGet]
         public IActionResult Update(TableViewModel tableViewModel) 
         {
@@ -40,7 +55,7 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Message"] = $"Something went wrong: {ex.Message}.";//This message should be update to give the client a clear idea of what went wrong.
+                TempData["ErrorMessage"] = $"Something went wrong: {ex.Message}.";//This message should be updated to give the client a clear idea of what went wrong.
                 return RedirectToAction("Index", "Table");
             }
         }
@@ -50,11 +65,12 @@ namespace ChapeauApp.Controllers
             try
             {
                 _tableService.UpdateTableStatus(tableUpdateViewModel);
+                TempData["Message"] = "TableStatus was succesfully updated.";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                TempData["Message"] = $"Something went wrong: {ex.Message}.";//This message should be update to give the client a clear idea of what went wrong.
+                TempData["ErrorMessage"] = $"Something went wrong: {ex.Message}.";//This message should be updated to give the client a clear idea of what went wrong.
                 return RedirectToAction("Index", "Table");
             }
         }

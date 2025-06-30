@@ -3,12 +3,15 @@
 @{
     ViewData["Title"] = "TableIndex";
 }
+<h1 class="alert-danger">@TempData["ErrorMessage"]</h1>
+<h1 class="alert-warning">@TempData["WarningMessage"]</h1>
+<h1 class="alert-success">@TempData["SuccesMessage"]</h1>
 <div id="gridContainer">
     @{
         foreach (TableViewModel tableViewModel in Model.Tables)
         {
             <div class="col-md-4 mb-4">
-                <a href="/Orders/GetOrderByTableNumber?tableNumber=@tableViewModel.TableNumber" class="text-decoration-none text-dark">
+                <a href="/Tables/Table/@tableViewModel.TableNumber" class="text-decoration-none text-dark">
                     <div class="card shadow-sm h-100 card-hover">
                         <div class="card-body d-flex flex-column justify-content-between text-center">
                             <h5 class="card-title">Table @tableViewModel.TableNumber</h5>
@@ -17,18 +20,6 @@
                     </div>
                 </a>
             </div>
-            string itemId = $"item{tableViewModel.TableNumber}";
-            string formId = $"UpdateTableForm_{tableViewModel.TableNumber}";
-            <form id="@formId" action="/Table/Update" method="get">
-                <div class="form-group">
-                    <input hidden type="text" name="TableStatus" value="@tableViewModel.TableStatus" />
-                    <input hidden type="text" name="TableNumber" value="@tableViewModel.TableNumber" />
-                </div>
-                <div id="@itemId" class="rechthoek-knop @tableViewModel.TableStatus"                      
-                     onclick="document.getElementById('@formId').submit();">
-                    @tableViewModel.TableNumber
-                </div>
-            </form>
         }
     }
 
@@ -36,7 +27,7 @@
         <button id="logoffButton" style="grid-area:logoffButton;" type="submit" class="btn btn-primary">Logoff</button>
     </form>
 
-    <form action="/Table/Index" method="get">
+    <form action="/Tables/Index" method="get">
         <button id="refreshButton" style="grid-area:refreshButton;" type="submit" class="btn btn-primary">Refresh</button>
     </form>
 </div>

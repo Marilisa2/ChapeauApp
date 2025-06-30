@@ -2,6 +2,9 @@
 @{
 	ViewData["Title"] = "Menu";
 }
+<h1 class="alert-danger">@TempData["ErrorMessage"]</h1>
+<h1 class="alert-warning">@TempData["WarningMessage"]</h1>
+<h1 class="alert-success">@TempData["SuccesMessage"]</h1>
 <form action="/Menu/Index" method="get" id="menuForm">
 	<div class="form-group py-2" id="menu">
 		<label for="cars">Choose a card:</label>

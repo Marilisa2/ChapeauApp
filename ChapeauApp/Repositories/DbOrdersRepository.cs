@@ -45,8 +45,8 @@ namespace ChapeauApp.Repositories
             int orderId = (int)reader["OrderId"];
             DateTime orderTime = (DateTime)reader["OrderTime"];
             OrderStatus orderStatus = (OrderStatus)reader["OrderStatus"];
-            int tableInt = (int)reader["TableNumber"];
-            int billInt = (int)reader["BillId"];
+            //int tableInt = (int)reader["TableNumber"];
+            //int billInt = (int)reader["BillId"];
             //Employee employee = (Employee)reader["EmployeeId"];
             List<OrderItem> orderItems = GetAllOrderItems(orderId);
             return new Order(orderId, orderTime, orderStatus, orderItems);

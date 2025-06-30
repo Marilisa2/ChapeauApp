@@ -43,13 +43,14 @@ namespace ChapeauApp.Repositories
             return new Table(tableNumber, tableStatus);
         }
 
+        //This function is not used and not true to its name.
         public Table GetTableById(int id)
         {
             Table table = new Table();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = "SELECT TableNumber, TableStatus FROM Tables";
-                SqlCommand command = new SqlCommand(querry, connection);
+                string query = "SELECT TableNumber, TableStatus FROM Tables";
+                SqlCommand command = new SqlCommand(query, connection);
 
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -87,7 +88,7 @@ namespace ChapeauApp.Repositories
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string querry = $"update Tables set tableStatus=@tableStatus where tableNumber=@tableNumber";
+                string querry = $"UPDATE Tables set tableStatus=@tableStatus WHERE tableNumber=@tableNumber";
                 SqlCommand command = new SqlCommand(querry, connection);
 
                 command.Connection.Open();

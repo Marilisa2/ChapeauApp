@@ -1,0 +1,47 @@
+﻿@model ChapeauApp.Models.ViewModels.TableViewModel
+
+@{
+    ViewData["Title"] = "View Order By Table Number";
+}
+<h1 class="alert-danger">@TempData["ErrorMessage"]</h1>
+<h1 class="alert-warning">@TempData["WarningMessage"]</h1>
+<h1 class="alert-success">@TempData["SuccesMessage"]</h1>
+@*Select status*@
+
+@*Select course*@
+
+@*Add order*@
+
+@*Is currently being prepared*@
+
+@*Previous orders*@
+@if (Model.OrderList != null)
+{
+<h3>Wordt momenteel bereid</h3>
+    @foreach(Order order in Model.OrderList){
+        <h4>Bestelnummer: @order.OrderId</h4>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @**@
+                @foreach (OrderItem orderItem in order.OrderItems)
+                {
+                    <tr>
+                        <td>@orderItem.MenuItem.ItemName</td>
+                        <td>@orderItem.Quantity</td>
+                        <td>@orderItem.MenuItem.ItemPrice</td>
+                        <td>€@(orderItem.Quantity* orderItem.MenuItem.ItemPrice) </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+@*Ask bill*@
+<a href="/Bills/SettleBill"></a>
+</div>
