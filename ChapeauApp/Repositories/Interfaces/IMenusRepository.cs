@@ -8,5 +8,6 @@ namespace ChapeauApp.Repositories.Interfaces
     {
         MenuViewModel GetMenusViewModel(string? query, string? card, string? category);
         MenuItem ReadMenuItem(SqlDataReader reader);
+        MenuItem GetMenuItemById(int MenuItemId);
     }
 }

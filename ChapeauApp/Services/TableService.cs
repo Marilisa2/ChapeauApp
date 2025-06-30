@@ -11,11 +11,13 @@ namespace ChapeauApp.Services
     {
         private readonly ITableRepository _tableRepository;
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IMenusRepository _menusRepository;
 
-        public TableService(ITableRepository tableRepository, IOrdersRepository ordersRepository)
+        public TableService(ITableRepository tableRepository, IOrdersRepository ordersRepository, IMenusRepository menusRepository)
         {
             _tableRepository = tableRepository;
             _ordersRepository = ordersRepository;
+            _menusRepository = menusRepository;
         }
 
         public TablesViewModel GetAllTables()
@@ -25,17 +27,10 @@ namespace ChapeauApp.Services
             List <TableViewModel> tableViewModels = new List<TableViewModel>();//All tables with their orders
             foreach (Table table in tablesWithoutOrders)
             {
-                Table newTable;
                 List<Order> orders = _ordersRepository.GetOrdersByTableNumber(table.TableNumber);
-                if (orders != null)
-                {
-                    newTable = new Table(table.TableNumber, table.TableStatus, orders);
-                }
-                else
-                {
-                    newTable = new Table(table.TableNumber, table.TableStatus);
-                }
-                    TableViewModel tableViewModel = new TableViewModel(table);
+                //Every OrderItem has a MenuItem as atribute, however this isn't implemented yet. This is why _menusRepository was added to the constructor of TableService.
+                Table newTable = new Table(table.TableNumber, table.TableStatus, orders);
+                TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
             }
             TablesViewModel tablesViewModel = new (tableViewModels);
@@ -44,7 +39,9 @@ namespace ChapeauApp.Services
 
         public TableViewModel GetTableById(int id)
         {
-            Table table = _tableRepository.GetTableById(id);
+            Table newTable = _tableRepository.GetTableById(id);
+            List<Order> orders = _ordersRepository.GetOrdersByTableNumber(newTable.TableNumber);
+            Table table = new Table(newTable.TableNumber, newTable.TableStatus, orders);
             TableViewModel tableViewModel = new (table);
             return tableViewModel;
         }

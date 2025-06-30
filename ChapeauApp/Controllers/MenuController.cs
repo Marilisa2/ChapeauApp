@@ -38,8 +38,7 @@ namespace ChapeauApp.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-                ViewBag.Error = ex.Message;
+                TempData["ErrorMessage"] = $"The menu could not be loaded: {ex.Message}";//This message should be updated to give the client a clear idea of what went wrong.
                 return RedirectToAction("Index", "Home");
             }
         }

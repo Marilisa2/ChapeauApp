@@ -12,34 +12,57 @@
 
 @*Add order*@
 
-@*Is currently being prepared*@
-
-@*Previous orders*@
 @if (Model.OrderList != null)
 {
-<h3>Wordt momenteel bereid</h3>
-    @foreach(Order order in Model.OrderList){
-        <h4>Bestelnummer: @order.OrderId</h4>
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @**@
-                @foreach (OrderItem orderItem in order.OrderItems)
-                {
+    @*Is currently being prepared*@
+    @foreach (Order order in Model.OrderList)
+    {
+        if (order.OrderStatus == ChapeauApp.Enums.OrderStatus.Voorbereiden)
+        {
+            <h3>Wordt momenteel bereid</h3>
+            <h4>Bestelnummer: @order.OrderId</h4>
+            <table class="table">
+                <thead class="table-dark">
                     <tr>
-                        <td>@orderItem.MenuItem.ItemName</td>
-                        <td>@orderItem.Quantity</td>
-                        <td>@orderItem.MenuItem.ItemPrice</td>
-                        <td>€@(orderItem.Quantity* orderItem.MenuItem.ItemPrice) </td>
+                        <th></th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @**@
+                    @foreach (OrderItem orderItem in order.OrderItems)
+                    {
+                        <tr>
+                            <td>@orderItem.MenuItem.ItemName</td>
+                            <td>@orderItem.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    @*Previous orders*@
+    <h3>Vorige bestellingen</h3>
+        @foreach(Order order in Model.OrderList){
+            <h4>Bestelnummer: @order.OrderId</h4>
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @**@
+                    @foreach (OrderItem orderItem in order.OrderItems)
+                    {
+                        <tr>
+                            <td>@orderItem.MenuItem.ItemName</td>
+                            <td>@orderItem.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
     }
 }
 @*Ask bill*@

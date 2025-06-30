@@ -20,6 +20,8 @@ namespace ChapeauApp.Repositories
         //cardName is menuName in the database.
         //itemCategory is itemType in the database but should have been courseName to avoid confusion.
         //Naming things really is some of the most difficult things in programming.
+        
+        //This belongs in the Menusservice.
         public MenuViewModel GetMenusViewModel(string? query, string? cardName, string? itemCategory)
         {
             List<MenuItem> menuItems = GetMenuItems(query, cardName, itemCategory);
@@ -29,6 +31,7 @@ namespace ChapeauApp.Repositories
         }
         public List<MenuItem> GetMenuItems(string query, string card, string category)
         {
+            //This belongs in the Menusservice.
             //Sets the default value for the filters card and category
             if (card == null)
                 card = "All";
@@ -65,11 +68,11 @@ namespace ChapeauApp.Repositories
             decimal itemPrice = (decimal)reader["itemPrice"];
             if (itemPrice < 0)
                 throw new Exception($"The itemPrice is negative for menuItemId {menuItemId} in the database!");
-            string itemType = (string)reader["itemCategory"];
+            int itemType = (int)reader["ItemCategory"];
             if (itemType == null)
                 throw new Exception($"The itemType has no value for menuItemId {menuItemId} in the database!");
             MenuItemCategory itemCategory = GetMenuItemCategory(itemType);
-            string description = (reader["itemDescription"] as string) ?? "";
+            string description = (reader["itemDescription"] as string) ?? "";//If the value is NULL in the database, set string description to an empty string.
             int stock = (int)reader["itemStock"];
             int vATAmount = (int)reader["vat_Amount"];
             MenuItem menuItem = new(menuItemId, menuItemCard, itemName, itemPrice, itemCategory, description, stock, vATAmount);
@@ -168,6 +171,24 @@ namespace ChapeauApp.Repositories
                     throw new Exception($"{itemType} is an invalid itemType/itemCategory!");
             }
             return menuItemCategory;
+        }
+
+        public MenuItem GetMenuItemById(int menuItemId)
+        {
+            MenuItem menuItem = new MenuItem();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT menuItemId, menuId, itemName, itemPrice, itemDescription, itemStock, vat_Amount, ItemCategory FROM MenuItems WHERE menuItemId = @MenuItemId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@MenuItemId", menuItemId);
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    menuItem = ReadMenuItem(reader);
+                }
+            }
+            return menuItem;
         }
     }
 }

@@ -25,11 +25,6 @@
 			<option value="Wijnen">Wijnen</option>
 			<option value="Koffie / Thee">Koffie / Thee</option>
 			<option value="Gedistilleerde drank">Gedistilleerde drank</option>
-			
-			<!--option value="All">All</option>
-			<option value="Starters">Starters</option>
-			<option value="Mains">Mains</option>
-			<option-- value="Desserts">Desserts</option-->
 		</select>
 	</div>
 	<button type="submit" class="btn btn-primary">Filter</button>
@@ -37,19 +32,6 @@
 @{
 	if (Model != null)
 	{
-		/*
-				 <h1>This is the menu!</h1>
-				<h2>Selected card: @Model.Menu.MenuItemCard</h2>
-				<h2>Selected category: @Model.Menu.Category</h2>
-				<table class="table table-hover">
-					<thead class="table-dark">
-						<tr>
-							<th>Dish</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Commentary</th>
-						</tr>
-				 */
 		<h1 id="menu">Dit is het menu!</h1>
 		<h2 id="menu">Geselecteerde menukaart: @Model.Menu.MenuItemCard</h2>
 		<h2 id="menu">Geselecteerde categorie: @Model.Menu.Category</h2>
