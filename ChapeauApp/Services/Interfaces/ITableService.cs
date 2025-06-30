@@ -6,7 +6,7 @@ namespace ChapeauApp.Services.Interfaces
 {
     public interface ITableService
     {
-        public List<TableViewModel> GetAllTables();
+        public TablesViewModel GetAllTables();
         public Table GetTableById(int id);
         public Table UpdateTableStatus(TableUpdateViewModel table);
     }

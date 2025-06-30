@@ -11,6 +11,11 @@
         {
         }
 
+        public Table(int tableNumber, TableStatuses tableStatus)
+        {
+            TableNumber = tableNumber;
+            TableStatus = tableStatus;
+        }
         public Table(int tableNumber, TableStatuses tableStatus, List<Order> orderList)
         {
             TableNumber = tableNumber;

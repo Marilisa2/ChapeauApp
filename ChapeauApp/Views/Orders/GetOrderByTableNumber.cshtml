@@ -79,11 +79,11 @@
     @* </div> *@
     
     @* Navgation buttons *@
-    <div class="d-flex justify-content-between mt-3">
+    @*<div class="d-flex justify-content-between mt-3">
         <a href="/Orders/Index" class="btn btn-primary w-25 text-white">← Back to table overview</a>
-        @*<a href="/Bills/SettleBill" class="btn btn-primary w-25 text-white">Go to Bill →</a>*@
+        @*<a href="/Bills/SettleBill" class="btn btn-primary w-25 text-white">Go to Bill →</a>
         <a asp-controller="Bills" asp-action="SettleBill" asp-route-billId="@Model.Order.Bill.BillId" class="btn btn-primary w-25 text-white">Go to Bill →</a>
-
+    *@
 
 
 

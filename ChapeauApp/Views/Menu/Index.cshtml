@@ -69,7 +69,6 @@
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
 							<td>Nog maar @menuItem.Stock over!</td>
-							<!--td>@menuItem.ItemName is almost out of stock! (@menuItem.Stock left)</-->
 						</tr>
 					}
 					else if (menuItem.Stock <= 0)
@@ -79,7 +78,6 @@
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
 							<td>Geen voorraad meer.</td>
-							<!--td>@menuItem.ItemName is out of stock!</-->
 						</tr>
 					}
 					else
@@ -89,7 +87,6 @@
 							<td>@menuItem.Description</td>
 							<td>@menuItem.ItemPrice</td>
 							<td>n.v.t.</td>
-							<!--td>Plenty of @menuItem.ItemName left!</-->
 						</tr>
 					}
 				}
@@ -98,8 +95,6 @@
 	}
 	else
 	{
-		/*<h1 class="alert-danger">No menu was found!</h1>*/
-	<h1 class="alert-danger">Geen menu gevonden!</h1>
-
+		<h1 class="alert-danger">Geen menu gevonden!</h1>
 	}
 }

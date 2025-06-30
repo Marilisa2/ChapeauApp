@@ -20,7 +20,7 @@ namespace ChapeauApp.Controllers
             _vatsService = vatsService;
         }
 
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
             //List<Table> tables = _tablesRepository.GetAllTables();
             List<TableViewModel> tables = _tableService.GetAllTables();
@@ -32,7 +32,7 @@ namespace ChapeauApp.Controllers
             };
 
             return View(ordersViewModel);
-        }
+        }*/
 
         // shows ordered items (orders)
         public IActionResult GetOrderByTableNumber(int tableNumber)
@@ -67,7 +67,7 @@ namespace ChapeauApp.Controllers
             //orderviewmodel
             OrdersViewModel ordersViewModel = new OrdersViewModel
             {
-                Table = order.Table,
+                //Table = order.Table,
                 Order = order,
                 TotalPriceAmount = totalPriceAmount,
                 VatTotals = vatTotals

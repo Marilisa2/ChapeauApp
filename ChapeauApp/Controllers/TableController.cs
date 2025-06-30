@@ -6,7 +6,7 @@ using ChapeauApp.Models.ViewModels;
 namespace ChapeauApp.Controllers
 {
    
-    public class TableController:Controller
+    public class TableController : Controller
     {
         private readonly ITableService _tableService;
 
@@ -20,26 +20,43 @@ namespace ChapeauApp.Controllers
         {
             try
             {
-                List<TableViewModel> tableViewModels = _tableService.GetAllTables();
+                TablesViewModel tablesViewModels = _tableService.GetAllTables();
                 ViewData["place"] = "TableIndex";
-                return View(tableViewModels);
+                return View(tablesViewModels);
             }
-            catch (Exception) 
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                TempData["Message"] = $"The tables could not be loaded: {ex.Message}.";
+                return RedirectToAction("Index", "Home");
             }
         }
         [HttpGet]
         public IActionResult Update(TableViewModel tableViewModel) 
         {
-            ViewData["OldStatus"] = tableViewModel.TableStatus;
-            return View(tableViewModel);   
+            try
+            {
+                ViewData["OldStatus"] = tableViewModel.TableStatus;
+                return View(tableViewModel);
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = $"Something went wrong: {ex.Message}.";//This message should be update to give the client a clear idea of what went wrong.
+                return RedirectToAction("Index", "Table");
+            }
         }
         [HttpPost]
         public IActionResult Update(TableUpdateViewModel tableUpdateViewModel)
         {
-            _tableService.UpdateTableStatus(tableUpdateViewModel);
-            return RedirectToAction("Index");
+            try
+            {
+                _tableService.UpdateTableStatus(tableUpdateViewModel);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = $"Something went wrong: {ex.Message}.";//This message should be update to give the client a clear idea of what went wrong.
+                return RedirectToAction("Index", "Table");
+            }
         }
     }
 }

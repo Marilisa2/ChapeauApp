@@ -19,35 +19,6 @@ namespace ChapeauApp.Repositories
             //_employeeRepository = employeeRepository;
             _orderItemsRepository = orderItemsRepository;
         }
-
-        private Order ReadOrder(SqlDataReader reader)
-        {
-            //retrieve data from fields from database
-            int orderId = (int)reader["OrderId"];
-            DateTime orderTime = (DateTime)reader["OrderTime"];
-            OrderStatus orderStatus = (OrderStatus)(int)reader["OrderStatus"];
-
-            int tableNumber = (int)reader["TableNumber"];
-            Table table = new Table
-            {
-                TableNumber = tableNumber,
-            };
-
-            //sprint2
-            //Employee employee = new Employee { EmployeeId = (int)reader["EmployeeId"] };
-            //Employee? employee = _employeeRepository.GetEmployeeById(employeeId);
-
-            int billId = (int)reader["BillId"];
-            Bill bill = new Bill()
-            {
-                BillId = billId,
-            };
-
-            List<OrderItem> orderItems = _orderItemsRepository.GetOrderItemsByOrderId(orderId);
-
-            return new Order(orderId, orderTime, orderStatus, table, bill, orderItems);
-        }
-
         public List<Order> GetAllOrders()
         {
             List<Order> orders = new List<Order>();
@@ -69,25 +40,39 @@ namespace ChapeauApp.Repositories
             }
             return orders;
         }
-
-        public Order? GetOrderByTableNumber(int tableNumber)
+        private Order ReadOrder(SqlDataReader reader)
         {
+            int orderId = (int)reader["OrderId"];
+            DateTime orderTime = (DateTime)reader["OrderTime"];
+            OrderStatus orderStatus = (OrderStatus)reader["OrderStatus"];
+            int tableInt = (int)reader["TableNumber"];
+            int billInt = (int)reader["BillId"];
+            //Employee employee = (Employee)reader["EmployeeId"];
+            List<OrderItem> orderItems = GetAllOrderItems(orderId);
+            return new Order(orderId, orderTime, orderStatus, orderItems);
+        }
+
+        public List<Order> GetOrdersByTableNumber(int tableNumber)
+        {
+            List<Order> orders = new List<Order>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT OrderId, OrderTime, OrderStatus, TableNumber, BillId FROM Orders WHERE TableNumber = @TableNumber";
+                string query = "SELECT OrderId, OrderTime, OrderStatus, BillId, EmployeeId FROM Orders WHERE TableNumber = @tableNumber";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@TableNumber", tableNumber);
+                command.Parameters.AddWithValue("@tableNumber", tableNumber);
 
                 command.Connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    return ReadOrder(reader);
+                    Order order = ReadOrder(reader);
+                    orders.Add(order);
                 }
 
-                return null;
+                reader.Close();
             }
+            return orders;
         }
 
         public Order? GetOrderByBillId(int billId)
@@ -108,12 +93,59 @@ namespace ChapeauApp.Repositories
 
                 return null;
             }
-
         }
 
+        private List<OrderItem> GetAllOrderItems(int orderId)
+        {
+            List<OrderItem> orderItems = new List<OrderItem>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems WHERE OrderId = @orderId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@orderId", orderId);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    OrderItem orderItem = ReadOrderItem(reader);
+                    orderItems.Add(orderItem);
+                }
+            }
+            return orderItems;
+        }
+        private List<OrderItem> GetOrderItemsById(int orderId)
+        {
+            List<OrderItem> orderItems = new List<OrderItem>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems WHERE OrderId = @orderId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@orderId", orderId);
+
+                command.Connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    OrderItem orderItem = ReadOrderItem(reader);
+                    orderItems.Add(orderItem);
+                }
+            }
+            return orderItems;
+        }
+        private OrderItem ReadOrderItem(SqlDataReader reader)
+        {
+            return new OrderItem();
+        }
+
+        public Order? GetOrderByTableNumber(int tableNumber)
+        {
+            throw new NotImplementedException();
+        }
         public List<Order> GetAllRunningOrders()
         {
             throw new NotImplementedException();
         }
+
     }
 }

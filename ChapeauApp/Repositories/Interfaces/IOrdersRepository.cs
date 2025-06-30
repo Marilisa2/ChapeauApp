@@ -8,5 +8,6 @@ namespace ChapeauApp.Repositories.Interfaces
         List<Order> GetAllRunningOrders();
         Order? GetOrderByTableNumber(int tableNumber);
         Order? GetOrderByBillId(int billId);
+        List<Order> GetOrdersByTableNumber(int tableNumber);
     }
 }
