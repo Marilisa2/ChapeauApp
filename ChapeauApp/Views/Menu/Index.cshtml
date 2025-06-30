@@ -3,7 +3,7 @@
 	ViewData["Title"] = "Menu";
 }
 <form action="/Menu/Index" method="get" id="menuForm">
-	<div class="form-group py-2">
+	<div class="form-group py-2" id="menu">
 		<label for="cars">Choose a card:</label>
 		<select value="@Model.Menu.MenuItemCard" name="card" id="card" form="menuForm">
 			<option value="All">Alles</option>
@@ -47,10 +47,10 @@
 							<th>Commentary</th>
 						</tr>
 				 */
-		<h1>Dit is het menu!</h1>
-		<h2>Geselecteerde menukaart: @Model.Menu.MenuItemCard</h2>
-		<h2>Geselecteerde categorie: @Model.Menu.Category</h2>
-		<table class="table table-hover">
+		<h1 id="menu">Dit is het menu!</h1>
+		<h2 id="menu">Geselecteerde menukaart: @Model.Menu.MenuItemCard</h2>
+		<h2 id="menu">Geselecteerde categorie: @Model.Menu.Category</h2>
+		<table class="table table-hover" id="menu">
 			<thead class="table-dark">
 				<tr>
 					<th>Gerecht</th>

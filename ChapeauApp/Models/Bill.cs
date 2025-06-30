@@ -8,6 +8,8 @@
         public decimal TotalPriceAmountInclVAT { get; set; }
         public string FeedbackText { get; set; }
         public Payment PaymentId { get; set; }
+        public List<Order> Orders { get; set; }
+        public Employee Employee { get; set; }
         //public int EmployeeId { get; set; }
 
         public Bill()

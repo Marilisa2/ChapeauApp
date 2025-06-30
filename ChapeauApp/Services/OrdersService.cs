@@ -10,10 +10,12 @@ namespace ChapeauApp.Services
     public class OrdersService : IOrdersService
     {
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IMenusRepository _menusRepository;
 
-        public OrdersService(IOrdersRepository ordersRepository)
+        public OrdersService(IOrdersRepository ordersRepository, IMenusRepository menusRepository)
         {
             _ordersRepository = ordersRepository;
+            _menusRepository = menusRepository;
         }
 
         public decimal CalculateTotalPriceAmount(List<OrderItem> orderItems)

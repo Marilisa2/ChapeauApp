@@ -8,5 +8,6 @@ namespace ChapeauApp.Repositories.Interfaces
         public Table GetTableById(int id);
         public Table UpdateTableStatus(Table table);
         public Table? GetTableByTableNumber (int tableNumber);
+        public List<Order> GetAllOrders(int tableNumber);
     }
 }

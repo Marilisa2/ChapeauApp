@@ -25,7 +25,7 @@ namespace ChapeauApp.Controllers
             //List<Table> tables = _tablesRepository.GetAllTables();
             List<TableViewModel> tables = _tableService.GetAllTables();
 
-            //orderviemodel
+            //orderviewmodel
             OrdersViewModel ordersViewModel = new OrdersViewModel
             {
                 Tables = tables
@@ -44,8 +44,9 @@ namespace ChapeauApp.Controllers
                 return NotFound($"No order found for table: {tableNumber}");
             }
 
+            return View(order);
             // calling the methode GetOrderByBillId(int bllId)
-            return GetOrderByBillId(order.Bill.BillId);
+            //return GetOrderByBillId(order.Bill.BillId);
         }
 
         public IActionResult GetOrderByBillId(int billId)

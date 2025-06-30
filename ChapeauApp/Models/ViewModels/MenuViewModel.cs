@@ -2,7 +2,6 @@
 {
     public class MenuViewModel
     {
-        //public List<MenuItem> AllMenuItems{ get; set; }
         public Menu Menu  { get; set; }
         public MenuViewModel()
         {
@@ -12,10 +11,5 @@
         {
             Menu = menu;
         }
-
-        /*public MenuViewModel(List<MenuItem> allMenuItems)
-        {
-            AllMenuItems = allMenuItems;
-        }*/
     }
 }

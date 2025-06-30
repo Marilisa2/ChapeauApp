@@ -33,16 +33,34 @@ namespace ChapeauApp.Services
         public string GetQuery(string? cardName, string? itemCategory)
         {
             //This will be used later for the implemention of basing the card on the time of day and displaying the current time.
-            /*
-            DateTime timeNow = DateTime.Now;
+            //This doesn't work yet, because the hours are stored in AM/PM format. This means that when the time is 15:30, int hours will have a value of 3.
+            /*DateTime timeNow = DateTime.Now;
             string day = timeNow.ToString("yyyy/MM/dd");
             string time = timeNow.ToString("hh:mm:ss");
-             */
+            int hours = int.Parse(timeNow.ToString("hh"));
+            if (cardName == null)
+            { 
+                if (hours > 17 && hours < 21)
+                {
+                    cardName = "diner";
+                }
+                else if(hours > 11 && hours < 16)
+                {
+                    cardName = "lunch";
+                }
+                else {
+                    cardName = "all";
+                }
+            }
+            else
+            { cardName = cardName.ToLower(); }
+            */
+
             if (cardName == null)
             { cardName = "all"; }
             else 
             { cardName = cardName.ToLower(); }
-
+            
             if (itemCategory == null)
             { itemCategory = "all"; }
             else

@@ -18,16 +18,36 @@ namespace ChapeauApp.Repositories
             _connectionString = configuration.GetConnectionString("Chapeau");
         }
 
+        public List<OrderItem> GetAllOrderItems()
+        {
+            List<OrderItem> orderItems = new();
+            /*using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    OrderItem orderItem = ReadOrderItem(reader);
+                    orderItems.Add(orderItem);
+                }
+            }
+            */
+            //dummyList
+            orderItems.Add(new OrderItem(1, 1, 
+                new MenuItem(1, MenuItemCard.Lunch, "Koffie", 3.50m, MenuItemCategory.KoffieThee, "", 100, 9), 
+                "", OrderItemStatus.Voorbereiden));
+            return orderItems;
+        }
         private OrderItem ReadOrderItem(SqlDataReader reader)
         {
             int orderItemId = (int)reader["OrderItemId"];
             int quantity = (int)reader["Quantity"];
-            MenuItem menuItemId = new MenuItem { MenuItemId = (int)reader["MenuItemId"] };
+            int menuItemId = (int)reader["MenuItemId"];
             Order order = new Order { OrderId = (int)reader["OrderId"] };
             string? comment = (string)reader["Comment"];
             OrderItemStatus orderItemStatus = (OrderItemStatus)(int)reader["OrderItemStatus"];
-
-                  
 
             MenuItem menuItem = new MenuItem
             {
@@ -48,7 +68,7 @@ namespace ChapeauApp.Repositories
                 OrderItemId = orderItemId,
                 Quantity = quantity,
                 MenuItem = menuItem,
-                Order = order,
+                //Order = order,
                 Comment = comment,
                 OrderItemStatus = orderItemStatus
             };
@@ -120,7 +140,7 @@ namespace ChapeauApp.Repositories
                 command.Parameters.AddWithValue("@OrderItemId", orderItem.OrderItemId);
                 command.Parameters.AddWithValue("@Quantity", orderItem.Quantity);
                 command.Parameters.AddWithValue("@MenuItemId", orderItem.MenuItem.MenuItemId);
-                command.Parameters.AddWithValue("@OrderId", orderItem.Order.OrderId);
+                //command.Parameters.AddWithValue("@OrderId", orderItem.Order.OrderId);
                 command.Parameters.AddWithValue("@Comment", orderItem.Comment);
                 command.Parameters.AddWithValue("@OrderItemStatus", orderItem.OrderItemStatus);
 
@@ -131,24 +151,6 @@ namespace ChapeauApp.Repositories
                     throw new Exception("No records Updated!");
                 }
             }
-        }
-
-        public List<OrderItem> GetAllOrderItems()
-        {
-            List <OrderItem> orderItems = new ();
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                string query = "SELECT OrderItemId, Quantity, MenuItemId, OrderId, Comment, OrderItemStatus FROM OrderItems";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    OrderItem menuItem = ReadOrderItem(reader);
-                    orderItems.Add(menuItem);
-                }
-            }
-            return orderItems;
         }
     }
 }

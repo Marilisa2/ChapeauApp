@@ -19,7 +19,7 @@ namespace ChapeauApp.Services
         {
             List<Table> tables= _tableRepository.GetAllTables();
             List<TableViewModel> tableViewModels = new List<TableViewModel>();
-            foreach (var table in tables) 
+            foreach (Table table in tables) 
             { 
                 TableViewModel tableViewModel = new TableViewModel(table);
                 tableViewModels.Add(tableViewModel);
@@ -31,11 +31,16 @@ namespace ChapeauApp.Services
         {
             return _tableRepository.GetTableById(id);
         }
+        public List<Order> GetAllOrders(int id)
+        {
+            return _tableRepository.GetAllOrders(id);
+        }
+
 
         public Table UpdateTableStatus(TableUpdateViewModel table)
         {
 
-            Table table1=new Table(table.TableNumber,table.NewStatus);
+            Table table1 = new Table(table.TableNumber,table.NewStatus, GetAllOrders(table.TableNumber));
             return _tableRepository.UpdateTableStatus(table1);
         }
     }
